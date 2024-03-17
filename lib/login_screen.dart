@@ -1,10 +1,13 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/signup_screen.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatelessWidget {
-  
   LoginScreen({super.key});
 
   var emailController = TextEditingController();
@@ -20,13 +23,13 @@ class LoginScreen extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
-            color: Colors.white, 
+            color: Colors.white,
           ),
         ),
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(2.0),
+        padding: EdgeInsets.all(25.0),
         child: Container(
           width: double.infinity,
           child: Column(
@@ -71,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                     'LOGIN',
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: login,
+                  onPressed: () => _login(context),
                 ),
               ),
               SizedBox(height: 20),
@@ -83,10 +86,9 @@ class LoginScreen extends StatelessWidget {
                     child: Text('Register'),
                     onPressed: () => {
                       Navigator.push(
-                        context, 
-                        MaterialPageRoute(builder: (context) => SignupScreen()
-                        )
-                      )
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignupScreen()))
                     },
                   )
                 ],
@@ -98,8 +100,33 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void login() {
-    print(emailController.text);
-    print(passwordController.text);
+  Future<void> _login(BuildContext context) async {
+    // Simulate login request
+    var response = await http.post(
+      Uri.parse('https://127.0.0.1:5000/login'),
+      body: {
+        'email': emailController.text,
+        'password': passwordController.text
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      var accessToken = response.body;
+      var refreshToken = response.body;
+
+      var prefs = await SharedPreferences.getInstance();
+      await prefs.setString('access_token', accessToken);
+      await prefs.setString('refresh_token', refreshToken);
+
+      // Navigate to profile screen
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => ProfileScreen()),
+      // );
+    } else {
+      // Handle login error
+      print('Login failed');
+    }
   }
 }
