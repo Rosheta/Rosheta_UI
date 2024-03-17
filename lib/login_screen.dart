@@ -1,6 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:rosheta_ui/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  
+  LoginScreen({super.key});
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
 
@@ -9,7 +15,14 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
-        title: Text('ROSHETA'),
+        title: Text(
+          'ROSHETA',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+            color: Colors.white, 
+          ),
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -68,7 +81,13 @@ class LoginScreen extends StatelessWidget {
                   Text('Don\'t have account?'),
                   TextButton(
                     child: Text('Register'),
-                    onPressed: () => {},
+                    onPressed: () => {
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => SignupScreen()
+                        )
+                      )
+                    },
                   )
                 ],
               )
