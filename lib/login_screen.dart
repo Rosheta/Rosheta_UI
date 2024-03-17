@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:rosheta_ui/signup_screen.dart';
+// import 'package:rosheta_ui/signup_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -85,14 +85,22 @@ class LoginScreen extends StatelessWidget {
                   TextButton(
                     child: Text('Register'),
                     onPressed: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignupScreen()))
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => SignupScreen()))
                     },
                   )
                 ],
-              )
+              ),
+              SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('We serve you with tender , care and love'),
+                    Icon(Icons.favorite , color: Colors.red,)
+                  ],
+                ),
             ],
           ),
         ),
