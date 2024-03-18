@@ -17,7 +17,7 @@ class _SignupState extends State<SignupScreen> {
   var passwordController = TextEditingController();
   TextEditingController birthDateController = TextEditingController();
   var phoneController = TextEditingController();
-
+  String _selectedUserRole = 'Patient';
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
 
@@ -54,6 +54,31 @@ class _SignupState extends State<SignupScreen> {
                 Form(
                     key: _formKey,
                     child: Column(children: [
+                      DropdownButtonFormField(
+                        value: _selectedUserRole,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _selectedUserRole = newValue.toString();
+                          });
+                        },
+                        items: [
+                          DropdownMenuItem(
+                            value: 'Patient',
+                            child: Text('Patient'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'Doctor', // Unique value for Doctor
+                            child: Text('Doctor'),
+                          ),
+                          
+                        ],
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 15),
+                        ),
+                      ),
+                      SizedBox(height: 10),
                       TextFormField(
                         controller: NameController,
                         keyboardType: TextInputType.name,
@@ -165,6 +190,7 @@ class _SignupState extends State<SignupScreen> {
                             ),
                           ),
                           onPressed: () async {
+                              print('selected :  $_selectedUserRole');
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState?.save();
                               print('before request.....................');
@@ -175,7 +201,8 @@ class _SignupState extends State<SignupScreen> {
                                   name: NameController.text,
                                   phone: phoneController.text,
                                   ssn: ssnController.text,
-                                  birthdate: birthDateController.text);
+                                  birthdate: birthDateController.text,
+                                  type: _selectedUserRole);
                               if (check) {
                                 // navigate to login page
                               } else {

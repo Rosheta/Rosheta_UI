@@ -13,5 +13,7 @@
     "Phone" : "Phonenumber",
     "birthDate" : "Select Birth Date",
     "havingaccount" : "Have an accout?",
-    "LoginNow" : "Login Now"
+    "LoginNow" : "Login Now",
+    "Doctor" : "Doctor",
+    "Patient" : "Patient"
 }

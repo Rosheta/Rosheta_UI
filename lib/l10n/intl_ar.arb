@@ -13,5 +13,7 @@
     "Phone" : "رقم التليفون",
     "birthDate" : "تاريخ ميلادك",
     "havingaccount" : "هل لديك حساب؟",
-    "LoginNow" : "سجل الان"
+    "LoginNow" : "سجل الان",
+    "Doctor" : "دكتور",
+    "Patient" : "مريض"
 }

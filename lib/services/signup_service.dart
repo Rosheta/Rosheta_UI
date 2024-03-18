@@ -7,7 +7,8 @@ class SignupApi {
       required name,
       required phone,
       required ssn,
-      required birthdate}) async {
+      required birthdate,
+      required type}) async {
     String url = 'http://127.0.0.1:8000/signup';
     try{
       http.Response response = await http.post(
@@ -22,6 +23,7 @@ class SignupApi {
           'phone': phone,
           'ssn': ssn,
           'birthdate': birthdate,
+          'type': type,
         },
       );
       if(response.statusCode == 200 || response.statusCode == 201) {
