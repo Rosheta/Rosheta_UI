@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rosheta_ui/services/signup_service.dart';
 import 'generated/l10n.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -157,18 +158,31 @@ class _SignupState extends State<SignupScreen> {
                         width: double.infinity,
                         color: Colors.cyan,
                         child: MaterialButton(
-                            child: Text(
-                              S.of(context).SIGNUP,
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
+                          child: Text(
+                            S.of(context).SIGNUP,
+                            style: TextStyle(
+                              color: Colors.white,
                             ),
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                _formKey.currentState?.save();
-                                print('before request.....................');
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState?.save();
+                              print('before request.....................');
+                              SignupApi signuprequest = new SignupApi();
+                              bool check = await signuprequest.signup(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  name: NameController.text,
+                                  phone: phoneController.text,
+                                  ssn: ssnController.text,
+                                  birthdate: birthDateController.text);
+                              if (check) {
+                                // navigate to login page
+                              } else {
+                                print('Failed to signup');
                               }
-                            },
+                            }
+                          },
                         ),
                       ),
                     ])),
@@ -180,7 +194,9 @@ class _SignupState extends State<SignupScreen> {
                       S.of(context).havingaccount,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Navigate to login screen
+                      },
                       child: Text(
                         S.of(context).LoginNow,
                       ),
