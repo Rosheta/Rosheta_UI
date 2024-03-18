@@ -2,10 +2,11 @@
 
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 // import 'package:rosheta_ui/signup_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rosheta_ui/generated/l10n.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -19,7 +20,7 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.cyan,
         title: Text(
-          'ROSHETA',
+          S.of(context).title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
@@ -36,7 +37,7 @@ class LoginScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Login',
+                S.of(context).login,
                 style: TextStyle(fontSize: 40.0, color: Colors.cyan),
               ),
               SizedBox(height: 25.0),
@@ -45,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.email),
-                  labelText: 'Email Address',
+                  labelText: S.of(context).email,
                   labelStyle: TextStyle(
                     color: Colors.cyan,
                   ),
@@ -60,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: Icon(Icons.remove_red_eye),
                     border: OutlineInputBorder(),
-                    labelText: 'Password',
+                    labelText: S.of(context).password,
                     labelStyle: TextStyle(
                       color: Colors.cyan,
                     )),
@@ -71,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                 child: MaterialButton(
                   color: Colors.cyan,
                   child: Text(
-                    'LOGIN',
+                    S.of(context).LOGIN,
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () => _login(context),
@@ -81,9 +82,9 @@ class LoginScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Don\'t have account?'),
+                  Text(S.of(context).nothavingaccount),
                   TextButton(
-                    child: Text('Register'),
+                    child: Text(S.of(context).register),
                     onPressed: () => {
                       // Navigator.push(
                       //     context,
@@ -97,7 +98,8 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('We serve you with tender , care and love'),
+                    Icon(Icons.favorite , color: Colors.red,),
+                    Text(' We serve you with tender , care and love '),
                     Icon(Icons.favorite , color: Colors.red,)
                   ],
                 ),

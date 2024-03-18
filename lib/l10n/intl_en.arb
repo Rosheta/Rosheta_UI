@@ -1,0 +1,9 @@
+{
+    "title" : "ROSHETA",
+    "login" : "Login",
+    "LOGIN" : "LOGIN",
+    "email" : "Email Address",
+    "password" : "Password" , 
+    "nothavingaccount" : "Don''t have account? " , 
+    "register" : "Register"
+}
