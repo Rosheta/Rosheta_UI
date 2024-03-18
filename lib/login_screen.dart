@@ -5,6 +5,8 @@ import 'dart:convert';
 // import 'package:rosheta_ui/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rosheta_ui/models/login_model.dart';
+import 'package:rosheta_ui/services/login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 
@@ -31,79 +33,93 @@ class LoginScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(25.0),
-        child: Container(
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                S.of(context).login,
-                style: TextStyle(fontSize: 40.0, color: Colors.cyan),
-              ),
-              SizedBox(height: 25.0),
-              TextFormField(
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.email),
-                  labelText: S.of(context).email,
-                  labelStyle: TextStyle(
-                    color: Colors.cyan,
-                  ),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 15.0),
-              TextFormField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.remove_red_eye),
-                    border: OutlineInputBorder(),
-                    labelText: S.of(context).password,
-                    labelStyle: TextStyle(
-                      color: Colors.cyan,
-                    )),
-              ),
-              SizedBox(height: 30),
-              Container(
-                width: 150,
-                child: MaterialButton(
-                  color: Colors.cyan,
-                  child: Text(
-                    S.of(context).LOGIN,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () => _login(context),
-                ),
-              ),
-              SizedBox(height: 20),
-              Row(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              width: double.infinity,
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(S.of(context).nothavingaccount),
-                  TextButton(
-                    child: Text(S.of(context).register),
-                    onPressed: () => {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => SignupScreen()))
-                    },
-                  )
+                  Text(
+                    S.of(context).login,
+                    style: TextStyle(fontSize: 40.0, color: Colors.cyan),
+                  ),
+                  SizedBox(height: 25.0),
+                  TextFormField(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.email),
+                      labelText: S.of(context).email,
+                      labelStyle: TextStyle(
+                        color: Colors.cyan,
+                      ),
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 15.0),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+                        suffixIcon: Icon(Icons.remove_red_eye),
+                        border: OutlineInputBorder(),
+                        labelText: S.of(context).password,
+                        labelStyle: TextStyle(
+                          color: Colors.cyan,
+                        )),
+                  ),
+                  SizedBox(height: 30),
+                  Container(
+                    width: 150,
+                    child: MaterialButton(
+                      color: Colors.cyan,
+                      child: Text(
+                        S.of(context).LOGIN,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () async {
+                        LoginApi loginapi = new LoginApi();
+                        print('before request.....................');
+                        await loginapi.login(emailController.text, passwordController.text);
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(S.of(context).nothavingaccount),
+                      TextButton(
+                        child: Text(S.of(context).register),
+                        onPressed: () => {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => SignupScreen()))
+                        },
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      ),
+                      Text(' We serve you with tender , care and love '),
+                      Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      )
+                    ],
+                  ),
                 ],
               ),
-              SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.favorite , color: Colors.red,),
-                    Text(' We serve you with tender , care and love '),
-                    Icon(Icons.favorite , color: Colors.red,)
-                  ],
-                ),
-            ],
+            ),
           ),
         ),
       ),
