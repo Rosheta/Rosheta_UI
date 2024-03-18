@@ -2,19 +2,19 @@
 
 import 'dart:convert';
 
-// import 'package:rosheta_ui/signup_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:rosheta_ui/models/login_model.dart';
 import 'package:rosheta_ui/services/login_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreen createState() => _LoginScreen();
+}
 
+class _LoginScreen extends State<LoginScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,47 +45,62 @@ class LoginScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 40.0, color: Colors.cyan),
                   ),
                   SizedBox(height: 25.0),
-                  TextFormField(
-                    controller: emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
-                      labelText: S.of(context).email,
-                      labelStyle: TextStyle(
-                        color: Colors.cyan,
-                      ),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: 15.0),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: Icon(Icons.remove_red_eye),
-                        border: OutlineInputBorder(),
-                        labelText: S.of(context).password,
-                        labelStyle: TextStyle(
-                          color: Colors.cyan,
-                        )),
-                  ),
-                  SizedBox(height: 30),
-                  Container(
-                    width: 150,
-                    child: MaterialButton(
-                      color: Colors.cyan,
-                      child: Text(
-                        S.of(context).LOGIN,
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () async {
-                        LoginApi loginapi = new LoginApi();
-                        print('before request.....................');
-                        await loginapi.login(emailController.text, passwordController.text);
-                      },
-                    ),
-                  ),
+                  Form(
+                      key: _formKey,
+                      child: Column(children: [
+                        TextFormField(
+                          controller: emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.email),
+                            labelText: S.of(context).email,
+                            labelStyle: TextStyle(
+                              color: Colors.cyan,
+                            ),
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (isValidEmail(value.toString())) return null;
+                            return "Email must contain @";
+                          },
+                        ),
+                        SizedBox(height: 15.0),
+                        TextFormField(
+                          controller: passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.lock),
+                              suffixIcon: Icon(Icons.remove_red_eye),
+                              border: OutlineInputBorder(),
+                              labelText: S.of(context).password,
+                              labelStyle: TextStyle(
+                                color: Colors.cyan,
+                              )),
+                          validator: (value) {
+                            return isValidPassword(value.toString());
+                          },
+                        ),
+                        SizedBox(height: 30),
+                        Container(
+                          width: 150,
+                          child: MaterialButton(
+                            color: Colors.cyan,
+                            child: Text(
+                              S.of(context).LOGIN,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState?.save();
+                                LoginApi loginapi = new LoginApi();
+                                print('before request.....................');
+                                await loginapi.login(emailController.text,
+                                    passwordController.text);
+                              }
+                            },
+                          ),
+                        ),
+                      ])),
                   SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -126,33 +141,32 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _login(BuildContext context) async {
-    // Simulate login request
-    var response = await http.post(
-      Uri.parse('https://127.0.0.1:5000/login'),
-      body: {
-        'email': emailController.text,
-        'password': passwordController.text
-      },
-    );
+  bool isValidEmail(String email) {
+    // Use a regular expression to check if the email contains '@' and '.'
+    // You can customize the regular expression based on your requirements
+    final emailRegex =
+        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    return emailRegex.hasMatch(email);
+  }
 
-    if (response.statusCode == 200) {
-      print(response.body);
-      var accessToken = response.body;
-      var refreshToken = response.body;
+  dynamic isValidPassword(String password) {
+    // Password must contain at least one uppercase letter, one lowercase letter,
+    // one digit, one special character, and be at least 8 characters long
+    final upperCaseRegex = RegExp(r'[A-Z]');
+    final lowerCaseRegex = RegExp(r'[a-z]');
+    final digitRegex = RegExp(r'[0-9]');
+    final specialCharRegex = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
 
-      var prefs = await SharedPreferences.getInstance();
-      await prefs.setString('access_token', accessToken);
-      await prefs.setString('refresh_token', refreshToken);
-
-      // Navigate to profile screen
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => ProfileScreen()),
-      // );
-    } else {
-      // Handle login error
-      print('Login failed');
+    if (password.length < 8) {
+      return "Password must contain more than 8 characters";
+    } else if (!upperCaseRegex.hasMatch(password) ||
+        !lowerCaseRegex.hasMatch(password)) {
+      return "Password must contain upper and lower case";
+    } else if (!digitRegex.hasMatch(password)) {
+      return "Password must contain numbers";
+    } else if (!specialCharRegex.hasMatch(password)) {
+      return "Password must contain special characters";
     }
+    return null;
   }
 }
