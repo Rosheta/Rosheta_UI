@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'generated/l10n.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -9,8 +10,7 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupState extends State<SignupScreen> {
-  var firstNameController = TextEditingController();
-  var lastNameController = TextEditingController();
+  var NameController = TextEditingController();
   var ssnController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
@@ -19,32 +19,12 @@ class _SignupState extends State<SignupScreen> {
 
   bool _obscureText = true;
 
-  void _togglePasswordVisibility() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
-
-  void _datePicker() async {
-      DateTime? birthdate = await showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime(1900),
-          lastDate: DateTime(2100));
-      
-      if (birthdate != null) {
-        setState(() {
-          birthDateController.text = DateFormat('yyyy-MM-dd').format(birthdate);
-        });
-      }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'ROSHETA',
+          S.of(context).title,
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
@@ -60,34 +40,22 @@ class _SignupState extends State<SignupScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // Text(
-                //   'Signup',
-                //   style: TextStyle(
-                //     color: Colors.cyan,
-                //     fontSize: 20,
-                //     fontWeight: FontWeight.bold,
-                //   ),
-                // ),
-                // SizedBox(height: 15),
-                TextFormField(
-                  controller: firstNameController,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(),
-                      labelText: 'First Name',
-                      labelStyle: TextStyle(
-                        color: Colors.cyan,
-                      )),
+                Text(
+                  S.of(context).signup,
+                  style: TextStyle(
+                    color: Colors.cyan,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
                 TextFormField(
-                  controller: lastNameController,
+                  controller: NameController,
                   keyboardType: TextInputType.name,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person),
                       border: OutlineInputBorder(),
-                      labelText: 'Last Name',
+                      labelText: S.of(context).name,
                       labelStyle: TextStyle(
                         color: Colors.cyan,
                       )),
@@ -99,7 +67,7 @@ class _SignupState extends State<SignupScreen> {
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.credit_card),
                       border: OutlineInputBorder(),
-                      labelText: 'National ID',
+                      labelText: S.of(context).NationalId,
                       labelStyle: TextStyle(
                         color: Colors.cyan,
                       )),
@@ -111,7 +79,7 @@ class _SignupState extends State<SignupScreen> {
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(),
-                      labelText: 'Email Address',
+                      labelText: S.of(context).email,
                       labelStyle: TextStyle(
                         color: Colors.cyan,
                       )),
@@ -128,7 +96,7 @@ class _SignupState extends State<SignupScreen> {
                         child : Icon(_obscureText ? Icons.visibility_off : Icons.visibility,),
                       ),
                       border: OutlineInputBorder(),
-                      labelText: 'Password',
+                      labelText: S.of(context).password,
                       labelStyle: TextStyle(
                         color: Colors.cyan,
                       )),
@@ -140,7 +108,7 @@ class _SignupState extends State<SignupScreen> {
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.phone),
                       border: OutlineInputBorder(),
-                      labelText: 'Phonenumber',
+                      labelText: S.of(context).Phone,
                       labelStyle: TextStyle(
                         color: Colors.cyan,
                       )),
@@ -152,7 +120,7 @@ class _SignupState extends State<SignupScreen> {
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.date_range),
                       border: OutlineInputBorder(),
-                      labelText: 'Select Birth Date',
+                      labelText: S.of(context).birthDate,
                       labelStyle: TextStyle(
                         color: Colors.cyan,
                       )),
@@ -164,7 +132,7 @@ class _SignupState extends State<SignupScreen> {
                   child: MaterialButton(
                     onPressed: () {},
                     child: Text(
-                      'SIGNUP',
+                      S.of(context).SIGNUP,
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -176,12 +144,12 @@ class _SignupState extends State<SignupScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Have an account?',
+                      S.of(context).havingaccount,
                     ),
                     TextButton(
                       onPressed: () {},
                       child: Text(
-                        'Login Now',
+                        S.of(context).LoginNow,
                       ),
                     ),
                   ],
@@ -201,4 +169,26 @@ class _SignupState extends State<SignupScreen> {
       ),
     );
   }
+
+    void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
+  void _datePicker() async {
+      DateTime? birthdate = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime(1900),
+          lastDate: DateTime(2100));
+      
+      if (birthdate != null) {
+        setState(() {
+          birthDateController.text = DateFormat('yyyy-MM-dd').format(birthdate);
+        });
+      }
+  }
+
+
 }
