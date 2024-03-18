@@ -15,5 +15,6 @@
     "havingaccount" : "Have an accout?",
     "LoginNow" : "Login Now",
     "Doctor" : "Doctor",
-    "Patient" : "Patient"
+    "Patient" : "Patient",
+    "register" : "Register"
 }

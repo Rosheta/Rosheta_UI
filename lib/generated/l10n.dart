@@ -119,7 +119,7 @@ class S {
       args: [],
     );
   }
-
+  
   /// `Signup`
   String get signup {
     return Intl.message(
