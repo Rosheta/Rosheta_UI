@@ -29,6 +29,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لا تمتلك حساب؟"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
         "register": MessageLookupByLibrary.simpleMessage("سجل"),
-        "title": MessageLookupByLibrary.simpleMessage("روشتة")
+        "title": MessageLookupByLibrary.simpleMessage("ROSHETA")
       };
 }
