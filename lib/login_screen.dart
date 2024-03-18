@@ -12,9 +12,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _obscureText = true;
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +70,15 @@ class _LoginScreen extends State<LoginScreen> {
                         SizedBox(height: 15.0),
                         TextFormField(
                           controller: passwordController,
-                          obscureText: true,
+                          obscureText: _obscureText,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.lock),
-                              suffixIcon: Icon(Icons.remove_red_eye),
+                              suffixIcon: GestureDetector(
+                                onTap: _togglePasswordVisibility,
+                                child: Icon(
+                                  _obscureText ? Icons.visibility_off : Icons.visibility,
+                                ),
+                              ),
                               border: OutlineInputBorder(),
                               labelText: S.of(context).password,
                               labelStyle: TextStyle(
@@ -168,5 +176,11 @@ class _LoginScreen extends State<LoginScreen> {
       return "Password must contain special characters";
     }
     return null;
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
   }
 }
