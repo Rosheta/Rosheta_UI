@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SignupApi {
   Future<bool> signup(
@@ -9,14 +10,14 @@ class SignupApi {
       required ssn,
       required birthdate,
       required type}) async {
-    String url = 'http://127.0.0.1:8000/signup';
-    try{
+    String url = 'http://192.168.1.2:5000/register';
+    try {
       http.Response response = await http.post(
         Uri.parse(url),
-        headers: <String, String>{
+        headers: {
           'Content-Type': 'application/json',
         },
-        body: <String, dynamic>{
+        body: json.encode({
           'email': email,
           'password': password,
           'name': name,
@@ -24,14 +25,13 @@ class SignupApi {
           'ssn': ssn,
           'birthdate': birthdate,
           'type': type,
-        },
+        }),
       );
-      if(response.statusCode == 200 || response.statusCode == 201) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return true;
-      }else
+      } else
         return false;
-    }
-    catch(e){
+    } catch (e) {
       print("Exception: $e");
       return false;
     }

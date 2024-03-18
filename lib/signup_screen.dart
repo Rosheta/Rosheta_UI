@@ -70,7 +70,6 @@ class _SignupState extends State<SignupScreen> {
                             value: 'Doctor', // Unique value for Doctor
                             child: Text('Doctor'),
                           ),
-                          
                         ],
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -190,7 +189,7 @@ class _SignupState extends State<SignupScreen> {
                             ),
                           ),
                           onPressed: () async {
-                              print('selected :  $_selectedUserRole');
+                            print('selected :  $_selectedUserRole');
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState?.save();
                               print('before request.....................');
