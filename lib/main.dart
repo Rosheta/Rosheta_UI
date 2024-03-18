@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rosheta_ui/signup_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'generated/l10n.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/login_screen.dart';
 
@@ -8,6 +10,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

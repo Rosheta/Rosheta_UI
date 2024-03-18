@@ -5,5 +5,16 @@
     "email" : "Email Address",
     "password" : "Password" , 
     "nothavingaccount" : "Don''t have account? " , 
+    "register" : "Register",
+    "signup" : "Signup",
+    "SIGNUP" : "SIGNUP",
+    "name" : "Full Name",
+    "NationalId" : "National ID",
+    "Phone" : "Phonenumber",
+    "birthDate" : "Select Birth Date",
+    "havingaccount" : "Have an accout?",
+    "LoginNow" : "Login Now",
+    "Doctor" : "Doctor",
+    "Patient" : "Patient",
     "register" : "Register"
 }

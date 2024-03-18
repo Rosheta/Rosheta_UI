@@ -119,6 +119,106 @@ class S {
       args: [],
     );
   }
+  
+  /// `Signup`
+  String get signup {
+    return Intl.message(
+      'Signup',
+      name: 'signup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SIGNUP`
+  String get SIGNUP {
+    return Intl.message(
+      'SIGNUP',
+      name: 'SIGNUP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Name`
+  String get name {
+    return Intl.message(
+      'Full Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National ID`
+  String get NationalId {
+    return Intl.message(
+      'National ID',
+      name: 'NationalId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phonenumber`
+  String get Phone {
+    return Intl.message(
+      'Phonenumber',
+      name: 'Phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Birth Date`
+  String get birthDate {
+    return Intl.message(
+      'Select Birth Date',
+      name: 'birthDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Have an accout?`
+  String get havingaccount {
+    return Intl.message(
+      'Have an accout?',
+      name: 'havingaccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login Now`
+  String get LoginNow {
+    return Intl.message(
+      'Login Now',
+      name: 'LoginNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Doctor`
+  String get Doctor {
+    return Intl.message(
+      'Doctor',
+      name: 'Doctor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Patient`
+  String get Patient {
+    return Intl.message(
+      'Patient',
+      name: 'Patient',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

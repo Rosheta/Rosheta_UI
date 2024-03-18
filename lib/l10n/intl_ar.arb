@@ -5,5 +5,16 @@
     "email" : "البريد الالكترونى",
     "password" : "كلمة السر" , 
     "nothavingaccount" : "لا تمتلك حساب؟" , 
+    "register" : "سجل",
+    "signup" : "انشاء حساب",
+    "SIGNUP" : "انشاء",
+    "name" : "الاسم",
+    "NationalId" : "الرقم القومى",
+    "Phone" : "رقم التليفون",
+    "birthDate" : "تاريخ ميلادك",
+    "havingaccount" : "هل لديك حساب؟",
+    "LoginNow" : "سجل الان",
+    "Doctor" : "دكتور",
+    "Patient" : "مريض",
     "register" : "سجل"
 }

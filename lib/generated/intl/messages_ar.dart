@@ -22,13 +22,24 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+
+        "Doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "LoginNow": MessageLookupByLibrary.simpleMessage("سجل الان"),
+        "NationalId": MessageLookupByLibrary.simpleMessage("الرقم القومى"),
+        "Patient": MessageLookupByLibrary.simpleMessage("مريض"),
+        "Phone": MessageLookupByLibrary.simpleMessage("رقم التليفون"),
+        "SIGNUP": MessageLookupByLibrary.simpleMessage("انشاء"),
+        "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
+        "havingaccount": MessageLookupByLibrary.simpleMessage("هل لديك حساب؟"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "nothavingaccount":
             MessageLookupByLibrary.simpleMessage("لا تمتلك حساب؟"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
         "register": MessageLookupByLibrary.simpleMessage("سجل"),
+        "signup": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
         "title": MessageLookupByLibrary.simpleMessage("ROSHETA")
       };
 }
