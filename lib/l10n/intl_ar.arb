@@ -1,0 +1,9 @@
+{
+    "title" : "ROSHETA",
+    "login" : "تسجيل الدخول",
+    "LOGIN" : "تسجيل الدخول",
+    "email" : "البريد الالكترونى",
+    "password" : "كلمة السر" , 
+    "nothavingaccount" : "لا تمتلك حساب؟" , 
+    "register" : "سجل"
+}
