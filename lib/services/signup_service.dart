@@ -12,7 +12,7 @@ class SignupApi {
       required phone,
       required ssn,
       required birthdate,
-      required type,required context}) async {
+      required type}) async {
     String url = 'http://192.168.1.2:5000/register';
     try {
       http.Response response = await http.post(
@@ -31,8 +31,6 @@ class SignupApi {
         }),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-                                Navigator.push(context,
-                            MaterialPageRoute(builder: (c) => LoginScreen()));
         return true;
       } else
         return false;

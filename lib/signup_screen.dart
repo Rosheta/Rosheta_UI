@@ -190,22 +190,24 @@ class _SignupState extends State<SignupScreen> {
                             ),
                           ),
                           onPressed: () async {
-                            print('selected :  $_selectedUserRole');
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState?.save();
                               print('before request.....................');
                               SignupApi signuprequest = new SignupApi();
                               bool check = await signuprequest.signup(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  name: NameController.text,
-                                  phone: phoneController.text,
-                                  ssn: ssnController.text,
-                                  birthdate: birthDateController.text,
-                                  type: _selectedUserRole,
-                                  context: context);
+                                email: emailController.text,
+                                password: passwordController.text,
+                                name: NameController.text,
+                                phone: phoneController.text,
+                                ssn: ssnController.text,
+                                birthdate: birthDateController.text,
+                                type: _selectedUserRole,
+                              );
                               if (check) {
-                                // navigate to login page
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (c) => LoginScreen()));
                               } else {
                                 print('Failed to signup');
                               }

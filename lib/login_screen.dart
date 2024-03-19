@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:rosheta_ui/profile_view.dart';
 import 'package:rosheta_ui/services/login_service.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/signup_screen.dart';
@@ -103,8 +104,13 @@ class _LoginScreen extends State<LoginScreen> {
                                 _formKey.currentState?.save();
                                 LoginApi loginapi = new LoginApi();
                                 print('before request.....................');
-                                await loginapi.login(emailController.text,
-                                    passwordController.text);
+                                bool tmp = await loginapi.login(emailController.text,passwordController.text);
+                                if(tmp){
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (c) => ProfileView()));
+                                }else{
+                                  print('error');
+                                }
                               }
                             },
                           ),

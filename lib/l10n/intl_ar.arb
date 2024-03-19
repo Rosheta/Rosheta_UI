@@ -5,7 +5,6 @@
     "email" : "البريد الالكترونى",
     "password" : "كلمة السر" , 
     "nothavingaccount" : "لا تمتلك حساب؟" , 
-    "register" : "سجل",
     "signup" : "انشاء حساب",
     "SIGNUP" : "انشاء",
     "name" : "الاسم",

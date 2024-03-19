@@ -5,7 +5,6 @@
     "email" : "Email Address",
     "password" : "Password" , 
     "nothavingaccount" : "Don''t have account? " , 
-    "register" : "Register",
     "signup" : "Signup",
     "SIGNUP" : "SIGNUP",
     "name" : "Full Name",

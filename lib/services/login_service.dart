@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginApi {
-  Future<void> login(String email, String password) async {
+  Future<bool> login(String email, String password) async {
     const url = 'http://192.168.1.2:5000/login';
     try {
       http.Response response = await http.post(
@@ -27,14 +27,15 @@ class LoginApi {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('acesstoken', tokens.accessToken);
         // await prefs.setString('refreshtoken', tokens.refreshToken);
-        return;
+        return true;
       } else {
         print('Status code: ${response.statusCode}');
+        return false;
       }
     } catch (e) {
       print('Exception: $e');
+      return false;
     }
-    throw Exception('Login failed');
   }
 
   Future<String> getAccessToken() async {

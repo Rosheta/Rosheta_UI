@@ -205,6 +205,10 @@ class S {
     return Intl.message(
       'Birth Date',
       name: 'UserbirthDate',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Doctor`
   String get Doctor {
