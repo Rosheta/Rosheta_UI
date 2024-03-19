@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/services/login_service.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
+import 'package:rosheta_ui/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -117,10 +118,10 @@ class _LoginScreen extends State<LoginScreen> {
                       TextButton(
                         child: Text(S.of(context).register),
                         onPressed: () => {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => SignupScreen()))
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (c) => SignupScreen()))
                         },
                       )
                     ],

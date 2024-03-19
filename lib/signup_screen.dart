@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rosheta_ui/login_screen.dart';
 import 'package:rosheta_ui/services/signup_service.dart';
 import 'generated/l10n.dart';
 
@@ -201,7 +202,8 @@ class _SignupState extends State<SignupScreen> {
                                   phone: phoneController.text,
                                   ssn: ssnController.text,
                                   birthdate: birthDateController.text,
-                                  type: _selectedUserRole);
+                                  type: _selectedUserRole,
+                                  context: context);
                               if (check) {
                                 // navigate to login page
                               } else {
@@ -221,7 +223,8 @@ class _SignupState extends State<SignupScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        // Navigate to login screen
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (c) => LoginScreen()));
                       },
                       child: Text(
                         S.of(context).LoginNow,
