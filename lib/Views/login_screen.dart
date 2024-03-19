@@ -1,7 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/profile_view.dart';
 import 'package:rosheta_ui/services/login_service.dart';
