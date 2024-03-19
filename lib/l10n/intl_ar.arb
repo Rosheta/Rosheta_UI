@@ -1,0 +1,18 @@
+{
+    "title" : "روشتة",
+    "login" : "تسجيل الدخول",
+    "LOGIN" : "تسجيل الدخول",
+    "email" : "البريد الالكترونى",
+    "password" : "كلمة السر" , 
+    "nothavingaccount" : "لا تمتلك حساب؟" , 
+    "register" : "سجل",
+    "signup" : "انشاء حساب",
+    "SIGNUP" : "انشاء",
+    "name" : "الاسم",
+    "NationalId" : "الرقم القومى",
+    "Phone" : "رقم التليفون",
+    "birthDate" : "تاريخ ميلادك",
+    "havingaccount" : "هل لديك حساب؟",
+    "LoginNow" : "سجل الان",
+    "UserbirthDate": "تاريخ الميلاد"
+}
