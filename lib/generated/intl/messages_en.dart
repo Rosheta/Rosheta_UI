@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Phone": MessageLookupByLibrary.simpleMessage("Phonenumber"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("SIGNUP"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
+        "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
+        "Patient": MessageLookupByLibrary.simpleMessage("Patient"),
         "birthDate": MessageLookupByLibrary.simpleMessage("Select Birth Date"),
         "email": MessageLookupByLibrary.simpleMessage("Email Address"),
         "havingaccount":

@@ -36,8 +36,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   http: ^1.2.1
   shared_preferences: ^2.2.2
+  intl: ^0.18.1
   flutter_localizations:
-        sdk: flutter
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +61,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
+
   assets:
     - Images/
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -87,3 +89,4 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_intl:
   enabled: true
+

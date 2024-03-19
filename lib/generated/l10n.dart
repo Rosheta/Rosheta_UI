@@ -205,6 +205,22 @@ class S {
     return Intl.message(
       'Birth Date',
       name: 'UserbirthDate',
+
+  /// `Doctor`
+  String get Doctor {
+    return Intl.message(
+      'Doctor',
+      name: 'Doctor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Patient`
+  String get Patient {
+    return Intl.message(
+      'Patient',
+      name: 'Patient',
       desc: '',
       args: [],
     );

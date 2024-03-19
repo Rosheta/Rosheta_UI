@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Phone": MessageLookupByLibrary.simpleMessage("رقم التليفون"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("انشاء"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
+        "Doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
+        "Patient": MessageLookupByLibrary.simpleMessage("مريض"),
         "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
         "havingaccount": MessageLookupByLibrary.simpleMessage("هل لديك حساب؟"),
@@ -38,6 +40,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
         "register": MessageLookupByLibrary.simpleMessage("سجل"),
         "signup": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
-        "title": MessageLookupByLibrary.simpleMessage("روشتة")
+        "title": MessageLookupByLibrary.simpleMessage("ROSHETA")
       };
 }

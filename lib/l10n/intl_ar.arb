@@ -1,5 +1,5 @@
 {
-    "title" : "روشتة",
+    "title" : "ROSHETA",
     "login" : "تسجيل الدخول",
     "LOGIN" : "تسجيل الدخول",
     "email" : "البريد الالكترونى",
@@ -14,5 +14,8 @@
     "birthDate" : "تاريخ ميلادك",
     "havingaccount" : "هل لديك حساب؟",
     "LoginNow" : "سجل الان",
-    "UserbirthDate": "تاريخ الميلاد"
+    "UserbirthDate": "تاريخ الميلاد",
+    "Doctor" : "دكتور",
+    "Patient" : "مريض",
+    "register" : "سجل"
 }
