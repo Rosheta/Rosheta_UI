@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginApi {
   Future<bool> login(String email, String password) async {
-    const url = 'http://192.168.1.2:5000/login';
+    const url = 'http://192.168.1.9:5000/login';
     try {
       http.Response response = await http.post(
         Uri.parse(url),

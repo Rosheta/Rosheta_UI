@@ -4,23 +4,25 @@ import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/Views/signup_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: Locale('ar'),
-      localizationsDelegates: [
+      locale: const Locale('en'),
+      localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: SignupScreen(),
+      home: const SignupScreen(),
     );
   }
 }

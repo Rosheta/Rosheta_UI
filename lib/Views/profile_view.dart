@@ -1,11 +1,13 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile_model.dart';
-import 'package:rosheta_ui/services/Profile_service.dart';
+import 'package:rosheta_ui/services/profile_service.dart';
 
 class ProfileView extends StatefulWidget {
-  const ProfileView({Key? key}) : super(key: key);
+  
+  const ProfileView({super.key});
 
   @override
   _ProfileViewState createState() => _ProfileViewState();
