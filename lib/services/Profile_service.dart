@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:rosheta_ui/models/profile_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ProfileApi {
   Future<Profile> featchProfile() async {
-    const url = 'http://192.168.1.9:5000/profile';
+    final String apiUrl = dotenv.env['API_URL']!;
+    final url = '$apiUrl/profile';
     try {
-      String accessToken = await getAccessToken(); // Assuming this method gets the access token
-          // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaWQiOiI2NWY4YzBlM2YwMzcwMzQxZjJlYjEwZDAiLCJpYXQiOjE3MTA4MTEzNDAsImV4cCI6MTcxMDgxNDk0MH0.QF5dOVusdSxLbL8ihRb3y973w_TA-7xbGlXIhvjBldU";
-      
+      String accessToken = await getAccessToken();
       http.Response response = await http.get(
         Uri.parse(url),
         headers: {

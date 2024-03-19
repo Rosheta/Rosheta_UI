@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class SignupApi {
   Future<bool> signup(
@@ -10,7 +11,9 @@ class SignupApi {
       required ssn,
       required birthdate,
       required type}) async {
-    String url = 'http://192.168.1.9:5000/register';
+        
+    final String apiUrl = dotenv.env['API_URL']!;
+    final url = '$apiUrl/register';
     try {
       http.Response response = await http.post(
         Uri.parse(url),

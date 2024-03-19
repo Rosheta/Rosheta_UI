@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'package:rosheta_ui/models/login_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LoginApi {
   Future<bool> login(String email, String password) async {
-    const url = 'http://192.168.1.9:5000/login';
+    final String apiUrl = dotenv.env['API_URL']!;
+    final url = '$apiUrl/login';
     try {
       http.Response response = await http.post(
         Uri.parse(url),
