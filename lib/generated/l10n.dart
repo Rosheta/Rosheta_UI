@@ -119,7 +119,7 @@ class S {
       args: [],
     );
   }
-  
+
   /// `Signup`
   String get signup {
     return Intl.message(
@@ -199,6 +199,12 @@ class S {
       args: [],
     );
   }
+
+  /// `Birth Date`
+  String get UserbirthDate {
+    return Intl.message(
+      'Birth Date',
+      name: 'UserbirthDate',
 
   /// `Doctor`
   String get Doctor {

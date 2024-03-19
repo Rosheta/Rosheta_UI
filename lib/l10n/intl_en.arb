@@ -14,6 +14,7 @@
     "birthDate" : "Select Birth Date",
     "havingaccount" : "Have an accout?",
     "LoginNow" : "Login Now",
+    "UserbirthDate" : "Birth Date",
     "Doctor" : "Doctor",
     "Patient" : "Patient",
     "register" : "Register"
