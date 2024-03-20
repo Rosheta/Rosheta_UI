@@ -16,5 +16,13 @@
     "UserbirthDate" : "Birth Date",
     "Doctor" : "Doctor",
     "Patient" : "Patient",
-    "register" : "Register"
+    "register" : "Register",
+    "editInfor": "Edit basic information",
+    "hintTextname": "Enter your name",
+    "hintTextemail": "Enter your email",
+    "hintTextphonenumber": "Enter your phone number",
+    "hintTextID": "Enter your National ID",
+    "hintTextdate": "Enter your Date of Birth",
+    "savechanges":"Save changes"
+
 }
