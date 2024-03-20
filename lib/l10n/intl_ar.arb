@@ -16,5 +16,15 @@
     "UserbirthDate": "تاريخ الميلاد",
     "Doctor" : "دكتور",
     "Patient" : "مريض",
-    "register" : "سجل"
+    "register" : "سجل",
+    "editInfor":"تعديل المعلومات الاساسية",
+    "hintTextname": "ادخل اسمك",
+    "hintTextemail": "ادخل البريد الالكتروني",
+    "hintTextphonenumber": "ادخل رقم الهاتف",
+    "hintTextID": "ادخل الرقم القومي",
+    "hintTextdate": "ادخل تاريخ الميلاد",
+    "savechanges":"حفظ التعديلات"
+
+    
+
 }
