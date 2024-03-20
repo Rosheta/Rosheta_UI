@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class EditProfileApi {
   Future<bool> editprofile(
@@ -8,7 +9,9 @@ class EditProfileApi {
       required phone,
       required ssn,
       required birthdate}) async {
-    String url = 'http://192.168.1.2:5000/editProfile';
+
+    final String apiUrl = dotenv.env['API_URL']!;
+    final url = '$apiUrl/editProfile';
     try {
       http.Response response = await http.post(
         Uri.parse(url),

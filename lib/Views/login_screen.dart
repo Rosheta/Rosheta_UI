@@ -1,20 +1,25 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
-import 'package:rosheta_ui/screens/profile_screen.dart';
+import 'package:rosheta_ui/Views/profile_screen.dart';
 import 'package:rosheta_ui/services/login_service.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
-import 'package:rosheta_ui/screens/signup_screen.dart';
+import 'package:rosheta_ui/Views/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreen createState() => _LoginScreen();
 }
 
 class _LoginScreen extends State<LoginScreen> {
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class _LoginScreen extends State<LoginScreen> {
         backgroundColor: Colors.cyan,
         title: Text(
           S.of(context).title,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
             color: Colors.white,
@@ -32,7 +37,7 @@ class _LoginScreen extends State<LoginScreen> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(25.0),
+        padding: const EdgeInsets.all(25.0),
         child: Center(
           child: SingleChildScrollView(
             child: Container(
@@ -42,9 +47,9 @@ class _LoginScreen extends State<LoginScreen> {
                 children: [
                   Text(
                     S.of(context).login,
-                    style: TextStyle(fontSize: 40.0, color: Colors.cyan),
+                    style: const TextStyle(fontSize: 40.0, color: Colors.cyan),
                   ),
-                  SizedBox(height: 25.0),
+                  const SizedBox(height: 25.0),
                   Form(
                       key: _formKey,
                       child: Column(children: [
@@ -52,64 +57,58 @@ class _LoginScreen extends State<LoginScreen> {
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.email),
+                            prefixIcon: const Icon(Icons.email),
                             labelText: S.of(context).email,
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                               color: Colors.cyan,
                             ),
-                            border: OutlineInputBorder(),
+                            border: const OutlineInputBorder(),
                           ),
                           validator: (value) {
                             if (isValidEmail(value.toString())) return null;
                             return "Email must contain @";
                           },
                         ),
-                        SizedBox(height: 15.0),
+                        const SizedBox(height: 15.0),
                         TextFormField(
                           controller: passwordController,
                           obscureText: _obscureText,
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                               suffixIcon: GestureDetector(
                                 onTap: _togglePasswordVisibility,
                                 child: Icon(
-                                  _obscureText
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
+                                  _obscureText ? Icons.visibility_off : Icons.visibility,
                                 ),
                               ),
-                              border: OutlineInputBorder(),
+                              border: const OutlineInputBorder(),
                               labelText: S.of(context).password,
-                              labelStyle: TextStyle(
+                              labelStyle: const TextStyle(
                                 color: Colors.cyan,
                               )),
                           validator: (value) {
                             return isValidPassword(value.toString());
                           },
                         ),
-                        SizedBox(height: 30),
+                        const SizedBox(height: 30),
                         Container(
                           width: 150,
                           child: MaterialButton(
                             color: Colors.cyan,
                             child: Text(
                               S.of(context).LOGIN,
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState?.save();
-                                LoginApi loginapi = new LoginApi();
+                                LoginApi loginapi = LoginApi();
                                 print('before request.....................');
-                                bool tmp = await loginapi.login(
-                                    emailController.text,
-                                    passwordController.text);
-                                if (tmp) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (c) => ProfileScreen()));
-                                } else {
+                                bool tmp = await loginapi.login(emailController.text,passwordController.text);
+                                if(tmp){
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (c) => const ProfileScreen()));
+                                }else{
                                   print('error');
                                 }
                               }
@@ -117,7 +116,7 @@ class _LoginScreen extends State<LoginScreen> {
                           ),
                         ),
                       ])),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -125,14 +124,16 @@ class _LoginScreen extends State<LoginScreen> {
                       TextButton(
                         child: Text(S.of(context).register),
                         onPressed: () => {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (c) => SignupScreen()))
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (c) => SignupScreen()))
                         },
                       )
                     ],
                   ),
-                  SizedBox(height: 5),
-                  Row(
+                  const SizedBox(height: 5),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(

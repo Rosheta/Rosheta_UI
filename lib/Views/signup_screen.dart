@@ -2,17 +2,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:rosheta_ui/screens/login_screen.dart';
+import 'package:rosheta_ui/Views/login_screen.dart';
 import 'package:rosheta_ui/services/signup_service.dart';
 import '../generated/l10n.dart';
 
 class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
+
   @override
   State<SignupScreen> createState() => _SignupState();
 }
 
 class _SignupState extends State<SignupScreen> {
-  var NameController = TextEditingController();
+  var nameController = TextEditingController();
   var ssnController = TextEditingController();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
@@ -28,7 +30,7 @@ class _SignupState extends State<SignupScreen> {
       appBar: AppBar(
         title: Text(
           S.of(context).title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -38,20 +40,20 @@ class _SignupState extends State<SignupScreen> {
         backgroundColor: Colors.cyan,
       ),
       body: Padding(
-        padding: EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(15.0),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Text(
                   S.of(context).signup,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.cyan,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Form(
                     key: _formKey,
                     child: Column(children: [
@@ -62,7 +64,7 @@ class _SignupState extends State<SignupScreen> {
                             _selectedUserRole = newValue.toString();
                           });
                         },
-                        items: [
+                        items: const [
                           DropdownMenuItem(
                             value: 'Patient',
                             child: Text('Patient'),
@@ -72,21 +74,21 @@ class _SignupState extends State<SignupScreen> {
                             child: Text('Doctor'),
                           ),
                         ],
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 15),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFormField(
-                        controller: NameController,
+                        controller: nameController,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.person),
-                            border: OutlineInputBorder(),
+                            prefixIcon: const Icon(Icons.person),
+                            border: const OutlineInputBorder(),
                             labelText: S.of(context).name,
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                               color: Colors.cyan,
                             )),
                         validator: (value) {
@@ -94,32 +96,33 @@ class _SignupState extends State<SignupScreen> {
                           return "Enter your name";
                         },
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: ssnController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.credit_card),
-                            border: OutlineInputBorder(),
+                            prefixIcon: const Icon(Icons.credit_card),
+                            border: const OutlineInputBorder(),
                             labelText: S.of(context).NationalId,
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                               color: Colors.cyan,
                             )),
                         validator: (value) {
-                          if (value.toString().length != 14)
+                          if (value.toString().length != 14) {
                             return "Enter your national id";
+                          }
                           return null;
                         },
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.email),
-                            border: OutlineInputBorder(),
+                            prefixIcon: const Icon(Icons.email),
+                            border: const OutlineInputBorder(),
                             labelText: S.of(context).email,
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                               color: Colors.cyan,
                             )),
                         validator: (value) {
@@ -127,13 +130,13 @@ class _SignupState extends State<SignupScreen> {
                           return "Email must contain @";
                         },
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: passwordController,
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: _obscureText,
                         decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.lock),
+                            prefixIcon: const Icon(Icons.lock),
                             suffixIcon: GestureDetector(
                               onTap: _togglePasswordVisibility,
                               child: Icon(
@@ -142,62 +145,61 @@ class _SignupState extends State<SignupScreen> {
                                     : Icons.visibility,
                               ),
                             ),
-                            border: OutlineInputBorder(),
+                            border: const OutlineInputBorder(),
                             labelText: S.of(context).password,
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                               color: Colors.cyan,
                             )),
                         validator: (value) {
                           return isValidPassword(value.toString());
                         },
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: phoneController,
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.phone),
-                            border: OutlineInputBorder(),
+                            prefixIcon: const Icon(Icons.phone),
+                            border: const OutlineInputBorder(),
                             labelText: S.of(context).Phone,
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                               color: Colors.cyan,
                             )),
                         validator: (value) {
                           return isValidPhone(value.toString());
                         },
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: birthDateController,
                         onTap: _datePicker,
                         decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.date_range),
-                            border: OutlineInputBorder(),
+                            prefixIcon: const Icon(Icons.date_range),
+                            border: const OutlineInputBorder(),
                             labelText: S.of(context).birthDate,
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                               color: Colors.cyan,
                             )),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Container(
                         width: double.infinity,
                         color: Colors.cyan,
                         child: MaterialButton(
                           child: Text(
                             S.of(context).SIGNUP,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                             ),
                           ),
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState?.save();
-                              print('before request.....................');
-                              SignupApi signuprequest = new SignupApi();
+                              SignupApi signuprequest = SignupApi();
                               bool check = await signuprequest.signup(
                                 email: emailController.text,
                                 password: passwordController.text,
-                                name: NameController.text,
+                                name: nameController.text,
                                 phone: phoneController.text,
                                 ssn: ssnController.text,
                                 birthdate: birthDateController.text,
@@ -207,16 +209,15 @@ class _SignupState extends State<SignupScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (c) => LoginScreen()));
+                                        builder: (c) => const LoginScreen()));
                               } else {
-                                print('Failed to signup');
                               }
                             }
                           },
                         ),
                       ),
                     ])),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -225,8 +226,10 @@ class _SignupState extends State<SignupScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (c) => LoginScreen()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (c) => const LoginScreen()));
                       },
                       child: Text(
                         S.of(context).LoginNow,
@@ -234,8 +237,8 @@ class _SignupState extends State<SignupScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 5),
-                Row(
+                const SizedBox(height: 5),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('We serve you with tender , care and love'),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile_model.dart';
-import 'package:rosheta_ui/screens/profile_screen.dart';
+import 'package:rosheta_ui/Views/profile_screen.dart';
 import 'package:rosheta_ui/services/edit_profile_service.dart';
 
 class EditBasicInfoScreen extends StatefulWidget {

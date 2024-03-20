@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
-import 'package:rosheta_ui/screens/profile_screen.dart';
+import 'package:rosheta_ui/Views/signup_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure plugin services are initialized
+  await dotenv.load(fileName: ".env");
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: Locale('en'),
+      locale: const Locale('en'),
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -20,7 +25,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: ProfileScreen(),
+      home: const SignupScreen(),
     );
   }
 }
