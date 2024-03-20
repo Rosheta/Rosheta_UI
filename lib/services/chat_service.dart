@@ -1,0 +1,81 @@
+import 'dart:convert';
+import 'package:rosheta_ui/models/chatuser_model.dart';
+import 'package:rosheta_ui/models/chatusers_model.dart';
+import 'package:http/http.dart' as http;
+import 'package:rosheta_ui/models/msg_model.dart';
+import 'package:rosheta_ui/models/msgs_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+class ChatApi {
+
+  Future<String> getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('acesstoken') ?? '';
+  }
+
+  Future<List<ChatUser>> getfriends() async {
+    final String apiUrl = dotenv.env['API_URL']!;
+    final url = '$apiUrl/chatusers';
+    final String token = await getAccessToken();
+    try {
+      http.Response response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({'token': token}),
+      );
+      // Deserialize body to be accessible
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        String data = response.body;
+        var jsonData = jsonDecode(data);
+        ChatUsers friends = ChatUsers.fromJson(jsonData);
+        List<ChatUser> listOfFriends =
+            friends.chatUser!.map((e) => ChatUser.fromJson(e)).toList();
+        return listOfFriends;
+      } else {
+        print('Status code: ${response.statusCode}');
+        return [];
+      }
+    } catch (e) {
+      print('Exception: $e');
+      return [];
+    }
+  }
+
+  Future<List<Message>> getmsgs(String chatId) async {
+    final String apiUrl = dotenv.env['API_URL']!;
+    final url = '$apiUrl/messages';
+    final String token = await getAccessToken();
+
+    try {
+      http.Response response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'token': token,
+          'chatId': chatId,
+        }),
+      );
+      
+      // Deserialize body to be accessible
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        String data = response.body;
+        var jsonData = jsonDecode(data);
+        Messages messages = Messages.fromJson(jsonData);
+        List<Message> listOfMsgs =
+            messages.msgs!.map((e) => Message.fromJson(e)).toList();
+        return listOfMsgs;
+      } else {
+        print('Status code: ${response.statusCode}');
+        return [];
+      }
+    } catch (e) {
+      print('Exception: $e');
+      return [];
+    }
+  }
+}

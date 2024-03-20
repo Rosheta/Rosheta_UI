@@ -2,13 +2,13 @@
 import 'package:rosheta_ui/models/chatuser_model.dart';
 
 class ChatUsers {
-  final List<ChatUser>? chatUsers;
+  final List<dynamic>? chatUser;
 
-  ChatUsers({this.chatUsers});
+  ChatUsers({this.chatUser});
 
   factory ChatUsers.fromJson(Map<String,dynamic> jsonData) {
     return ChatUsers(
-      chatUsers: jsonData['chatUsers']
+      chatUser: jsonData['chatUsers']
     );
   }
 }

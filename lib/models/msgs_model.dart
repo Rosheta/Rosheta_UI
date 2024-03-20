@@ -1,7 +1,7 @@
 import 'package:rosheta_ui/models/msg_model.dart';
 
 class Messages {
-  final List<Message>? msgs;
+  final List<dynamic>? msgs;
 
   Messages({this.msgs});
 
