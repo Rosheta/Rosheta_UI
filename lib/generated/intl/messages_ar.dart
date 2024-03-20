@@ -22,23 +22,34 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "LoginNow": MessageLookupByLibrary.simpleMessage("سجل الان"),
         "NationalId": MessageLookupByLibrary.simpleMessage("الرقم القومى"),
+        "Patient": MessageLookupByLibrary.simpleMessage("مريض"),
         "Phone": MessageLookupByLibrary.simpleMessage("رقم التليفون"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("انشاء"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
-        "Doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
-        "Patient": MessageLookupByLibrary.simpleMessage("مريض"),
         "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
+        "editInfor":
+            MessageLookupByLibrary.simpleMessage("تعديل المعلومات الاساسية"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
         "havingaccount": MessageLookupByLibrary.simpleMessage("هل لديك حساب؟"),
+        "hintTextID": MessageLookupByLibrary.simpleMessage("ادخل الرقم القومي"),
+        "hintTextdate":
+            MessageLookupByLibrary.simpleMessage("ادخل تاريخ الميلاد"),
+        "hintTextemail":
+            MessageLookupByLibrary.simpleMessage("ادخل البريد الالكتروني"),
+        "hintTextname": MessageLookupByLibrary.simpleMessage("ادخل اسمك"),
+        "hintTextphonenumber":
+            MessageLookupByLibrary.simpleMessage("ادخل رقم الهاتف"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "nothavingaccount":
             MessageLookupByLibrary.simpleMessage("لا تمتلك حساب؟"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
         "register": MessageLookupByLibrary.simpleMessage("سجل"),
+        "savechanges": MessageLookupByLibrary.simpleMessage("حفظ التعديلات"),
         "signup": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
         "title": MessageLookupByLibrary.simpleMessage("ROSHETA")
       };

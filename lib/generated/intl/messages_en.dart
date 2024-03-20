@@ -22,24 +22,36 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("LOGIN"),
         "LoginNow": MessageLookupByLibrary.simpleMessage("Login Now"),
         "NationalId": MessageLookupByLibrary.simpleMessage("National ID"),
+        "Patient": MessageLookupByLibrary.simpleMessage("Patient"),
         "Phone": MessageLookupByLibrary.simpleMessage("Phonenumber"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("SIGNUP"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
-        "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
-        "Patient": MessageLookupByLibrary.simpleMessage("Patient"),
         "birthDate": MessageLookupByLibrary.simpleMessage("Select Birth Date"),
+        "editInfor":
+            MessageLookupByLibrary.simpleMessage("Edit basic information"),
         "email": MessageLookupByLibrary.simpleMessage("Email Address"),
         "havingaccount":
             MessageLookupByLibrary.simpleMessage("Have an accout?"),
+        "hintTextID":
+            MessageLookupByLibrary.simpleMessage("Enter your National ID"),
+        "hintTextdate":
+            MessageLookupByLibrary.simpleMessage("Enter your Date of Birth"),
+        "hintTextemail":
+            MessageLookupByLibrary.simpleMessage("Enter your email"),
+        "hintTextname": MessageLookupByLibrary.simpleMessage("Enter your name"),
+        "hintTextphonenumber":
+            MessageLookupByLibrary.simpleMessage("Enter your phone number"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "name": MessageLookupByLibrary.simpleMessage("Full Name"),
         "nothavingaccount":
             MessageLookupByLibrary.simpleMessage("Don\'\'t have account? "),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "savechanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
         "title": MessageLookupByLibrary.simpleMessage("ROSHETA")
       };
