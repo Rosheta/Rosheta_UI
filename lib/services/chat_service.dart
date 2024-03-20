@@ -1,38 +1,41 @@
-import 'dart:convert';
-import 'package:rosheta_ui/models/chatuser_model.dart';
-import 'package:rosheta_ui/models/chatusers_model.dart';
-import 'package:http/http.dart' as http;
-import 'package:rosheta_ui/models/msg_model.dart';
-import 'package:rosheta_ui/models/msgs_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:rosheta_ui/models/friends_model.dart';
+import 'package:rosheta_ui/models/friend_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:rosheta_ui/models/msgs_model.dart';
+import 'package:rosheta_ui/models/msg_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ChatApi {
-
   Future<String> getAccessToken() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('acesstoken') ?? '';
   }
 
-  Future<List<ChatUser>> getfriends() async {
+  Future<List<Friend>> getfriends() async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/chatusers';
-    final String token = await getAccessToken();
+    final url = '$apiUrl/friends';
+    // final String token = await getAccessToken();
+    final String token = "gdyushfsdkjfhuvj";
+
     try {
-      http.Response response = await http.post(
+      http.Response response = await http.get(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
+          'Authorization':
+              'Bearer $token', // Include access token in Authorization header
         },
-        body: json.encode({'token': token}),
       );
+
       // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
         var jsonData = jsonDecode(data);
-        ChatUsers friends = ChatUsers.fromJson(jsonData);
-        List<ChatUser> listOfFriends =
-            friends.chatUser!.map((e) => ChatUser.fromJson(e)).toList();
+        Friends friends = Friends.fromJson(jsonData);
+        List<Friend> listOfFriends =
+            friends.chatUser!.map((e) => Friend.fromJson(e)).toList();
         return listOfFriends;
       } else {
         print('Status code: ${response.statusCode}');
@@ -60,7 +63,7 @@ class ChatApi {
           'chatId': chatId,
         }),
       );
-      
+
       // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;

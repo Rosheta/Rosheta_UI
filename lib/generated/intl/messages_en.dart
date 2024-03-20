@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SIGNUP": MessageLookupByLibrary.simpleMessage("SIGNUP"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
         "birthDate": MessageLookupByLibrary.simpleMessage("Select Birth Date"),
+        "chat": MessageLookupByLibrary.simpleMessage("Chats"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("Edit basic information"),
         "email": MessageLookupByLibrary.simpleMessage("Email Address"),

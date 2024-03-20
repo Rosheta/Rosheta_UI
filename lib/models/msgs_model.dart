@@ -1,14 +1,13 @@
-import 'package:rosheta_ui/models/msg_model.dart';
-
 class Messages {
+  final String? userId;
   final List<dynamic>? msgs;
 
-  Messages({this.msgs});
+  Messages({this.userId , this.msgs});
 
-  factory Messages.fromJson(Map<String,dynamic> jsonData) {
+  factory Messages.fromJson(Map<String, dynamic> jsonData) {
     return Messages(
-      msgs: jsonData['msg']
+      userId: jsonData['userId'],
+      msgs: jsonData['messages']
     );
   }
-
 }

@@ -23,6 +23,6 @@
     "hintTextphonenumber": "Enter your phone number",
     "hintTextID": "Enter your National ID",
     "hintTextdate": "Enter your Date of Birth",
-    "savechanges":"Save changes"
-
+    "savechanges":"Save changes",
+    "chat" : "Chats"
 }

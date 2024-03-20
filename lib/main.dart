@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:rosheta_ui/Views/friends_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
-import 'package:rosheta_ui/Views/signup_screen.dart';
+// import 'package:rosheta_ui/Views/signup_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: const SignupScreen(),
+      home: const FriendsScreen(),
     );
   }
 }

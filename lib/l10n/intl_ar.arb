@@ -23,8 +23,6 @@
     "hintTextphonenumber": "ادخل رقم الهاتف",
     "hintTextID": "ادخل الرقم القومي",
     "hintTextdate": "ادخل تاريخ الميلاد",
-    "savechanges":"حفظ التعديلات"
-
-    
-
+    "savechanges":"حفظ التعديلات",
+    "chat" : "المحادثة"
 }
