@@ -110,16 +110,6 @@ class S {
     );
   }
 
-  /// `Register`
-  String get register {
-    return Intl.message(
-      'Register',
-      name: 'register',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Signup`
   String get signup {
     return Intl.message(
@@ -225,6 +215,86 @@ class S {
     return Intl.message(
       'Patient',
       name: 'Patient',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message(
+      'Register',
+      name: 'register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit basic information`
+  String get editInfor {
+    return Intl.message(
+      'Edit basic information',
+      name: 'editInfor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your name`
+  String get hintTextname {
+    return Intl.message(
+      'Enter your name',
+      name: 'hintTextname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email`
+  String get hintTextemail {
+    return Intl.message(
+      'Enter your email',
+      name: 'hintTextemail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your phone number`
+  String get hintTextphonenumber {
+    return Intl.message(
+      'Enter your phone number',
+      name: 'hintTextphonenumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your National ID`
+  String get hintTextID {
+    return Intl.message(
+      'Enter your National ID',
+      name: 'hintTextID',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your Date of Birth`
+  String get hintTextdate {
+    return Intl.message(
+      'Enter your Date of Birth',
+      name: 'hintTextdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save changes`
+  String get savechanges {
+    return Intl.message(
+      'Save changes',
+      name: 'savechanges',
       desc: '',
       args: [],
     );
