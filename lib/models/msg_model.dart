@@ -11,7 +11,6 @@ class Message{
     return Message(
       message: jsonData['message'],
       sender: jsonData['sender'],
-      receiver: jsonData['receiver'],
       time: jsonData['time'], // split time to show only time
       isRead: jsonData['isRead'],
     );
