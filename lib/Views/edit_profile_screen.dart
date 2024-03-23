@@ -6,9 +6,9 @@ import 'package:rosheta_ui/services/edit_profile_service.dart';
 
 class EditBasicInfoScreen extends StatefulWidget {
   final Profile user; // Define a property to hold the user object
-
-  EditBasicInfoScreen({required this.user});
+  const EditBasicInfoScreen({super.key, required this.user});
   @override
+  // ignore: library_private_types_in_public_api
   _EditBasicInfoPageState createState() => _EditBasicInfoPageState();
 }
 
@@ -71,7 +71,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.message),
+            icon: const Icon(Icons.message),
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
@@ -79,7 +79,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
@@ -87,7 +87,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
@@ -101,26 +101,26 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
         width: double.infinity,
         height: double.infinity,
         child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Center(
                     child: Text(
                       S.of(context).editInfor,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Text(
                     S.of(context).name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextField(
                     controller: _nameController,
@@ -128,10 +128,10 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                       hintText: S.of(context).hintTextname,
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Text(
                     S.of(context).email,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style:const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextField(
                     controller: _emailController,
@@ -139,10 +139,10 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                       hintText: S.of(context).hintTextemail,
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Text(
                     S.of(context).Phone,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextField(
                     controller: _phoneController,
@@ -150,10 +150,10 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                       hintText: S.of(context).hintTextphonenumber,
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Text(
                     S.of(context).birthDate,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Row(
                     children: <Widget>[
@@ -163,15 +163,15 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.edit),
+                        icon: const Icon(Icons.edit),
                         onPressed: () => _selectDate(context),
                       ),
                     ],
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Text(
                     S.of(context).NationalId,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextField(
                     controller: _idController,
@@ -179,12 +179,13 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                       hintText: S.of(context).hintTextID,
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Center(
                     child: ElevatedButton(
                       onPressed: () async {
-                        EditProfileApi editrequest = new EditProfileApi();
+                        EditProfileApi editrequest = EditProfileApi();
                         bool check = await editrequest.editprofile(
+                          userID: widget.user.userID,
                           email: _emailController.text,
                           name: _nameController.text,
                           phone: _phoneController.text,
@@ -194,20 +195,19 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                         check = true;
                         if (check) {
                           Navigator.pushReplacement(
+                              // ignore: use_build_context_synchronously
                               context,
                               MaterialPageRoute(
-                                  builder: (c) => ProfileScreen()));
-                        } else {
-                          print('Failed to signup');
+                                  builder: (c) => const ProfileScreen()));
                         }
                       },
                       child: Text(
                         S.of(context).savechanges,
-                        style: TextStyle(fontSize: 20, color: Colors.black),
+                        style: const TextStyle(fontSize: 20, color: Colors.black),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   const Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

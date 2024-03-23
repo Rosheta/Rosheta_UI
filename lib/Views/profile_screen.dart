@@ -1,20 +1,38 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile_model.dart';
 import 'package:rosheta_ui/Views/edit_profile_screen.dart';
 import 'package:rosheta_ui/services/Profile_service.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:rosheta_ui/services/change_pic_service.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProfileViewState createState() => _ProfileViewState();
 }
 
 class _ProfileViewState extends State<ProfileScreen> {
   late Future<Profile> _profileFuture;
-
   // create constructor to initialize the future
+  Uint8List image = Uint8List.fromList([10, 20, 30, 40, 50]);
+  void selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+    setState(() {
+      image = img;
+    });
+  }
+
+  pickImage(ImageSource source) async {
+    final ImagePicker impicker = ImagePicker();
+    XFile? file = await impicker.pickImage(source: source);
+    if (file != null) {
+      return await file.readAsBytes();
+    }
+  }
 
   Future<Profile> _fetchProfile() async {
     try {
@@ -22,9 +40,138 @@ class _ProfileViewState extends State<ProfileScreen> {
       return await pa.featchProfile();
     } catch (e) {
       // Handle any errors that occur during the data fetching process
-      print('Error fetching profile: $e');
       throw Exception('Failed to fetch profile');
     }
+  }
+
+  Container dumy(context, Uint8List ima) {
+    String da = "03-04-2017:022150";
+    Profile pr = Profile(
+        userID: "userID",
+        profileImage: ima,
+        userName: "userName",
+        email: "email",
+        phone: "phone",
+        date: "1901-02-03",
+        ID: "ID",
+        viewemail: true,
+        viewphone: true,
+        viewdate: true,
+        viewID: true);
+    return Container(
+      color: const Color.fromARGB(255, 233, 255, 255),
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Stack(children: [
+                  // ignore: unnecessary_null_comparison
+                  ima != null
+                      ? CircleAvatar(
+                          radius: 100.0,
+                          backgroundImage: MemoryImage(ima),
+                        )
+                      : const CircleAvatar(
+                          radius: 100.0,
+                          backgroundImage: AssetImage('Images/profile.png'),
+                        ),
+                  Positioned(
+                    bottom: -5,
+                    left: 160,
+                    child: IconButton(
+                        onPressed: () async {
+                          selectImage();
+                          // ignore: unnecessary_new
+                          changePicApi changePicrequest = new changePicApi();
+                          await changePicrequest.changePic(
+                              profileImage: ima, id: pr.userID);
+                        },
+                        icon: const Icon(
+                          Icons.add_a_photo,
+                          size: 30,
+                        )),
+                  )
+                ]),
+                const Text(
+                  "Mohamed Mostafa Ibrahim",
+                  style: TextStyle(
+                      fontSize: 25.5, color: Color.fromARGB(255, 1, 14, 15)),
+                ),
+                const SizedBox(height: 30),
+                getCont(Icons.email, "hamomemo@gmail.com",
+                    "${S.of(context).email}:"),
+                const SizedBox(height: 10),
+                getCont(Icons.phone, "01032901480", "${S.of(context).Phone}:"),
+                const SizedBox(height: 10),
+                getCont(
+                  Icons.date_range,
+                  da.substring(0, 10),
+                  "${S.of(context).UserbirthDate}:",
+                ),
+                const SizedBox(height: 10),
+                getCont(Icons.credit_card, "301071202023662",
+                    "${S.of(context).NationalId}:"),
+                const SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: () async {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => EditBasicInfoScreen(user: pr)));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(
+                        255, 159, 196, 196), // Background color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          20.0), // Set the border radius for circular edges
+                    ),
+                  ),
+                  child: SizedBox(
+                    height: 50, // Set the fixed height of the container
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 30),
+                        const Icon(
+                          Icons.settings,
+                          color: Colors.black,
+                          size: 35.0,
+                        ),
+                        const SizedBox(width: 25),
+                        Text(
+                          S.of(context).editInfor,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    ),
+                    Text(' We serve you with tender , care and love '),
+                    Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -43,7 +190,7 @@ class _ProfileViewState extends State<ProfileScreen> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.message),
+            icon: const Icon(Icons.message),
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
@@ -51,7 +198,7 @@ class _ProfileViewState extends State<ProfileScreen> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
@@ -59,7 +206,7 @@ class _ProfileViewState extends State<ProfileScreen> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
@@ -72,12 +219,12 @@ class _ProfileViewState extends State<ProfileScreen> {
         future: _profileFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // return dumy(context);
-            return Center(
+            //return dumy(context, _image);
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            // return dumy(context);
+            //return dumy(context, _image);
             return Center(
               child: Text('Error: ${snapshot.error}'),
             );
@@ -86,39 +233,65 @@ class _ProfileViewState extends State<ProfileScreen> {
             return Container(
               color: const Color.fromARGB(255, 233, 255, 255),
               child: Padding(
-                padding: EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Center(
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const CircleAvatar(
-                          radius: 100.0,
-                          backgroundImage: AssetImage('Images/profile.png'),
-                        ),
-                        Text(
-                          pr.userName,
-                          style: const TextStyle(
+                        Stack(children: [
+                          // ignore: unnecessary_null_comparison
+                          image != null
+                              ? CircleAvatar(
+                                  radius: 100.0,
+                                  backgroundImage: MemoryImage(image),
+                                )
+                              : const CircleAvatar(
+                                  radius: 100.0,
+                                  backgroundImage:
+                                      AssetImage('Images/profile.png'),
+                                ),
+                          Positioned(
+                            bottom: -5,
+                            left: 160,
+                            child: IconButton(
+                                onPressed: () async {
+                                  selectImage();
+                                  // ignore: unnecessary_new
+                                  changePicApi changePicrequest =
+                                      changePicApi();
+                                  await changePicrequest.changePic(
+                                      profileImage: image, id: pr.userID);
+                                },
+                                icon: const Icon(
+                                  Icons.add_a_photo,
+                                  size: 30,
+                                )),
+                          )
+                        ]),
+                        const Text(
+                          "Mohamed Mostafa Ibrahim",
+                          style: TextStyle(
                               fontSize: 25.5,
                               color: Color.fromARGB(255, 1, 14, 15)),
                         ),
                         const SizedBox(height: 30),
-                        getCont(
-                            Icons.email, pr.email, S.of(context).email + ":"),
+                        getCont(Icons.email, "hamomemo@gmail.com",
+                            "${S.of(context).email}:"),
                         const SizedBox(height: 10),
-                        getCont(
-                            Icons.phone, pr.phone, S.of(context).Phone + ":"),
+                        getCont(Icons.phone, "01032901480",
+                            "${S.of(context).Phone}:"),
                         const SizedBox(height: 10),
                         getCont(
                           Icons.date_range,
                           pr.date.substring(0, 10),
-                          S.of(context).UserbirthDate + ":",
+                          "${S.of(context).UserbirthDate}:",
                         ),
                         const SizedBox(height: 10),
-                        getCont(Icons.credit_card, pr.ID,
-                            S.of(context).NationalId + ":"),
+                        getCont(Icons.credit_card, "301071202023662",
+                            "${S.of(context).NationalId}:"),
                         const SizedBox(height: 40),
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -126,7 +299,7 @@ class _ProfileViewState extends State<ProfileScreen> {
                                         EditBasicInfoScreen(user: pr)));
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(
+                            backgroundColor: const Color.fromARGB(
                                 255, 159, 196, 196), // Background color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
@@ -137,16 +310,16 @@ class _ProfileViewState extends State<ProfileScreen> {
                             height: 50, // Set the fixed height of the container
                             child: Row(
                               children: [
-                                SizedBox(width: 30),
-                                Icon(
+                                const SizedBox(width: 30),
+                                const Icon(
                                   Icons.settings,
                                   color: Colors.black,
                                   size: 35.0,
                                 ),
-                                SizedBox(width: 25),
+                                const SizedBox(width: 25),
                                 Text(
                                   S.of(context).editInfor,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
                                       color: Colors.black),
@@ -155,8 +328,8 @@ class _ProfileViewState extends State<ProfileScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
-                        Row(
+                        const SizedBox(height: 20),
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
@@ -197,7 +370,7 @@ Column getCont(IconData icon, dynamic st, String text) {
       ]),
       Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 159, 196, 196),
+          color: const Color.fromARGB(255, 159, 196, 196),
           borderRadius: BorderRadius.circular(
               10.0), // Set the border radius for circular edges
         ),
@@ -223,105 +396,5 @@ Column getCont(IconData icon, dynamic st, String text) {
         ),
       ),
     ],
-  );
-}
-
-Container dumy(context) {
-  String da = "03-04-2017:022150";
-  return Container(
-    color: const Color.fromARGB(255, 233, 255, 255),
-    child: Padding(
-      padding: EdgeInsets.all(15.0),
-      child: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const CircleAvatar(
-                radius: 100.0,
-                backgroundImage: AssetImage('Images/profile.png'),
-              ),
-              Text(
-                "Mohamed Mostafa Ibrahim",
-                style: const TextStyle(
-                    fontSize: 25.5, color: Color.fromARGB(255, 1, 14, 15)),
-              ),
-              const SizedBox(height: 30),
-              getCont(
-                  Icons.email, "hamomemo@gmail.com", S.of(context).email + ":"),
-              const SizedBox(height: 10),
-              getCont(Icons.phone, "01032901480", S.of(context).Phone + ":"),
-              const SizedBox(height: 10),
-              getCont(
-                Icons.date_range,
-                da.substring(0, 10),
-                S.of(context).UserbirthDate + ":",
-              ),
-              const SizedBox(height: 10),
-              getCont(Icons.credit_card, "301071202023662",
-                  S.of(context).NationalId + ":"),
-              const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () {
-                  Profile pro = Profile(
-                      userName: "userName",
-                      email: "email",
-                      phone: "phone",
-                      date: "2024/10/15",
-                      ID: "ID");
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (c) => EditBasicInfoScreen(user: pro)));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor:
-                      Color.fromARGB(255, 159, 196, 196), // Background color
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        20.0), // Set the border radius for circular edges
-                  ),
-                ),
-                child: SizedBox(
-                  height: 50, // Set the fixed height of the container
-                  child: Row(
-                    children: [
-                      SizedBox(width: 30),
-                      Icon(
-                        Icons.settings,
-                        color: Colors.black,
-                        size: 35.0,
-                      ),
-                      SizedBox(width: 25),
-                      Text(
-                        S.of(context).editInfor,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  ),
-                  Text(' We serve you with tender , care and love '),
-                  Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    ),
   );
 }

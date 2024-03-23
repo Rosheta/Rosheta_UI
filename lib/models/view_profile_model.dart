@@ -1,7 +1,7 @@
 import 'dart:js_interop';
 import 'dart:typed_data';
 
-class Profile {
+class ViewProfile {
   final String userID;
   final Uint8List profileImage;
   final String userName;
@@ -14,7 +14,7 @@ class Profile {
   final bool viewdate;
   final bool viewID;
 
-  Profile(
+  ViewProfile(
       {required this.userID,
       required this.profileImage,
       required this.userName,
@@ -27,8 +27,8 @@ class Profile {
       required this.viewdate,
       required this.viewID});
 
-  factory Profile.fromJson(Map<String, dynamic> jsonData) {
-    return Profile(
+  factory ViewProfile.fromJson(Map<String, dynamic> jsonData) {
+    return ViewProfile(
       userID: jsonData['userID'],
       profileImage: jsonData['profileImage'],
       userName: jsonData['userName'],
