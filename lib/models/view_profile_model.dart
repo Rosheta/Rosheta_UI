@@ -1,8 +1,7 @@
-import 'dart:io';
 import 'dart:typed_data';
 
-class Profile {
-  Uint8List profileImage;
+class ViewProfile {
+  final Uint8List profileImage;
   final String userName;
   final String email;
   final String phone;
@@ -13,7 +12,7 @@ class Profile {
   final bool viewdate;
   final bool viewID;
 
-  Profile(
+  ViewProfile(
       {required this.profileImage,
       required this.userName,
       required this.email,
@@ -25,16 +24,14 @@ class Profile {
       required this.viewdate,
       required this.viewID});
 
-  factory Profile.fromJson(Map<String, dynamic> jsonData) {
-    final Uint8List proImage;
-
+  factory ViewProfile.fromJson(Map<String, dynamic> jsonData) {
+    Uint8List proImage;
     if (jsonData['profileImage'] == null) {
       proImage = Uint8List.fromList([]);
     } else {
       proImage = jsonData['profileImage'];
     }
-    return Profile(
-      // profileImage: Uint8List.fromList([10, 20, 30, 40, 50]),
+    return ViewProfile(
       profileImage: proImage,
       userName: jsonData['userName'],
       email: jsonData['email'],

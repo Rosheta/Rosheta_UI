@@ -1,30 +1,32 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:rosheta_ui/models/profile_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:rosheta_ui/models/view_profile_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileApi {
-  Future<Profile> featchProfile() async {
+class viewProfileApi {
+  Future<ViewProfile> viewProfile({required userId}) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/profile';
+    final url = '$apiUrl/profileByID';
     try {
       String accessToken =
           await getAccessToken(); // Assuming this method gets the access token
 
+      // Construct the URL with the user ID as a query parameter
+      Uri uri = Uri.parse('$url?userId=$userId');
+
       http.Response response = await http.get(
-        Uri.parse(url),
+        uri,
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
               'Bearer $accessToken', // Include access token in Authorization header
         },
       );
-      // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
         var jsonData = jsonDecode(data);
-        Profile dataProfile = Profile.fromJson(jsonData);
+        ViewProfile dataProfile = ViewProfile.fromJson(jsonData);
         return dataProfile;
       } else {
         print('Status code: ${response.statusCode}');
@@ -33,6 +35,8 @@ class ProfileApi {
       print('Exception: $e');
     }
     throw Exception('Login failed');
+
+    // Handle response here
   }
 
   Future<String> getAccessToken() async {

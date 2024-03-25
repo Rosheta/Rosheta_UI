@@ -1,22 +1,33 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfileApi {
-  Future<bool> editprofile(
-      {required email,
-      required name,
-      required phone,
-      required ssn,
-      required birthdate}) async {
-
+  Future<bool> editprofile({
+    required email,
+    required name,
+    required phone,
+    required ssn,
+    required birthdate,
+    required viewemail,
+    required viewphone,
+    required viewdate,
+    required viewID,
+  }) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/editProfile';
+    final url = '$apiUrl/profile';
     try {
-      http.Response response = await http.post(
+      String accessToken =
+          await getAccessToken(); // Assuming this method gets the access token
+
+      http.Response response = await http.put(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
+          'Authorization':
+              'Bearer $accessToken', // Include access token in Authorization header
         },
         body: json.encode({
           'email': email,
@@ -24,15 +35,25 @@ class EditProfileApi {
           'phone': phone,
           'ssn': ssn,
           'birthdate': birthdate,
+          "viewemail": viewemail,
+          "viewphone": viewphone,
+          "viewdate": viewdate,
+          "viewID": viewID,
         }),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         return true;
-      } else
+      } else {
         return false;
+      }
     } catch (e) {
       print("Exception: $e");
       return false;
     }
+  }
+
+  Future<String> getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('acesstoken') ?? '';
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:rosheta_ui/Views/search_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile_model.dart';
 import 'package:rosheta_ui/Views/profile_screen.dart';
@@ -6,9 +8,9 @@ import 'package:rosheta_ui/services/edit_profile_service.dart';
 
 class EditBasicInfoScreen extends StatefulWidget {
   final Profile user; // Define a property to hold the user object
-
-  EditBasicInfoScreen({required this.user});
+  const EditBasicInfoScreen({super.key, required this.user});
   @override
+  // ignore: library_private_types_in_public_api
   _EditBasicInfoPageState createState() => _EditBasicInfoPageState();
 }
 
@@ -18,6 +20,11 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
   late TextEditingController _phoneController;
   late DateTime _dateOfBirth;
   late TextEditingController _idController;
+  late bool viewemail;
+  late bool viewphone;
+  late bool viewdate;
+  late bool viewID;
+  late TextEditingController birthDateController = TextEditingController();
 
   @override
   void initState() {
@@ -30,6 +37,12 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
         int.parse(widget.user.date.substring(5, 7)),
         int.parse(widget.user.date.substring(8, 10))); // Initial date of birth
     _idController = TextEditingController(text: widget.user.ID);
+    viewemail = widget.user.viewemail;
+    viewphone = widget.user.viewphone;
+    viewdate = widget.user.viewdate;
+    viewID = widget.user.viewID;
+    birthDateController.text = DateFormat('yyyy/MM/dd').format(_dateOfBirth);
+    print(birthDateController);
   }
 
   @override
@@ -41,19 +54,38 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
     super.dispose();
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: _dateOfBirth,
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
+  void _datePicker() async {
+    DateTime? birthdate = await showDatePicker(
+        context: context,
+        initialDate: _dateOfBirth,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2100));
 
-    if (pickedDate != null && pickedDate != _dateOfBirth) {
+    if (birthdate != null) {
       setState(() {
-        _dateOfBirth = pickedDate;
+        birthDateController.text = DateFormat('yyyy/MM/dd').format(birthdate);
       });
     }
+  }
+
+  Icon getViewIDIcon() {
+    if (viewID) return const Icon(Icons.visibility);
+    return const Icon(Icons.visibility_off);
+  }
+
+  Icon getViewPhoneIcon() {
+    if (viewphone) return const Icon(Icons.visibility);
+    return const Icon(Icons.visibility_off);
+  }
+
+  Icon getViewDateIcon() {
+    if (viewdate) return const Icon(Icons.visibility);
+    return const Icon(Icons.visibility_off);
+  }
+
+  Icon getViewEmailIcon() {
+    if (viewemail) return const Icon(Icons.visibility);
+    return const Icon(Icons.visibility_off);
   }
 
   @override
@@ -71,7 +103,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.message),
+            icon: const Icon(Icons.message),
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
@@ -79,15 +111,18 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
-              // Handle icon2 onPressed action
+              showSearch(
+                  context: context,
+                  // delegate to customize the search bar
+                  delegate: SearchPeople());
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
@@ -101,26 +136,26 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
         width: double.infinity,
         height: double.infinity,
         child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Center(
                     child: Text(
                       S.of(context).editInfor,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Text(
                     S.of(context).name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextField(
                     controller: _nameController,
@@ -128,86 +163,124 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                       hintText: S.of(context).hintTextname,
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Text(
                     S.of(context).email,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
                       hintText: S.of(context).hintTextemail,
+                      suffix: IconButton(
+                        icon:
+                            getViewEmailIcon(), // You can replace with any desired icon
+                        onPressed: () {
+                          setState(() {
+                            viewemail = !viewemail;
+                          });
+                        },
+                      ),
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Text(
                     S.of(context).Phone,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextField(
                     controller: _phoneController,
                     decoration: InputDecoration(
                       hintText: S.of(context).hintTextphonenumber,
+                      suffix: IconButton(
+                        icon:
+                            getViewPhoneIcon(), // You can replace with any desired icon
+                        onPressed: () {
+                          setState(() {
+                            viewphone = !viewphone;
+                          });
+                        },
+                      ),
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Text(
                     S.of(context).birthDate,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          '${_dateOfBirth.day}/${_dateOfBirth.month}/${_dateOfBirth.year}',
-                        ),
+                  TextFormField(
+                    controller:
+                        birthDateController, // Use the birthDateController
+                    readOnly: true, // Make the field read-only
+
+                    onTap: () => _datePicker(),
+                    decoration: InputDecoration(
+                      suffix: IconButton(
+                        icon:
+                            getViewDateIcon(), // You can replace with any desired icon
+                        onPressed: () {
+                          setState(() {
+                            viewdate = !viewdate;
+                          });
+                        },
                       ),
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () => _selectDate(context),
-                      ),
-                    ],
+                    ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Text(
                     S.of(context).NationalId,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextField(
                     controller: _idController,
                     decoration: InputDecoration(
                       hintText: S.of(context).hintTextID,
+                      suffix: IconButton(
+                        icon:
+                            getViewIDIcon(), // You can replace with any desired icon
+                        onPressed: () {
+                          setState(() {
+                            viewID = !viewID;
+                          });
+                        },
+                      ),
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   Center(
                     child: ElevatedButton(
                       onPressed: () async {
-                        EditProfileApi editrequest = new EditProfileApi();
+                        EditProfileApi editrequest = EditProfileApi();
                         bool check = await editrequest.editprofile(
                           email: _emailController.text,
                           name: _nameController.text,
                           phone: _phoneController.text,
                           ssn: _idController.text,
-                          birthdate: _dateOfBirth,
+                          birthdate: birthDateController.text.substring(0, 9) +
+                              (int.parse(birthDateController.text[9]) + 1)
+                                  .toString(),
+                          viewdate: viewdate,
+                          viewID: viewID,
+                          viewemail: viewemail,
+                          viewphone: viewphone,
                         );
-                        check = true;
+                        // check = true;
                         if (check) {
                           Navigator.pushReplacement(
+                              // ignore: use_build_context_synchronously
                               context,
                               MaterialPageRoute(
-                                  builder: (c) => ProfileScreen()));
-                        } else {
-                          print('Failed to signup');
+                                  builder: (c) => const ProfileScreen()));
                         }
                       },
                       child: Text(
                         S.of(context).savechanges,
-                        style: TextStyle(fontSize: 20, color: Colors.black),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.black),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   const Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

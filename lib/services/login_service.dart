@@ -8,6 +8,7 @@ class LoginApi {
   Future<bool> login(String email, String password) async {
     final String apiUrl = dotenv.env['API_URL']!;
     final url = '$apiUrl/login';
+
     try {
       http.Response response = await http.post(
         Uri.parse(url),
