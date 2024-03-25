@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:rosheta_ui/Views/search_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile_model.dart';
 import 'package:rosheta_ui/Views/edit_profile_screen.dart';
@@ -18,12 +19,18 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileViewState extends State<ProfileScreen> {
   late Future<Profile> _profileFuture;
   // create constructor to initialize the future
-  Uint8List image = Uint8List.fromList([10, 20, 30, 40, 50]);
+  Uint8List image = Uint8List.fromList([]);
   void selectImage() async {
     Uint8List img = await pickImage(ImageSource.gallery);
+    print("object");
+    print(img);
     setState(() {
       image = img;
     });
+    print(image);
+    // ignore: unnecessary_new
+    changePicApi changePicrequest = changePicApi();
+    print(await changePicrequest.changePic(profileImage: img));
   }
 
   pickImage(ImageSource source) async {
@@ -47,7 +54,6 @@ class _ProfileViewState extends State<ProfileScreen> {
   Container dumy(context, Uint8List ima) {
     String da = "03-04-2017:022150";
     Profile pr = Profile(
-        userID: "userID",
         profileImage: ima,
         userName: "userName",
         email: "email",
@@ -85,8 +91,7 @@ class _ProfileViewState extends State<ProfileScreen> {
                           selectImage();
                           // ignore: unnecessary_new
                           changePicApi changePicrequest = new changePicApi();
-                          await changePicrequest.changePic(
-                              profileImage: ima, id: pr.userID);
+                          await changePicrequest.changePic(profileImage: ima);
                         },
                         icon: const Icon(
                           Icons.add_a_photo,
@@ -132,8 +137,8 @@ class _ProfileViewState extends State<ProfileScreen> {
                   child: SizedBox(
                     height: 50, // Set the fixed height of the container
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(width: 30),
                         const Icon(
                           Icons.settings,
                           color: Colors.black,
@@ -202,7 +207,10 @@ class _ProfileViewState extends State<ProfileScreen> {
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
-              // Handle icon2 onPressed action
+              showSearch(
+                  context: context,
+                  // delegate to customize the search bar
+                  delegate: SearchPeople());
             },
           ),
           IconButton(
@@ -219,17 +227,19 @@ class _ProfileViewState extends State<ProfileScreen> {
         future: _profileFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            //return dumy(context, _image);
+            // return dumy(context, image);
             return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            //return dumy(context, _image);
+            // return dumy(context, image);
             return Center(
               child: Text('Error: ${snapshot.error}'),
             );
           } else {
             Profile pr = snapshot.data!;
+            //image = pr.profileImage;
+
             return Container(
               color: const Color.fromARGB(255, 233, 255, 255),
               child: Padding(
@@ -240,7 +250,7 @@ class _ProfileViewState extends State<ProfileScreen> {
                       children: [
                         Stack(children: [
                           // ignore: unnecessary_null_comparison
-                          image != null
+                          image.isNotEmpty
                               ? CircleAvatar(
                                   radius: 100.0,
                                   backgroundImage: MemoryImage(image),
@@ -256,11 +266,6 @@ class _ProfileViewState extends State<ProfileScreen> {
                             child: IconButton(
                                 onPressed: () async {
                                   selectImage();
-                                  // ignore: unnecessary_new
-                                  changePicApi changePicrequest =
-                                      changePicApi();
-                                  await changePicrequest.changePic(
-                                      profileImage: image, id: pr.userID);
                                 },
                                 icon: const Icon(
                                   Icons.add_a_photo,
@@ -268,18 +273,18 @@ class _ProfileViewState extends State<ProfileScreen> {
                                 )),
                           )
                         ]),
-                        const Text(
-                          "Mohamed Mostafa Ibrahim",
-                          style: TextStyle(
+                        Text(
+                          pr.userName,
+                          style: const TextStyle(
                               fontSize: 25.5,
                               color: Color.fromARGB(255, 1, 14, 15)),
                         ),
                         const SizedBox(height: 30),
-                        getCont(Icons.email, "hamomemo@gmail.com",
-                            "${S.of(context).email}:"),
+                        getCont(
+                            Icons.email, pr.email, "${S.of(context).email}:"),
                         const SizedBox(height: 10),
-                        getCont(Icons.phone, "01032901480",
-                            "${S.of(context).Phone}:"),
+                        getCont(
+                            Icons.phone, pr.phone, "${S.of(context).Phone}:"),
                         const SizedBox(height: 10),
                         getCont(
                           Icons.date_range,
@@ -287,7 +292,7 @@ class _ProfileViewState extends State<ProfileScreen> {
                           "${S.of(context).UserbirthDate}:",
                         ),
                         const SizedBox(height: 10),
-                        getCont(Icons.credit_card, "301071202023662",
+                        getCont(Icons.credit_card, pr.ID,
                             "${S.of(context).NationalId}:"),
                         const SizedBox(height: 40),
                         ElevatedButton(

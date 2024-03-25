@@ -1,12 +1,13 @@
 import 'dart:convert';
-import 'package:rosheta_ui/models/profile_model.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:rosheta_ui/models/view_profile_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class viewProfileApi {
   Future<ViewProfile> viewProfile({required userId}) async {
-    const url = 'http://192.168.1.2:5000/viewProfile';
+    final String apiUrl = dotenv.env['API_URL']!;
+    final url = '$apiUrl/profileByID';
     try {
       String accessToken =
           await getAccessToken(); // Assuming this method gets the access token

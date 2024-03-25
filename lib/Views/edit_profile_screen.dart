@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:rosheta_ui/Views/search_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile_model.dart';
 import 'package:rosheta_ui/Views/profile_screen.dart';
@@ -18,6 +20,11 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
   late TextEditingController _phoneController;
   late DateTime _dateOfBirth;
   late TextEditingController _idController;
+  late bool viewemail;
+  late bool viewphone;
+  late bool viewdate;
+  late bool viewID;
+  late TextEditingController birthDateController = TextEditingController();
 
   @override
   void initState() {
@@ -30,6 +37,12 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
         int.parse(widget.user.date.substring(5, 7)),
         int.parse(widget.user.date.substring(8, 10))); // Initial date of birth
     _idController = TextEditingController(text: widget.user.ID);
+    viewemail = widget.user.viewemail;
+    viewphone = widget.user.viewphone;
+    viewdate = widget.user.viewdate;
+    viewID = widget.user.viewID;
+    birthDateController.text = DateFormat('yyyy/MM/dd').format(_dateOfBirth);
+    print(birthDateController);
   }
 
   @override
@@ -41,19 +54,38 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
     super.dispose();
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: _dateOfBirth,
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
+  void _datePicker() async {
+    DateTime? birthdate = await showDatePicker(
+        context: context,
+        initialDate: _dateOfBirth,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2100));
 
-    if (pickedDate != null && pickedDate != _dateOfBirth) {
+    if (birthdate != null) {
       setState(() {
-        _dateOfBirth = pickedDate;
+        birthDateController.text = DateFormat('yyyy/MM/dd').format(birthdate);
       });
     }
+  }
+
+  Icon getViewIDIcon() {
+    if (viewID) return const Icon(Icons.visibility);
+    return const Icon(Icons.visibility_off);
+  }
+
+  Icon getViewPhoneIcon() {
+    if (viewphone) return const Icon(Icons.visibility);
+    return const Icon(Icons.visibility_off);
+  }
+
+  Icon getViewDateIcon() {
+    if (viewdate) return const Icon(Icons.visibility);
+    return const Icon(Icons.visibility_off);
+  }
+
+  Icon getViewEmailIcon() {
+    if (viewemail) return const Icon(Icons.visibility);
+    return const Icon(Icons.visibility_off);
   }
 
   @override
@@ -83,7 +115,10 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
-              // Handle icon2 onPressed action
+              showSearch(
+                  context: context,
+                  // delegate to customize the search bar
+                  delegate: SearchPeople());
             },
           ),
           IconButton(
@@ -131,12 +166,21 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                   const SizedBox(height: 20.0),
                   Text(
                     S.of(context).email,
-                    style:const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
                       hintText: S.of(context).hintTextemail,
+                      suffix: IconButton(
+                        icon:
+                            getViewEmailIcon(), // You can replace with any desired icon
+                        onPressed: () {
+                          setState(() {
+                            viewemail = !viewemail;
+                          });
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
@@ -148,6 +192,15 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     controller: _phoneController,
                     decoration: InputDecoration(
                       hintText: S.of(context).hintTextphonenumber,
+                      suffix: IconButton(
+                        icon:
+                            getViewPhoneIcon(), // You can replace with any desired icon
+                        onPressed: () {
+                          setState(() {
+                            viewphone = !viewphone;
+                          });
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
@@ -155,18 +208,23 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     S.of(context).birthDate,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          '${_dateOfBirth.day}/${_dateOfBirth.month}/${_dateOfBirth.year}',
-                        ),
+                  TextFormField(
+                    controller:
+                        birthDateController, // Use the birthDateController
+                    readOnly: true, // Make the field read-only
+
+                    onTap: () => _datePicker(),
+                    decoration: InputDecoration(
+                      suffix: IconButton(
+                        icon:
+                            getViewDateIcon(), // You can replace with any desired icon
+                        onPressed: () {
+                          setState(() {
+                            viewdate = !viewdate;
+                          });
+                        },
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.edit),
-                        onPressed: () => _selectDate(context),
-                      ),
-                    ],
+                    ),
                   ),
                   const SizedBox(height: 20.0),
                   Text(
@@ -177,6 +235,15 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     controller: _idController,
                     decoration: InputDecoration(
                       hintText: S.of(context).hintTextID,
+                      suffix: IconButton(
+                        icon:
+                            getViewIDIcon(), // You can replace with any desired icon
+                        onPressed: () {
+                          setState(() {
+                            viewID = !viewID;
+                          });
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20.0),
@@ -185,14 +252,19 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                       onPressed: () async {
                         EditProfileApi editrequest = EditProfileApi();
                         bool check = await editrequest.editprofile(
-                          userID: widget.user.userID,
                           email: _emailController.text,
                           name: _nameController.text,
                           phone: _phoneController.text,
                           ssn: _idController.text,
-                          birthdate: _dateOfBirth,
+                          birthdate: birthDateController.text.substring(0, 9) +
+                              (int.parse(birthDateController.text[9]) + 1)
+                                  .toString(),
+                          viewdate: viewdate,
+                          viewID: viewID,
+                          viewemail: viewemail,
+                          viewphone: viewphone,
                         );
-                        check = true;
+                        // check = true;
                         if (check) {
                           Navigator.pushReplacement(
                               // ignore: use_build_context_synchronously
@@ -203,7 +275,8 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                       },
                       child: Text(
                         S.of(context).savechanges,
-                        style: const TextStyle(fontSize: 20, color: Colors.black),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.black),
                       ),
                     ),
                   ),

@@ -2,6 +2,7 @@
 
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:rosheta_ui/Views/search_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile_model.dart';
 import 'package:rosheta_ui/models/view_profile_model.dart';
@@ -18,7 +19,6 @@ class ViewProfileScreen extends StatefulWidget {
 
 class _viewProfileViewState extends State<ViewProfileScreen> {
   late Future<ViewProfile> _profileFuture;
-  // create constructor to initialize the future
   File imageFile = File('Images/profile.png');
   Column getCont(IconData icon, dynamic st, String text) {
     return Column(
@@ -65,7 +65,6 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
 
   Container dumy(context, Uint8List ima) {
     Profile pr = Profile(
-        userID: "userID",
         profileImage: ima,
         userName: "userName",
         email: "email",
@@ -230,7 +229,10 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
-              // Handle icon2 onPressed action
+              showSearch(
+                  context: context,
+                  // delegate to customize the search bar
+                  delegate: SearchPeople());
             },
           ),
           IconButton(
@@ -267,7 +269,7 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
                     child: Column(
                       children: [
                         Stack(children: [
-                          pr.profileImage != null
+                          pr.profileImage.isNotEmpty
                               ? CircleAvatar(
                                   radius: 100.0,
                                   backgroundImage: MemoryImage(pr.profileImage),
