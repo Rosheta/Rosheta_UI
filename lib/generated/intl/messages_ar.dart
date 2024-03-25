@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SIGNUP": MessageLookupByLibrary.simpleMessage("انشاء"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
         "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
+        "chat": MessageLookupByLibrary.simpleMessage("المحادثة"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("تعديل المعلومات الاساسية"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
@@ -43,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hintTextname": MessageLookupByLibrary.simpleMessage("ادخل اسمك"),
         "hintTextphonenumber":
             MessageLookupByLibrary.simpleMessage("ادخل رقم الهاتف"),
+        "hinttextmsg":
+            MessageLookupByLibrary.simpleMessage("اكتب رسالتك هنا..."),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "nothavingaccount":
