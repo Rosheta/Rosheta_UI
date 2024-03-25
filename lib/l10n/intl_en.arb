@@ -24,5 +24,6 @@
     "hintTextID": "Enter your National ID",
     "hintTextdate": "Enter your Date of Birth",
     "savechanges":"Save changes",
-    "chat" : "Chats"
+    "chat" : "Chats",
+    "hinttextmsg" : "type your message here ..."
 }

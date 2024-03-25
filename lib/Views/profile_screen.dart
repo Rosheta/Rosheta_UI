@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rosheta_ui/Views/friends_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile_model.dart';
 import 'package:rosheta_ui/Views/edit_profile_screen.dart';
@@ -47,7 +48,10 @@ class _ProfileViewState extends State<ProfileScreen> {
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
-              // Handle icon1 onPressed action
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (c) => const FriendsScreen()));
             },
           ),
           IconButton(

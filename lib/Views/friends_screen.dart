@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:rosheta_ui/Views/chat_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/friend_model.dart';
@@ -106,8 +107,8 @@ class _FriendsScreenState extends State<FriendsScreen> {
           ),
     );
   }
-}
 
+  
 Widget buildChatItem(
         {String? imageURL,
         required String chatId,
@@ -170,7 +171,7 @@ Widget buildChatItem(
                       ),
                     ),
                     Text(
-                      time,
+                      convertToTimeString(time),
                     ),
                   ],
                 ),
@@ -181,3 +182,11 @@ Widget buildChatItem(
         ],
       ),
     );
+
+
+  String convertToTimeString(String dateTimeString) {
+    DateTime dateTime = DateTime.parse(dateTimeString);
+    String formattedTime = DateFormat.jm().format(dateTime);
+    return formattedTime;
+  }
+}

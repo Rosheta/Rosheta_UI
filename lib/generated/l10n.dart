@@ -309,6 +309,16 @@ class S {
       args: [],
     );
   }
+
+  /// `type your message here ...`
+  String get hinttextmsg {
+    return Intl.message(
+      'type your message here ...',
+      name: 'hinttextmsg',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

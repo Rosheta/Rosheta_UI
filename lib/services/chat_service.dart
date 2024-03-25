@@ -14,7 +14,7 @@ class ChatApi {
 
   Future<List<Friend>> getfriends() async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/friends';
+    final url = '$apiUrl/getChats';
     final String token = await getAccessToken();
 
     try {
@@ -47,7 +47,38 @@ class ChatApi {
 
   Future<Messages> getmsgs(String chatId) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/messages';
+    final url = '$apiUrl/getChatContent?chatId=${chatId}';
+    final String token = await getAccessToken();
+
+    try {
+      http.Response response = await http.get(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':
+              'Bearer $token', // Include access token in Authorization header
+        },
+      );
+
+      // Deserialize body to be accessible
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        String data = response.body;
+        var jsonData = jsonDecode(data);
+        Messages messages = Messages.fromJson(jsonData);
+        return messages;
+      } else {
+        print('Status code: ${response.statusCode}');
+        return Messages();
+      }
+    } catch (e) {
+      print('Exception: $e');
+      return Messages();
+    }
+  }
+
+  Future<void> startChat(String secondUserId) async{
+    final String apiUrl = dotenv.env['API_URL']!;
+    final url = '$apiUrl/startChat';
     final String token = await getAccessToken();
 
     try {
@@ -58,26 +89,20 @@ class ChatApi {
           'Authorization':
               'Bearer $token', // Include access token in Authorization header
         },
-        body: json.encode({
-          'chatId': chatId,
+        body: jsonEncode({
+          'userId': secondUserId,
         }),
       );
 
       // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
-        String data = response.body;
-        var jsonData = jsonDecode(data);
-        Messages messages = Messages.fromJson(jsonData);
-        // List<Message> listOfMsgs =
-        //     messages.msgs!.map((e) => Message.fromJson(e)).toList();
-        return messages;
+        print('startChat: ${response.body}');
       } else {
         print('Status code: ${response.statusCode}');
-        return Messages();
+        print('startChat: ${response.body}');
       }
     } catch (e) {
       print('Exception: $e');
-      return Messages();
     }
   }
 }
