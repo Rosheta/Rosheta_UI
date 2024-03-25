@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/Views/signup_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:rosheta_ui/Views/search_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure plugin services are initialized
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: const SignupScreen(),
+      home: const searchWidget(),
     );
   }
 }
