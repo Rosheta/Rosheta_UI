@@ -2,10 +2,13 @@
 
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:rosheta_ui/Views/chat_screen.dart';
+import 'package:rosheta_ui/Views/friends_screen.dart';
 import 'package:rosheta_ui/Views/search_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile_model.dart';
 import 'package:rosheta_ui/models/view_profile_model.dart';
+import 'package:rosheta_ui/services/chat_service.dart';
 import 'dart:io';
 import 'package:rosheta_ui/services/view_profile_service.dart';
 
@@ -19,6 +22,8 @@ class ViewProfileScreen extends StatefulWidget {
 
 class _viewProfileViewState extends State<ViewProfileScreen> {
   late Future<ViewProfile> _profileFuture;
+  late ViewProfile pr;
+
   File imageFile = File('Images/profile.png');
   Column getCont(IconData icon, dynamic st, String text) {
     return Column(
@@ -221,7 +226,10 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
-              // Handle icon1 onPressed action
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (c) => const FriendsScreen()));
             },
           ),
           IconButton(
@@ -259,7 +267,7 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
               child: Text('Error: ${snapshot.error}'),
             );
           } else {
-            ViewProfile pr = snapshot.data!;
+            pr = snapshot.data!;
             return Container(
               color: const Color.fromARGB(255, 233, 255, 255),
               child: Padding(
@@ -287,30 +295,46 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
                               color: Color.fromARGB(255, 1, 14, 15)),
                         ),
                         const SizedBox(height: 15),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 25, 155, 155),
-                            borderRadius: BorderRadius.circular(
-                                10.0), // Set the border radius for circular edges
-                          ),
-                          child: const SizedBox(
-                            height: 50,
-                            width: 200,
-                            child: Row(
-                              children: [
-                                SizedBox(width: 10),
-                                Icon(Icons.message,
-                                    size: 20, color: Colors.black),
-                                SizedBox(width: 10),
-                                Center(
-                                    child: Text(
-                                  'Send Message',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ))
-                              ],
+                        TextButton(
+                          onPressed: () async {
+                            ChatApi chatApi = ChatApi();
+                            String chatID =
+                                await chatApi.startChat(widget.userID);
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (c) => ChatScreen(
+                                          userIdSecondPerson: widget.userID,
+                                          name: pr.userName,
+                                          chatId: chatID,
+                                        )));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 25, 155, 155),
+                              borderRadius: BorderRadius.circular(
+                                  10.0), // Set the border radius for circular edges
+                            ),
+                            child: const SizedBox(
+                              height: 50,
+                              width: 200,
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 10),
+                                  Icon(Icons.message,
+                                      size: 20, color: Colors.black),
+                                  SizedBox(width: 10),
+                                  Center(
+                                      child: Text(
+                                    'Send Message',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ))
+                                ],
+                              ),
                             ),
                           ),
                         ),

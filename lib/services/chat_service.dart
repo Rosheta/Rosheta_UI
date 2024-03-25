@@ -76,11 +76,10 @@ class ChatApi {
     }
   }
 
-  Future<void> startChat(String secondUserId) async{
+  Future<String> startChat(String secondUserId) async {
     final String apiUrl = dotenv.env['API_URL']!;
     final url = '$apiUrl/startChat';
     final String token = await getAccessToken();
-
     try {
       http.Response response = await http.post(
         Uri.parse(url),
@@ -96,13 +95,20 @@ class ChatApi {
 
       // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print('startChat: ${response.body}');
+        String data = response.body;
+        var jsonData = jsonDecode(data);
+        String chatId = jsonData['chatId'];
+
+        print('startChat: ${chatId}');
+        return chatId;
       } else {
         print('Status code: ${response.statusCode}');
         print('startChat: ${response.body}');
+        return " ";
       }
     } catch (e) {
       print('Exception: $e');
+      return " ";
     }
   }
 }
