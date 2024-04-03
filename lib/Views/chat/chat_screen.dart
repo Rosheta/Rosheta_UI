@@ -4,11 +4,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:rosheta_ui/models/msg_model.dart';
-import 'package:rosheta_ui/models/msgs_model.dart';
-import 'package:rosheta_ui/services/chat_service.dart';
-import 'package:rosheta_ui/services/login_service.dart';
-import 'package:rosheta_ui/services/socket_service.dart';
+import 'package:rosheta_ui/models/chat/msg_model.dart';
+import 'package:rosheta_ui/models/chat/msgs_model.dart';
+import 'package:rosheta_ui/services/chat/chat_service.dart';
+import 'package:rosheta_ui/services/register/login_service.dart';
+import 'package:rosheta_ui/services/chat/socket_service.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 
 

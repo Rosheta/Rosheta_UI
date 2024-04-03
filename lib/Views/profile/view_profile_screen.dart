@@ -2,15 +2,15 @@
 
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:rosheta_ui/Views/chat_screen.dart';
-import 'package:rosheta_ui/Views/friends_screen.dart';
-import 'package:rosheta_ui/Views/search_screen.dart';
+import 'package:rosheta_ui/Views/chat/chat_screen.dart';
+import 'package:rosheta_ui/Views/chat/friends_screen.dart';
+import 'package:rosheta_ui/Views/search/search_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
-import 'package:rosheta_ui/models/profile_model.dart';
-import 'package:rosheta_ui/models/view_profile_model.dart';
-import 'package:rosheta_ui/services/chat_service.dart';
+import 'package:rosheta_ui/models/profile/profile_model.dart';
+import 'package:rosheta_ui/models/profile/view_profile_model.dart';
+import 'package:rosheta_ui/services/chat/chat_service.dart';
 import 'dart:io';
-import 'package:rosheta_ui/services/view_profile_service.dart';
+import 'package:rosheta_ui/services/profile/view_profile_service.dart';
 
 class ViewProfileScreen extends StatefulWidget {
   final String userID; // Define a property to hold the user object

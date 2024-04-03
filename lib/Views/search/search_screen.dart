@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rosheta_ui/Views/view_profile_screen.dart';
-import 'package:rosheta_ui/services/search_service.dart';
+import 'package:rosheta_ui/Views/profile/view_profile_screen.dart';
+import 'package:rosheta_ui/services/search/search_service.dart';
 
 class SearchWidget extends StatefulWidget {
   const SearchWidget({Key? key}) : super(key: key);

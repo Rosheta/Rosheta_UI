@@ -1,8 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:rosheta_ui/models/friends_model.dart';
-import 'package:rosheta_ui/models/friend_model.dart';
+import 'package:rosheta_ui/models/chat/friends_model.dart';
+import 'package:rosheta_ui/models/chat/friend_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:rosheta_ui/models/msgs_model.dart';
+import 'package:rosheta_ui/models/chat/msgs_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

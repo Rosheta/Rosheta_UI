@@ -1,38 +1,55 @@
-import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:rosheta_ui/models/profile_model.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileApi {
-  Future<Profile> featchProfile() async {
+class EditProfileApi {
+  Future<bool> editprofile({
+    required email,
+    required name,
+    required phone,
+    required ssn,
+    required birthdate,
+    required viewemail,
+    required viewphone,
+    required viewdate,
+    required viewID,
+  }) async {
     final String apiUrl = dotenv.env['API_URL']!;
     final url = '$apiUrl/profile';
     try {
       String accessToken =
           await getAccessToken(); // Assuming this method gets the access token
 
-      http.Response response = await http.get(
+      http.Response response = await http.put(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
               'Bearer $accessToken', // Include access token in Authorization header
         },
+        body: json.encode({
+          'email': email,
+          'name': name,
+          'phone': phone,
+          'ssn': ssn,
+          'birthdate': birthdate,
+          "viewemail": viewemail,
+          "viewphone": viewphone,
+          "viewdate": viewdate,
+          "viewID": viewID,
+        }),
       );
-      // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
-        String data = response.body;
-        var jsonData = jsonDecode(data);
-        Profile dataProfile = Profile.fromJson(jsonData);
-        return dataProfile;
+        return true;
       } else {
-        print('Status code: ${response.statusCode}');
+        return false;
       }
     } catch (e) {
-      print('Exception: $e');
+      print("Exception: $e");
+      return false;
     }
-    throw Exception('Login failed');
   }
 
   Future<String> getAccessToken() async {

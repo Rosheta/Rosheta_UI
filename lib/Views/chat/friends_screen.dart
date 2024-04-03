@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:rosheta_ui/Views/chat_screen.dart';
+import 'package:rosheta_ui/Views/chat/chat_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
-import 'package:rosheta_ui/models/friend_model.dart';
-import 'package:rosheta_ui/services/chat_service.dart';
+import 'package:rosheta_ui/models/chat/friend_model.dart';
+import 'package:rosheta_ui/services/chat/chat_service.dart';
 
 class FriendsScreen extends StatefulWidget {
   const FriendsScreen({super.key});
