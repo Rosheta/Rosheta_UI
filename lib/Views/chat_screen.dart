@@ -18,7 +18,7 @@ class ChatScreen extends StatefulWidget {
   final String? userIdSecondPerson;
   final String? imageUrl;
 
-  ChatScreen(
+  const ChatScreen(
       {super.key,
       this.userIdSecondPerson,
       required this.name,
@@ -59,7 +59,6 @@ class _ChatScreenState extends State<ChatScreen> {
     socketService.socket.on(widget.chatId, (data) {
       setState(() {
         // Append the new message to the existing list
-        print('entered socket listener $data');
         messages = messages.then((msgs) {
           msgs.add(Message.fromJson(data));
           return msgs;

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/view_profile_screen.dart';
 import 'package:rosheta_ui/services/search_service.dart';
 
-class searchWidget extends StatefulWidget {
-  const searchWidget({Key? key}) : super(key: key);
+class SearchWidget extends StatefulWidget {
+  const SearchWidget({Key? key}) : super(key: key);
 
   @override
-  State<searchWidget> createState() => _searchWidgetState();
+  State<SearchWidget> createState() => _SearchWidgetState();
 }
 
-class _searchWidgetState extends State<searchWidget> {
+class _SearchWidgetState extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +89,7 @@ void showResults(BuildContext context) {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    search_service s = search_service();
+    SearchApi s = SearchApi();
     return FutureBuilder<List<dynamic>>(
       future: s.fetchSuggestions(query),
       builder: (context, snapshot) {

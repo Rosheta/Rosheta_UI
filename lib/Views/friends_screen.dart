@@ -42,14 +42,6 @@ class _FriendsScreenState extends State<FriendsScreen> {
           ),
           actions: <Widget>[
             IconButton(
-              icon: const Icon(Icons.search),
-              iconSize: 30,
-              color: Colors.white,
-              onPressed: () {
-                // Handle icon1 onPressed action
-              },
-            ),
-            IconButton(
               icon: const Icon(Icons.menu),
               iconSize: 30,
               color: Colors.white,
