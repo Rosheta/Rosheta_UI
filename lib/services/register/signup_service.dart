@@ -17,7 +17,6 @@ class SignupApi {
     final String apiUrl = dotenv.env['API_URL']!;
     final String url = '$apiUrl/doctor';
 
-    print('url: $url');
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
       request.files.add(await http.MultipartFile.fromPath('file', selectedFile.path));
@@ -33,25 +32,8 @@ class SignupApi {
       request.fields['birthdate'] = birthdate;
       request.fields['government'] = government;
 
-      print(request.fields);
-
       // Send the request
       var response = await request.send();
-      print('response: $response');
-      // http.Response response = await http.post(
-      //   Uri.parse(url),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: json.encode({
-      //     'email': email,
-      //     'password': password,
-      //     'name': name,
-      //     'phone': phone,
-      //     'ssn': ssn,
-      //     'birthdate': birthdate
-      //   }),
-      // );
       if (response.statusCode == 200 || response.statusCode == 201) {
         return 'true';
       } else {
@@ -73,8 +55,9 @@ class SignupApi {
       required birthdate}) async {
 
     final String apiUrl = dotenv.env['API_URL']!;
-    final String url = '$apiUrl/register/doctor';
+    final String url = '$apiUrl/register/patient';
     try {
+
       http.Response response = await http.post(
         Uri.parse(url),
         headers: {
