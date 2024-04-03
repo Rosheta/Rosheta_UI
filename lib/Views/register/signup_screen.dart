@@ -12,8 +12,6 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupState extends State<SignupScreen> {
-  String _selectedUserRole = 'Patient';
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

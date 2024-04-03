@@ -363,7 +363,7 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
 
     if (birthdate != null) {
       setState(() {
-        birthDateController.text = DateFormat('yyyy-MM-dd').format(birthdate);
+        birthDateController.text = DateFormat('yyyy-MM-dd','en_US').format(birthdate);
       });
     }
   }
