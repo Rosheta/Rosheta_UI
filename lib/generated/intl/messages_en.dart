@@ -32,9 +32,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
         "birthDate": MessageLookupByLibrary.simpleMessage("Select Birth Date"),
         "chat": MessageLookupByLibrary.simpleMessage("Chats"),
+        "clinicPosition":
+            MessageLookupByLibrary.simpleMessage("Clinic Position"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("Edit basic information"),
         "email": MessageLookupByLibrary.simpleMessage("Email Address"),
+        "enterValidEmail":
+            MessageLookupByLibrary.simpleMessage("Email must contain @"),
+        "enterValidPhone": MessageLookupByLibrary.simpleMessage(
+            "Phone number must contain 11 numbers"),
+        "enterYourName":
+            MessageLookupByLibrary.simpleMessage("Enter your name"),
+        "enterYourNationalId": MessageLookupByLibrary.simpleMessage(
+            "National ID must conatain 14 numbers"),
+        "enterclinicPosition":
+            MessageLookupByLibrary.simpleMessage("Enter your clinic position"),
+        "female": MessageLookupByLibrary.simpleMessage("Female"),
         "havingaccount":
             MessageLookupByLibrary.simpleMessage("Have an accout?"),
         "hintTextID":
@@ -49,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hinttextmsg":
             MessageLookupByLibrary.simpleMessage("type your message here ..."),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "male": MessageLookupByLibrary.simpleMessage("Male"),
         "name": MessageLookupByLibrary.simpleMessage("Full Name"),
         "nothavingaccount":
             MessageLookupByLibrary.simpleMessage("Don\'\'t have account? "),
@@ -56,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "savechanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
-        "title": MessageLookupByLibrary.simpleMessage("ROSHETA")
+        "title": MessageLookupByLibrary.simpleMessage("ROSHETA"),
+        "uploadFile": MessageLookupByLibrary.simpleMessage("Upload File")
       };
 }
