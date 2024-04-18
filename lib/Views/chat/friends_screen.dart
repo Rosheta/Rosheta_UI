@@ -16,10 +16,8 @@ class FriendsScreen extends StatefulWidget {
 
 class _FriendsScreenState extends State<FriendsScreen> {
   late Future<List<Friend>> friends;
-
   Future<List<Friend>> _fetchfriends() async {
     try {
-      print('enter....................');
       ChatApi chat = ChatApi();
       return await chat.getfriends();
     } catch (e) {

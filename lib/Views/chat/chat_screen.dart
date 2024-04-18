@@ -33,9 +33,11 @@ class _ChatScreenState extends State<ChatScreen> {
   SocketService socketService = SocketService();
   String token = LoginApi().getAccessToken().toString();
   late Future<List<Message>> messages;
-  final _scrollController = ScrollController();
+  final _scrollController = ScrollController(keepScrollOffset: false);
   bool flag = true;
+  bool flag2 = true;
   int page = 2;
+  double tmpOffset = 0.0;
 
   Future<List<Message>> _fetchMessages() async {
     try {
@@ -65,10 +67,9 @@ class _ChatScreenState extends State<ChatScreen> {
     });
 
     _scrollController.addListener(() async {
-      if ((_scrollController.position.pixels -
-                  _scrollController.position.minScrollExtent <=
-              100) &&
-          (flag)) {
+      if ((_scrollController.position.pixels ==
+          _scrollController.position.minScrollExtent) && flag2) {
+        flag = false;
         ChatApi chat = ChatApi();
         Messages message = await chat.getmsgs(widget.chatId, page);
         userId = message.userId!;
@@ -79,6 +80,8 @@ class _ChatScreenState extends State<ChatScreen> {
         setState(() {
           page++;
           messages = Future.value(updatedMessages);
+          if(listOfMsgs.isEmpty)
+            flag2 = false;
         });
       }
     });
@@ -137,7 +140,15 @@ class _ChatScreenState extends State<ChatScreen> {
               } else {
                 List<Message> msgs = snapshot.data!;
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                  _scrollToBottom();
+                  if (flag) {
+                    tmpOffset = _scrollController.position.maxScrollExtent;
+                    _scrollToBottom();
+                  } else {
+                    print('tmpOffset: $tmpOffset  max: ${_scrollController.position.maxScrollExtent}');
+                    double tmm = (_scrollController.position.maxScrollExtent - tmpOffset - 20) < 0 ? 0 : (_scrollController.position.maxScrollExtent - tmpOffset - 20);
+                    _scrollController.jumpTo(tmm);
+                    tmpOffset = _scrollController.position.maxScrollExtent;
+                  }
                 });
                 return Container(
                     color: const Color.fromARGB(255, 233, 255, 255),
@@ -149,10 +160,8 @@ class _ChatScreenState extends State<ChatScreen> {
                           Expanded(
                             child: ListView.separated(
                               controller: _scrollController,
-                              // reverse: true,
-                              // physics: const BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
-                                if (userId == msgs[index].sender) {
+                                if (userId != msgs[index].sender) {
                                   return buildMessage(
                                       context,
                                       msgs[index].message!,
