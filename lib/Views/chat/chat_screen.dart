@@ -35,14 +35,15 @@ class _ChatScreenState extends State<ChatScreen> {
   late Future<List<Message>> messages;
   final _scrollController = ScrollController();
   bool flag = true;
+  int page = 2;
 
   Future<List<Message>> _fetchMessages() async {
     try {
       ChatApi chat = ChatApi();
-      Messages messages = await chat.getmsgs(widget.chatId);
-      userId = messages.userId!;
+      Messages message = await chat.getmsgs(widget.chatId, 1);
+      userId = message.userId!;
       List<Message> listOfMsgs =
-          messages.msgs!.map((e) => Message.fromJson(e)).toList();
+          message.msgs!.map((e) => Message.fromJson(e)).toList();
       return listOfMsgs;
     } catch (e) {
       throw Exception('Failed to fetch profile');
@@ -63,12 +64,27 @@ class _ChatScreenState extends State<ChatScreen> {
       });
     });
 
-    _scrollController.addListener(() {
-      if ((_scrollController.position.pixels - _scrollController.position.minScrollExtent <= 100) && (flag)) {}
+    _scrollController.addListener(() async {
+      if ((_scrollController.position.pixels -
+                  _scrollController.position.minScrollExtent <=
+              100) &&
+          (flag)) {
+        ChatApi chat = ChatApi();
+        Messages message = await chat.getmsgs(widget.chatId, page);
+        userId = message.userId!;
+        List<Message> listOfMsgs =
+            message.msgs!.map((e) => Message.fromJson(e)).toList();
+        List<Message> existingMessages = await messages;
+        List<Message> updatedMessages = listOfMsgs + existingMessages;
+        setState(() {
+          page++;
+          messages = Future.value(updatedMessages);
+        });
+      }
     });
   }
 
-    void _scrollToBottom() {
+  void _scrollToBottom() {
     _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
   }
 
@@ -111,20 +127,18 @@ class _ChatScreenState extends State<ChatScreen> {
             future: messages,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                // return dumy(context);
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else if (snapshot.hasError) {
-                // return dumy(context);
                 return Center(
                   child: Text('Error: ${snapshot.error}'),
                 );
               } else {
                 List<Message> msgs = snapshot.data!;
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                    _scrollToBottom();
-                  });
+                  _scrollToBottom();
+                });
                 return Container(
                     color: const Color.fromARGB(255, 233, 255, 255),
                     child: Padding(
