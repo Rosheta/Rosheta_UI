@@ -45,9 +45,11 @@ class ChatApi {
     }
   }
 
-  Future<Messages> getmsgs(String chatId) async {
+  Future<Messages> getmsgs(String chatId,int page) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/getChatContent?chatId=${chatId}';
+    print(chatId);
+    final url = '$apiUrl/getChatContent?chatId=${chatId}&page=${page}';
+    print(url);
     final String token = await getAccessToken();
 
     try {
@@ -63,6 +65,7 @@ class ChatApi {
       // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
+        print(data);
         var jsonData = jsonDecode(data);
         Messages messages = Messages.fromJson(jsonData);
         return messages;
