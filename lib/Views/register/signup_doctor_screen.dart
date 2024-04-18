@@ -42,7 +42,26 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
     'Aswan',
     'Red Sea',
   ];
+  final List<String> departments = [
+    'Neurology',
+    'Facial Plastic Surgery',
+    'Dermatology',
+    'Neurosurgery',
+    'Otology',
+    'Ophthalmology',
+    'Rhinology',
+    'Oral Health',
+    'Cardiology',
+    'Hepatology',
+    'Pulmonology',
+    'Gastroenterology',
+    'Urology',
+    'Plastic Surgery',
+    'Orthopedics',
+    'Gynecology'
+  ];
   String _selectedGovernment = 'Cairo';
+  String _selectedDepartments = 'Neurology';
   String _selectedUserGender = 'M';
   final _formKey = GlobalKey<FormState>();
   var nameController = TextEditingController();
@@ -109,8 +128,11 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
                       return S.of(context).enterYourNationalId;
                     }),
                     const SizedBox(height: 10),
-                    buildTextFormField(clinicController, S.of(context).clinicPosition,
-                        Icons.location_on, TextInputType.streetAddress, (value) {
+                    buildTextFormField(
+                        clinicController,
+                        S.of(context).clinicPosition,
+                        Icons.location_on,
+                        TextInputType.streetAddress, (value) {
                       if (value.toString().length > 5) return null;
                       return S.of(context).enterclinicPosition;
                     }),
@@ -132,6 +154,26 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
                           child: Text(S.of(context).female),
                         ),
                       ],
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    DropdownButtonFormField(
+                      value: _selectedDepartments,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedDepartments = newValue.toString();
+                        });
+                      },
+                      items: departments.map((String department) {
+                        return DropdownMenuItem<String>(
+                          value: department,
+                          child: Text(department),
+                        );
+                      }).toList(),
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         contentPadding:
@@ -207,15 +249,16 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
                           onPressed: _selectFile,
                           child: Text(S.of(context).uploadFile),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Expanded(
-                          child: Text(
-                            _selectedFile != null ? '${_selectedFile?.path}' : 'No File Selected',
-                            style: TextStyle(fontSize: 16),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          )
-                        ),
+                            child: Text(
+                          _selectedFile != null
+                              ? '${_selectedFile?.path}'
+                              : 'No File Selected',
+                          style: const TextStyle(fontSize: 16),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        )),
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -230,21 +273,22 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
                           ),
                         ),
                         onPressed: () async {
-                          if (_formKey.currentState!.validate() && _selectedFile != null) {
+                          if (_formKey.currentState!.validate() &&
+                              _selectedFile != null) {
                             _formKey.currentState?.save();
                             SignupApi signuprequest = SignupApi();
                             String check = await signuprequest.signupDoctor(
-                              email: emailController.text,
-                              name: nameController.text,
-                              ssn: ssnController.text,
-                              clinicPosition: clinicController.text,
-                              gender: _selectedUserGender,
-                              password: passwordController.text,
-                              phone: phoneController.text,
-                              birthdate: birthDateController.text,
-                              government: _selectedGovernment,
-                              selectedFile: _selectedFile!
-                            );
+                                email: emailController.text,
+                                name: nameController.text,
+                                ssn: ssnController.text,
+                                clinicPosition: clinicController.text,
+                                gender: _selectedUserGender,
+                                password: passwordController.text,
+                                phone: phoneController.text,
+                                birthdate: birthDateController.text,
+                                government: _selectedGovernment,
+                                department: _selectedDepartments,
+                                selectedFile: _selectedFile!);
                             if (check == "true") {
                               Navigator.push(
                                   context,
@@ -318,7 +362,6 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
       setState(() {
         _selectedFile = file;
       });
-      // Rest of your code...
     }
   }
 
@@ -360,10 +403,10 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
         initialDate: DateTime.now(),
         firstDate: DateTime(1900),
         lastDate: DateTime(2100));
-
     if (birthdate != null) {
       setState(() {
-        birthDateController.text = DateFormat('yyyy-MM-dd','en_US').format(birthdate);
+        birthDateController.text =
+            DateFormat('yyyy-MM-dd', 'en_US').format(birthdate);
       });
     }
   }

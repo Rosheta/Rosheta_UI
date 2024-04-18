@@ -13,6 +13,7 @@ class SignupApi {
       required phone,
       required birthdate,
       required government,
+      required department,
       required selectedFile}) async {
     final String apiUrl = dotenv.env['API_URL']!;
     final String url = '$apiUrl/doctor';
@@ -31,6 +32,7 @@ class SignupApi {
       request.fields['phone'] = phone;
       request.fields['birthdate'] = birthdate;
       request.fields['government'] = government;
+      request.fields['department'] = department;
 
       // Send the request
       var response = await request.send();
@@ -83,5 +85,42 @@ class SignupApi {
       return 'false';
     }
   }
+
+  Future<String> signupLab(
+      {required email,
+      required name,
+      required labPosition,
+      required password,
+      required phone,
+      required government,
+      required selectedFile}) async {
+    final String apiUrl = dotenv.env['API_URL']!;
+    final String url = '$apiUrl/lab';
+
+    try {
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+      request.files.add(await http.MultipartFile.fromPath('file', selectedFile.path));
+
+      // Add additional data fields
+      request.fields['email'] = email;
+      request.fields['name'] = name;
+      request.fields['clinicPosition'] = labPosition;
+      request.fields['password'] = password;
+      request.fields['phone'] = phone;
+      request.fields['government'] = government;
+
+      // Send the request
+      var response = await request.send();
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return 'true';
+      } else {
+        return response.toString();
+      }
+    } catch (e) {
+      print("Exception: $e");
+      return 'false';
+    }
+  }
+
 
 }

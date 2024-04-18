@@ -15,7 +15,8 @@
     "LoginNow" : "سجل الان",
     "UserbirthDate": "تاريخ الميلاد",
     "Doctor" : "دكتور",
-    "Patient" : "مريض",
+    "Patient" : "مستخدم",
+    "Lab": "معمل تحاليل",
     "register" : "سجل",
     "editInfor":"تعديل المعلومات الاساسية",
     "hintTextname": "ادخل اسمك",
@@ -34,5 +35,6 @@
     "male" : "ذكر",
     "uploadFile": "رفع ملف",
     "clinicPosition" : "موقع العيادة",
-    "enterclinicPosition" : "ادخل موقع العيادة"
+    "enterclinicPosition" : "ادخل موقع العيادة",
+    "positionController": "موقع معمل التحاليل"
 }

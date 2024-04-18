@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("LOGIN"),
+        "Lab": MessageLookupByLibrary.simpleMessage("Lab"),
         "LoginNow": MessageLookupByLibrary.simpleMessage("Login Now"),
         "NationalId": MessageLookupByLibrary.simpleMessage("National ID"),
         "Patient": MessageLookupByLibrary.simpleMessage("Patient"),
@@ -46,7 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterYourNationalId": MessageLookupByLibrary.simpleMessage(
             "National ID must conatain 14 numbers"),
         "enterclinicPosition":
-            MessageLookupByLibrary.simpleMessage("Enter your clinic position"),
+            MessageLookupByLibrary.simpleMessage("Enter your clinic address"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
         "havingaccount":
             MessageLookupByLibrary.simpleMessage("Have an accout?"),
@@ -67,6 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nothavingaccount":
             MessageLookupByLibrary.simpleMessage("Don\'\'t have account? "),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "positionController":
+            MessageLookupByLibrary.simpleMessage("Enter your address"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "savechanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),

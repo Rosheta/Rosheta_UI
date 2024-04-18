@@ -16,6 +16,7 @@
     "UserbirthDate" : "Birth Date",
     "Doctor" : "Doctor",
     "Patient" : "Patient",
+    "Lab" : "Lab",
     "register" : "Register",
     "editInfor": "Edit basic information",
     "hintTextname": "Enter your name",
@@ -34,5 +35,6 @@
     "male" : "Male",
     "uploadFile" : "Upload File",
     "clinicPosition" : "Clinic Position",
-    "enterclinicPosition" : "Enter your clinic position"
+    "enterclinicPosition" : "Enter your clinic address",
+    "positionController": "Enter your address"
 }

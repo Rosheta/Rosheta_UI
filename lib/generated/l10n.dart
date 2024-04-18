@@ -220,6 +220,16 @@ class S {
     );
   }
 
+  /// `Lab`
+  String get Lab {
+    return Intl.message(
+      'Lab',
+      name: 'Lab',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Register`
   String get register {
     return Intl.message(
@@ -400,11 +410,21 @@ class S {
     );
   }
 
-  /// `Enter your clinic position`
+  /// `Enter your clinic address`
   String get enterclinicPosition {
     return Intl.message(
-      'Enter your clinic position',
+      'Enter your clinic address',
       name: 'enterclinicPosition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your address`
+  String get positionController {
+    return Intl.message(
+      'Enter your address',
+      name: 'positionController',
       desc: '',
       args: [],
     );

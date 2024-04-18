@@ -24,9 +24,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "Lab": MessageLookupByLibrary.simpleMessage("معمل تحاليل"),
         "LoginNow": MessageLookupByLibrary.simpleMessage("سجل الان"),
         "NationalId": MessageLookupByLibrary.simpleMessage("الرقم القومى"),
-        "Patient": MessageLookupByLibrary.simpleMessage("مريض"),
+        "Patient": MessageLookupByLibrary.simpleMessage("مستخدم"),
         "Phone": MessageLookupByLibrary.simpleMessage("رقم التليفون"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("انشاء"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
@@ -63,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nothavingaccount":
             MessageLookupByLibrary.simpleMessage("لا تمتلك حساب؟"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
+        "positionController":
+            MessageLookupByLibrary.simpleMessage("موقع معمل التحاليل"),
         "register": MessageLookupByLibrary.simpleMessage("سجل"),
         "savechanges": MessageLookupByLibrary.simpleMessage("حفظ التعديلات"),
         "signup": MessageLookupByLibrary.simpleMessage("انشاء حساب"),

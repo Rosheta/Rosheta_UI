@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/register/login_screen.dart';
 import 'package:rosheta_ui/Views/register/signup_doctor_screen.dart';
+import 'package:rosheta_ui/Views/register/signup_lab_screen.dart';
 import 'package:rosheta_ui/Views/register/signup_patient_screen.dart';
 import '../../generated/l10n.dart';
 
@@ -43,16 +44,14 @@ class _SignupState extends State<SignupScreen> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                TextButton(
+                MaterialButton(
+                      color: Colors.cyan,
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (c) =>  SignupPatientScreen()));
                       },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.cyan),
-                      ),
                       child: Text(
                         S.of(context).Patient,
                         style: const TextStyle(
@@ -62,22 +61,34 @@ class _SignupState extends State<SignupScreen> {
                       ),
                     ),
                 const SizedBox(height: 15),
-                TextButton(
+                MaterialButton(
+                      color: Colors.cyan,
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (c) =>  SignupDoctorScreen()));
                       },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(Colors.cyan),
-                      ),
                       child: Text(
                         S.of(context).Doctor,
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
+                      ),
+                    ),
+                const SizedBox(height: 15),
+                MaterialButton(
+                      color: Colors.cyan,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (c) =>  SignupLabScreen()));
+                      },
+                      child: Text(
+                        S.of(context).Lab,
+                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),
                 const SizedBox(height: 5),
