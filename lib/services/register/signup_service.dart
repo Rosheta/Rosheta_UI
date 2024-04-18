@@ -26,7 +26,7 @@ class SignupApi {
       request.fields['email'] = email;
       request.fields['name'] = name;
       request.fields['ssn'] = ssn;
-      request.fields['clinicPosition'] = clinicPosition;
+      request.fields['location'] = clinicPosition;
       request.fields['gender'] = gender;
       request.fields['password'] = password;
       request.fields['phone'] = phone;
@@ -104,7 +104,7 @@ class SignupApi {
       // Add additional data fields
       request.fields['email'] = email;
       request.fields['name'] = name;
-      request.fields['clinicPosition'] = labPosition;
+      request.fields['location'] = labPosition;
       request.fields['password'] = password;
       request.fields['phone'] = phone;
       request.fields['government'] = government;
