@@ -1,7 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rosheta_ui/models/chat/msg_model.dart';
@@ -10,7 +9,6 @@ import 'package:rosheta_ui/services/chat/chat_service.dart';
 import 'package:rosheta_ui/services/register/login_service.dart';
 import 'package:rosheta_ui/services/chat/socket_service.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
-
 
 class ChatScreen extends StatefulWidget {
   final String name;
@@ -35,7 +33,8 @@ class _ChatScreenState extends State<ChatScreen> {
   SocketService socketService = SocketService();
   String token = LoginApi().getAccessToken().toString();
   late Future<List<Message>> messages;
-  late ScrollController _scrollController;
+  final _scrollController = ScrollController();
+  bool flag = true;
 
   Future<List<Message>> _fetchMessages() async {
     try {
@@ -53,9 +52,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
     messages = _fetchMessages();
-    // Initialize socket listener here to avoid multiple listeners
     socketService.socket.on(widget.chatId, (data) {
       setState(() {
         // Append the new message to the existing list
@@ -63,9 +60,16 @@ class _ChatScreenState extends State<ChatScreen> {
           msgs.add(Message.fromJson(data));
           return msgs;
         });
-        _scrollToBottom();
       });
     });
+
+    _scrollController.addListener(() {
+      if ((_scrollController.position.pixels - _scrollController.position.minScrollExtent <= 100) && (flag)) {}
+    });
+  }
+
+    void _scrollToBottom() {
+    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
   }
 
   @override
@@ -118,6 +122,9 @@ class _ChatScreenState extends State<ChatScreen> {
                 );
               } else {
                 List<Message> msgs = snapshot.data!;
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                    _scrollToBottom();
+                  });
                 return Container(
                     color: const Color.fromARGB(255, 233, 255, 255),
                     child: Padding(
@@ -128,6 +135,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           Expanded(
                             child: ListView.separated(
                               controller: _scrollController,
+                              // reverse: true,
                               // physics: const BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
                                 if (userId == msgs[index].sender) {
@@ -146,12 +154,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                     AlignmentDirectional.centerStart);
                               },
                               separatorBuilder: (context, index) =>
-                                  const SizedBox(
-                                height: 15.0,
-                              ),
+                                  const SizedBox(height: 15.0),
                               itemCount: msgs.length,
                             ),
                           ),
+                          const SizedBox(height: 20.0),
                           Container(
                             decoration: BoxDecoration(
                               border: Border.all(
@@ -184,8 +191,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                   color: Colors.cyan,
                                   child: MaterialButton(
                                     onPressed: () {
-                                      if (messageController.text.isEmpty)
+                                      if (messageController.text.isEmpty) {
                                         return;
+                                      }
                                       socketService.socket.emit('sendMessage', {
                                         'senderId': userId,
                                         'chatId': widget.chatId.toString(),
@@ -265,14 +273,6 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ),
       );
-
-  void _scrollToBottom() {
-    _scrollController.animateTo(
-      _scrollController.position.maxScrollExtent,
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.easeOut,
-    );
-  }
 
   String convertToTimeString(String dateTimeString) {
     DateTime dateTime = DateTime.parse(dateTimeString);
