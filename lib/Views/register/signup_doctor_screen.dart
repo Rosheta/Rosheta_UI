@@ -62,7 +62,7 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
   ];
   String _selectedGovernment = 'Cairo';
   String _selectedDepartments = 'Neurology';
-  String _selectedUserGender = 'M';
+  String _selectedUserGender = 'm';
   final _formKey = GlobalKey<FormState>();
   var nameController = TextEditingController();
   var ssnController = TextEditingController();
@@ -128,6 +128,26 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
                       return S.of(context).enterYourNationalId;
                     }),
                     const SizedBox(height: 10),
+                    DropdownButtonFormField(
+                      value: _selectedGovernment,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedGovernment = newValue.toString();
+                        });
+                      },
+                      items: governments.map((String government) {
+                        return DropdownMenuItem<String>(
+                          value: government,
+                          child: Text(government),
+                        );
+                      }).toList(),
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     buildTextFormField(
                         clinicController,
                         S.of(context).clinicPosition,
@@ -146,11 +166,11 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
                       },
                       items: [
                         DropdownMenuItem(
-                          value: 'M',
+                          value: 'm',
                           child: Text(S.of(context).male),
                         ),
                         DropdownMenuItem(
-                          value: 'F', // Unique value for Doctor
+                          value: 'f', // Unique value for Doctor
                           child: Text(S.of(context).female),
                         ),
                       ],
@@ -221,26 +241,6 @@ class _SignupDoctorScreenState extends State<SignupDoctorScreen> {
                           labelStyle: const TextStyle(
                             color: Colors.cyan,
                           )),
-                    ),
-                    const SizedBox(height: 10),
-                    DropdownButtonFormField(
-                      value: _selectedGovernment,
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedGovernment = newValue.toString();
-                        });
-                      },
-                      items: governments.map((String government) {
-                        return DropdownMenuItem<String>(
-                          value: government,
-                          child: Text(government),
-                        );
-                      }).toList(),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                      ),
                     ),
                     const SizedBox(height: 10),
                     Row(

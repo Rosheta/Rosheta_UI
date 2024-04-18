@@ -17,7 +17,7 @@ class _SignupPatientScreenState extends State<SignupPatientScreen> {
   var passwordController = TextEditingController();
   var birthDateController = TextEditingController();
   var phoneController = TextEditingController();
-  String _selectedUserGender = "M";
+  String _selectedUserGender = "m";
   bool _obscureText = true;
 
   @override
@@ -82,11 +82,11 @@ class _SignupPatientScreenState extends State<SignupPatientScreen> {
                       },
                       items: [
                         DropdownMenuItem(
-                          value: 'M',
+                          value: 'm',
                           child: Text(S.of(context).male),
                         ),
                         DropdownMenuItem(
-                          value: 'F', // Unique value for Doctor
+                          value: 'f', // Unique value for Doctor
                           child: Text(S.of(context).female),
                         ),
                       ],

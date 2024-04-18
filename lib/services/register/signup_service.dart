@@ -16,17 +16,18 @@ class SignupApi {
       required department,
       required selectedFile}) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final String url = '$apiUrl/doctor';
+    final String url = '$apiUrl/doctor/register';
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
-      request.files.add(await http.MultipartFile.fromPath('file', selectedFile.path));
+      request.files
+          .add(await http.MultipartFile.fromPath('file', selectedFile.path));
 
       // Add additional data fields
       request.fields['email'] = email;
       request.fields['name'] = name;
       request.fields['ssn'] = ssn;
-      request.fields['clinicPosition'] = clinicPosition;
+      request.fields['location'] = clinicPosition;
       request.fields['gender'] = gender;
       request.fields['password'] = password;
       request.fields['phone'] = phone;
@@ -55,11 +56,11 @@ class SignupApi {
       required password,
       required phone,
       required birthdate}) async {
-
     final String apiUrl = dotenv.env['API_URL']!;
-    final String url = '$apiUrl/register/patient';
+    final String url = '$apiUrl/patient/register';
+    print(url);
+    print(gender);
     try {
-
       http.Response response = await http.post(
         Uri.parse(url),
         headers: {
@@ -72,7 +73,7 @@ class SignupApi {
           'phone': phone,
           'ssn': ssn,
           'birthdate': birthdate,
-          'gender' : gender,
+          'gender': gender,
         }),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -95,16 +96,17 @@ class SignupApi {
       required government,
       required selectedFile}) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final String url = '$apiUrl/lab';
+    final String url = '$apiUrl/lab/register';
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
-      request.files.add(await http.MultipartFile.fromPath('file', selectedFile.path));
+      request.files
+          .add(await http.MultipartFile.fromPath('file', selectedFile.path));
 
       // Add additional data fields
       request.fields['email'] = email;
       request.fields['name'] = name;
-      request.fields['clinicPosition'] = labPosition;
+      request.fields['location'] = labPosition;
       request.fields['password'] = password;
       request.fields['phone'] = phone;
       request.fields['government'] = government;
@@ -121,6 +123,4 @@ class SignupApi {
       return 'false';
     }
   }
-
-
 }
