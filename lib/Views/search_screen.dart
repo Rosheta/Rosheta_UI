@@ -4,8 +4,6 @@ import 'package:rosheta_ui/services/search_service.dart';
 
 // import 'package:rosheta_ui/Views/profile_screen.dart';
 
-
-
 class searchWidget extends StatefulWidget {
   const searchWidget({Key? key}) : super(key: key);
 
@@ -39,6 +37,174 @@ class _searchWidgetState extends State<searchWidget> {
   }
 }
 
+
+// class FilterWidget extends StatefulWidget {
+//   @override
+//   _FilterWidgetState createState() => _FilterWidgetState();
+// }
+
+// class _FilterWidgetState extends State<FilterWidget> {
+//   String selectedSpecialization = '';
+//   String selectedHospital = '';
+
+//   List<String> specializations = [
+//     'Specialization 1',
+//     'Specialization 2',
+//     'Specialization 3',
+//   ];
+
+//   List<String> hospitals = [
+//     'Hospital 1',
+//     'Hospital 2',
+//     'Hospital 3',
+//   ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(16.0),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           Expanded(
+//             child: GestureDetector(
+//               onTap: () {
+//                 _showSpecializationDialog(context);
+//               },
+//               child: Container(
+//                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+//                 decoration: BoxDecoration(
+//                   border: Border.all(color: Colors.grey),
+//                   borderRadius: BorderRadius.circular(10.0),
+//                 ),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Text(
+//                       'Specialization',
+//                       style: TextStyle(fontSize: 16.0, color: Colors.grey),
+//                     ),
+//                     SizedBox(height: 4.0),
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Expanded(
+//                           child: Text(
+//                             selectedSpecialization.isEmpty ? 'Select Specialization' : selectedSpecialization,
+//                             style: TextStyle(fontSize: 16.0),
+//                             overflow: TextOverflow.ellipsis,
+//                           ),
+//                         ),
+//                         Icon(Icons.arrow_drop_down),
+//                       ],
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//           SizedBox(width: 10.0),
+//           Expanded(
+//             child: GestureDetector(
+//               onTap: () {
+//                 _showHospitalDialog(context);
+//               },
+//               child: Container(
+//                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+//                 decoration: BoxDecoration(
+//                   border: Border.all(color: Colors.grey),
+//                   borderRadius: BorderRadius.circular(10.0),
+//                 ),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Text(
+//                       'Hospital Name',
+//                       style: TextStyle(fontSize: 16.0, color: Colors.grey),
+//                     ),
+//                     SizedBox(height: 4.0),
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Expanded(
+//                           child: Text(
+//                             selectedHospital.isEmpty ? 'Select Hospital Name' : selectedHospital,
+//                             style: TextStyle(fontSize: 16.0),
+//                             overflow: TextOverflow.ellipsis,
+//                           ),
+//                         ),
+//                         Icon(Icons.arrow_drop_down),
+//                       ],
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   void _showSpecializationDialog(BuildContext context) {
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           title: Text('Select Specialization'),
+//           content: SingleChildScrollView(
+//             child: ListBody(
+//               children: specializations.map((String specialization) {
+//                 return GestureDetector(
+//                   onTap: () {
+//                     setState(() {
+//                       selectedSpecialization = specialization;
+//                     });
+//                     Navigator.of(context).pop();
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.symmetric(vertical: 8.0),
+//                     child: Text(specialization),
+//                   ),
+//                 );
+//               }).toList(),
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+
+//   void _showHospitalDialog(BuildContext context) {
+//     showDialog(
+//       context: context,
+//       builder: (BuildContext context) {
+//         return AlertDialog(
+//           title: Text('Select Hospital Name'),
+//           content: SingleChildScrollView(
+//             child: ListBody(
+//               children: hospitals.map((String hospital) {
+//                 return GestureDetector(
+//                   onTap: () {
+//                     setState(() {
+//                       selectedHospital = hospital;
+//                     });
+//                     Navigator.of(context).pop();
+//                   },
+//                   child: Padding(
+//                     padding: const EdgeInsets.symmetric(vertical: 8.0),
+//                     child: Text(hospital),
+//                   ),
+//                 );
+//               }).toList(),
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
+
 // class SearchData extends ChangeNotifier {
 //   String selectedSpecialization = 'Any';
 //   String selectedHospital = 'Any';
@@ -58,6 +224,7 @@ class SearchPeople extends SearchDelegate<String>{
   String selectedUserId = "";
 
   List<String> specializations = [
+    'Any',
     'أمراض القلب والأوعية الدموية (Cardiology)',
     'جراحة العظام (Orthopedics)',
     'طب الأطفال (Pediatrics)',
@@ -111,145 +278,6 @@ class SearchPeople extends SearchDelegate<String>{
       ),
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return ChangeNotifierProvider(
-  //     create: (context) => SearchData(),
-  //     child: Scaffold(
-  //       appBar: AppBar(
-  //         title: Text('Search People'),
-  //       ),
-  //       body: Column(
-  //         children: [
-  //           buildFilters(),
-  //           Expanded(
-  //             child: buildSuggestions(context),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Widget buildFilters() {
-  //   return Consumer<SearchData>(
-  //     builder: (context, searchData, _) {
-  //       return Padding(
-  //         padding: const EdgeInsets.all(16.0),
-  //         child: Row(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           children: [
-  //             Expanded(
-  //               child: GestureDetector(
-  //                 onTap: () {
-  //                   showSpecializationDialog(context, searchData);
-  //                 },
-  //                 child: Container(
-  //                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-  //                   decoration: BoxDecoration(
-  //                     border: Border.all(color: Colors.grey),
-  //                     borderRadius: BorderRadius.circular(10.0),
-  //                   ),
-  //                   child: Row(
-  //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                     children: [
-  //                       Text(
-  //                         searchData.selectedSpecialization.isEmpty ? 'Select Specialization' : searchData.selectedSpecialization,
-  //                         style: TextStyle(fontSize: 16.0),
-  //                       ),
-  //                       Icon(Icons.arrow_drop_down),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //             SizedBox(width: 10.0),
-  //             Expanded(
-  //               child: GestureDetector(
-  //                 onTap: () {
-  //                   showHospitalDialog(context, searchData);
-  //                 },
-  //                 child: Container(
-  //                   padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-  //                   decoration: BoxDecoration(
-  //                     border: Border.all(color: Colors.grey),
-  //                     borderRadius: BorderRadius.circular(10.0),
-  //                   ),
-  //                   child: Row(
-  //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                     children: [
-  //                       Text(
-  //                         searchData.selectedHospital.isEmpty ? 'Select Hospital Name' : searchData.selectedHospital,
-  //                         style: TextStyle(fontSize: 16.0),
-  //                       ),
-  //                       Icon(Icons.arrow_drop_down),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
-  // void showSpecializationDialog(BuildContext context, SearchData searchData) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         title: Text('Select Specialization'),
-  //         content: SingleChildScrollView(
-  //           child: ListBody(
-  //             children: specializations.map((String specialization) {
-  //               return GestureDetector(
-  //                 onTap: () {
-  //                   searchData.setSpecialization(specialization);
-  //                   Navigator.of(context).pop();
-  //                 },
-  //                 child: Padding(
-  //                   padding: const EdgeInsets.symmetric(vertical: 8.0),
-  //                   child: Text(specialization),
-  //                 ),
-  //               );
-  //             }).toList(),
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
-  // void showHospitalDialog(BuildContext context, SearchData searchData) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         title: Text('Select Hospital Name'),
-  //         content: SingleChildScrollView(
-  //           child: ListBody(
-  //             children: hospitals.map((String hospital) {
-  //               return GestureDetector(
-  //                 onTap: () {
-  //                   searchData.setHospital(hospital);
-  //                   Navigator.of(context).pop();
-  //                 },
-  //                 child: Padding(
-  //                   padding: const EdgeInsets.symmetric(vertical: 8.0),
-  //                   child: Text(hospital),
-  //                 ),
-  //               );
-  //             }).toList(),
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -334,7 +362,8 @@ class SearchPeople extends SearchDelegate<String>{
                       : null,
                 ),
                 title: Text(
-                  item?['username'] ?? "",
+                  // item?['username'] ?? "",
+                  item?['name']['f_name'] ?? "",
                   style: const TextStyle(fontSize: 16.0),
                 ),
                 subtitle: Column(
@@ -391,6 +420,7 @@ class SearchPeople extends SearchDelegate<String>{
                                   // Set the selected specialization
                                   selectedSpecialization = specialization;
                                   print(selectedSpecialization);
+                                  buildSuggestions(context);
                                   Navigator.of(context).pop(); // Close the dialog
                                 },
                                 child: Padding(
@@ -421,7 +451,9 @@ class SearchPeople extends SearchDelegate<String>{
                         children: [
                           Expanded(
                             child: Text(selectedSpecialization.isEmpty ? 'Select Specialization' : selectedSpecialization,
-                                style: TextStyle(fontSize: 16.0)),
+                                style: TextStyle(fontSize: 16.0),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1),
                           ),
                           Icon(Icons.arrow_drop_down),
                         ],
@@ -450,6 +482,7 @@ class SearchPeople extends SearchDelegate<String>{
                                 onTap: () {
                                   // Set the selected hospital
                                   selectedHospital = hospital;
+                                  buildSuggestions(context);
                                   print(selectedHospital);
                                   Navigator.of(context).pop(); // Close the dialog
                                 },
@@ -479,7 +512,10 @@ class SearchPeople extends SearchDelegate<String>{
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(selectedHospital.isEmpty ? 'Select Hospital Name' : selectedHospital, style: TextStyle(fontSize: 16.0)),
+                          Text(selectedHospital.isEmpty ? 'Select Hospital Name' : selectedHospital, 
+                                style: TextStyle(fontSize: 16.0) , 
+                                overflow: TextOverflow.ellipsis, 
+                                maxLines: 1, ),
                           Icon(Icons.arrow_drop_down),
                         ],
                       ),
