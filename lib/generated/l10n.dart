@@ -220,6 +220,16 @@ class S {
     );
   }
 
+  /// `Lab`
+  String get Lab {
+    return Intl.message(
+      'Lab',
+      name: 'Lab',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Register`
   String get register {
     return Intl.message(
@@ -315,6 +325,106 @@ class S {
     return Intl.message(
       'type your message here ...',
       name: 'hinttextmsg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your name`
+  String get enterYourName {
+    return Intl.message(
+      'Enter your name',
+      name: 'enterYourName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National ID must conatain 14 numbers`
+  String get enterYourNationalId {
+    return Intl.message(
+      'National ID must conatain 14 numbers',
+      name: 'enterYourNationalId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email must contain @`
+  String get enterValidEmail {
+    return Intl.message(
+      'Email must contain @',
+      name: 'enterValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number must contain 11 numbers`
+  String get enterValidPhone {
+    return Intl.message(
+      'Phone number must contain 11 numbers',
+      name: 'enterValidPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Female`
+  String get female {
+    return Intl.message(
+      'Female',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get male {
+    return Intl.message(
+      'Male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload File`
+  String get uploadFile {
+    return Intl.message(
+      'Upload File',
+      name: 'uploadFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clinic Position`
+  String get clinicPosition {
+    return Intl.message(
+      'Clinic Position',
+      name: 'clinicPosition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your clinic address`
+  String get enterclinicPosition {
+    return Intl.message(
+      'Enter your clinic address',
+      name: 'enterclinicPosition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your address`
+  String get positionController {
+    return Intl.message(
+      'Enter your address',
+      name: 'positionController',
       desc: '',
       args: [],
     );

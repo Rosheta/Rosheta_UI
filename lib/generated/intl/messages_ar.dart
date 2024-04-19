@@ -24,17 +24,29 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "Lab": MessageLookupByLibrary.simpleMessage("معمل تحاليل"),
         "LoginNow": MessageLookupByLibrary.simpleMessage("سجل الان"),
         "NationalId": MessageLookupByLibrary.simpleMessage("الرقم القومى"),
-        "Patient": MessageLookupByLibrary.simpleMessage("مريض"),
+        "Patient": MessageLookupByLibrary.simpleMessage("مستخدم"),
         "Phone": MessageLookupByLibrary.simpleMessage("رقم التليفون"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("انشاء"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
         "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
         "chat": MessageLookupByLibrary.simpleMessage("المحادثة"),
+        "clinicPosition": MessageLookupByLibrary.simpleMessage("موقع العيادة"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("تعديل المعلومات الاساسية"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
+        "enterValidEmail":
+            MessageLookupByLibrary.simpleMessage("الايميل يحتوى على @"),
+        "enterValidPhone":
+            MessageLookupByLibrary.simpleMessage("رقم الهاتف يتكون من 11 رقم"),
+        "enterYourName": MessageLookupByLibrary.simpleMessage("ادخل اسمك"),
+        "enterYourNationalId": MessageLookupByLibrary.simpleMessage(
+            "الرقم القومى يتكون من 14 رقم"),
+        "enterclinicPosition":
+            MessageLookupByLibrary.simpleMessage("ادخل موقع العيادة"),
+        "female": MessageLookupByLibrary.simpleMessage("انثى"),
         "havingaccount": MessageLookupByLibrary.simpleMessage("هل لديك حساب؟"),
         "hintTextID": MessageLookupByLibrary.simpleMessage("ادخل الرقم القومي"),
         "hintTextdate":
@@ -47,13 +59,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "hinttextmsg":
             MessageLookupByLibrary.simpleMessage("اكتب رسالتك هنا..."),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "male": MessageLookupByLibrary.simpleMessage("ذكر"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "nothavingaccount":
             MessageLookupByLibrary.simpleMessage("لا تمتلك حساب؟"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
+        "positionController":
+            MessageLookupByLibrary.simpleMessage("موقع معمل التحاليل"),
         "register": MessageLookupByLibrary.simpleMessage("سجل"),
         "savechanges": MessageLookupByLibrary.simpleMessage("حفظ التعديلات"),
         "signup": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
-        "title": MessageLookupByLibrary.simpleMessage("ROSHETA")
+        "title": MessageLookupByLibrary.simpleMessage("ROSHETA"),
+        "uploadFile": MessageLookupByLibrary.simpleMessage("رفع ملف")
       };
 }

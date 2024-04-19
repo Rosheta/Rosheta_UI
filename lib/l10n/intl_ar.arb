@@ -15,7 +15,8 @@
     "LoginNow" : "سجل الان",
     "UserbirthDate": "تاريخ الميلاد",
     "Doctor" : "دكتور",
-    "Patient" : "مريض",
+    "Patient" : "مستخدم",
+    "Lab": "معمل تحاليل",
     "register" : "سجل",
     "editInfor":"تعديل المعلومات الاساسية",
     "hintTextname": "ادخل اسمك",
@@ -25,5 +26,15 @@
     "hintTextdate": "ادخل تاريخ الميلاد",
     "savechanges":"حفظ التعديلات",
     "chat" : "المحادثة",
-    "hinttextmsg" : "اكتب رسالتك هنا..."
+    "hinttextmsg" : "اكتب رسالتك هنا...",
+    "enterYourName": "ادخل اسمك",
+    "enterYourNationalId" : "الرقم القومى يتكون من 14 رقم",
+    "enterValidEmail" : "الايميل يحتوى على @",
+    "enterValidPhone" : "رقم الهاتف يتكون من 11 رقم",
+    "female" : "انثى",
+    "male" : "ذكر",
+    "uploadFile": "رفع ملف",
+    "clinicPosition" : "موقع العيادة",
+    "enterclinicPosition" : "ادخل موقع العيادة",
+    "positionController": "موقع معمل التحاليل"
 }
