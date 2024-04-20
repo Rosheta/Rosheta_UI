@@ -319,6 +319,76 @@ class S {
       args: [],
     );
   }
+
+  /// `gender`
+  String get gender {
+    return Intl.message(
+      'gender',
+      name: 'gender',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `government`
+  String get government {
+    return Intl.message(
+      'government',
+      name: 'government',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `department`
+  String get department {
+    return Intl.message(
+      'department',
+      name: 'department',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `location`
+  String get location {
+    return Intl.message(
+      'location',
+      name: 'location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `clinicLocation`
+  String get clinicLocation {
+    return Intl.message(
+      'clinicLocation',
+      name: 'clinicLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `male`
+  String get male {
+    return Intl.message(
+      'male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `female`
+  String get female {
+    return Intl.message(
+      'female',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

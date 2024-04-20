@@ -32,9 +32,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
         "birthDate": MessageLookupByLibrary.simpleMessage("Select Birth Date"),
         "chat": MessageLookupByLibrary.simpleMessage("Chats"),
+        "clinicLocation":
+            MessageLookupByLibrary.simpleMessage("clinicLocation"),
+        "department": MessageLookupByLibrary.simpleMessage("department"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("Edit basic information"),
         "email": MessageLookupByLibrary.simpleMessage("Email Address"),
+        "female": MessageLookupByLibrary.simpleMessage("female"),
+        "gender": MessageLookupByLibrary.simpleMessage("gender"),
+        "government": MessageLookupByLibrary.simpleMessage("government"),
         "havingaccount":
             MessageLookupByLibrary.simpleMessage("Have an accout?"),
         "hintTextID":
@@ -48,7 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter your phone number"),
         "hinttextmsg":
             MessageLookupByLibrary.simpleMessage("type your message here ..."),
+        "location": MessageLookupByLibrary.simpleMessage("location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "male": MessageLookupByLibrary.simpleMessage("male"),
         "name": MessageLookupByLibrary.simpleMessage("Full Name"),
         "nothavingaccount":
             MessageLookupByLibrary.simpleMessage("Don\'\'t have account? "),

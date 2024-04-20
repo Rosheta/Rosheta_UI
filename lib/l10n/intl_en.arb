@@ -25,5 +25,12 @@
     "hintTextdate": "Enter your Date of Birth",
     "savechanges":"Save changes",
     "chat" : "Chats",
-    "hinttextmsg" : "type your message here ..."
+    "hinttextmsg" : "type your message here ...",
+    "gender" : "gender",
+    "government":"government",
+    "department":"department",
+    "location":"location",
+    "clinicLocation":"clinicLocation",
+    "male":"male",
+    "female":"female"
 }

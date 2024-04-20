@@ -80,11 +80,11 @@ class SearchPeople extends SearchDelegate<String> {
 @override
 void showResults(BuildContext context) {
   // Push the user profile screen with userID as arguments
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (context) => ViewProfileScreen(userID: selectedUserId),
-    ),
-  );
+  // Navigator.of(context).push(
+  //   MaterialPageRoute(
+  //     builder: (context) => ViewProfileScreen(userID: selectedUserId),
+  //   ),
+  // );
 }
 
   @override

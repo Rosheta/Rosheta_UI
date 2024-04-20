@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:rosheta_ui/models/profile/view_profile_model.dart';
@@ -27,6 +28,7 @@ class viewProfileApi {
         String data = response.body;
         var jsonData = jsonDecode(data);
         ViewProfile dataProfile = ViewProfile.fromJson(jsonData);
+
         return dataProfile;
       } else {
         print('Status code: ${response.statusCode}');

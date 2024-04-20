@@ -25,5 +25,13 @@
     "hintTextdate": "ادخل تاريخ الميلاد",
     "savechanges":"حفظ التعديلات",
     "chat" : "المحادثة",
-    "hinttextmsg" : "اكتب رسالتك هنا..."
+    "hinttextmsg" : "اكتب رسالتك هنا...",
+    "gender" : "النوع",
+    "government":"المحافظة",
+    "department":"القسم",
+    "location":"العنوان",
+    "clinicLocation":"عنوان العيادة",
+    "male":"ذكر",
+    "female":"انثي"
+
 }

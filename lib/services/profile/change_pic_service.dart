@@ -5,32 +5,30 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class changePicApi {
-  Future<bool> changePic({required profileImage}) async {
+  Future<String> changePic({required profileImage}) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/profilePicture';
+    final url = '$apiUrl/profile/picture';
     try {
       String accessToken =
           await getAccessToken(); // Assuming this method gets the access token
 
-      http.Response response = await http.put(
-        Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization':
-              'Bearer $accessToken', // Include access token in Authorization header
-        },
-        body: json.encode({
-          'profileImage': profileImage,
-        }),
-      );
+      var request = http.MultipartRequest('PUT', Uri.parse(url));
+      request.files
+          .add(await http.MultipartFile.fromPath('photo', profileImage.path));
+      request.headers['Authorization'] = 'Bearer $accessToken';
+
+      var response = await request.send();
+
+      // Get the response body
+      String responseBody = await response.stream.bytesToString();
       if (response.statusCode == 200 || response.statusCode == 201) {
-        return true;
+        return responseBody;
       } else {
-        return false;
+        return "";
       }
     } catch (e) {
       print("Exception: $e");
-      return false;
+      return "";
     }
   }
 

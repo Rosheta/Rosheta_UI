@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'dart:typed_data';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/search/search_screen.dart';
 import 'package:rosheta_ui/Views/chat/friends_screen.dart';
@@ -19,26 +21,25 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileScreen> {
   late Future<Profile> _profileFuture;
+  late File file;
+  late String path;
+
   // create constructor to initialize the future
-  Uint8List image = Uint8List.fromList([]);
   void selectImage() async {
-    Uint8List img = await pickImage(ImageSource.gallery);
-    print("object");
-    print(img);
-    setState(() {
-      image = img;
-    });
-    print(image);
+    FilePickerResult? res = await FilePicker.platform.pickFiles();
+    if (res != null) {
+      File newfile = File(res.files.single.path ?? '');
+      setState(() {
+        file = newfile;
+      });
+    }
     // ignore: unnecessary_new
     changePicApi changePicrequest = changePicApi();
-    print(await changePicrequest.changePic(profileImage: img));
-  }
-
-  pickImage(ImageSource source) async {
-    final ImagePicker impicker = ImagePicker();
-    XFile? file = await impicker.pickImage(source: source);
-    if (file != null) {
-      return await file.readAsBytes();
+    String s = await changePicrequest.changePic(profileImage: file);
+    if (s != "") {
+      setState(() {
+        path = s;
+      });
     }
   }
 
@@ -52,133 +53,144 @@ class _ProfileViewState extends State<ProfileScreen> {
     }
   }
 
-  Container dumy(context, Uint8List ima) {
-    String da = "03-04-2017:022150";
-    Profile pr = Profile(
-        profileImage: ima,
-        userName: "userName",
-        email: "email",
-        phone: "phone",
-        date: "1901-02-03",
-        ID: "ID",
-        viewemail: true,
-        viewphone: true,
-        viewdate: true,
-        viewID: true);
-    return Container(
-      color: const Color.fromARGB(255, 233, 255, 255),
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(children: [
-                  // ignore: unnecessary_null_comparison
-                  ima != null
-                      ? CircleAvatar(
-                          radius: 100.0,
-                          backgroundImage: MemoryImage(ima),
-                        )
-                      : const CircleAvatar(
-                          radius: 100.0,
-                          backgroundImage: AssetImage('Images/profile.png'),
-                        ),
-                  Positioned(
-                    bottom: -5,
-                    left: 160,
-                    child: IconButton(
-                        onPressed: () async {
-                          selectImage();
-                          // ignore: unnecessary_new
-                          changePicApi changePicrequest = new changePicApi();
-                          await changePicrequest.changePic(profileImage: ima);
-                        },
-                        icon: const Icon(
-                          Icons.add_a_photo,
-                          size: 30,
-                        )),
-                  )
-                ]),
-                const Text(
-                  "Mohamed Mostafa Ibrahim",
-                  style: TextStyle(
-                      fontSize: 25.5, color: Color.fromARGB(255, 1, 14, 15)),
-                ),
-                const SizedBox(height: 30),
-                getCont(Icons.email, "hamomemo@gmail.com",
-                    "${S.of(context).email}:"),
-                const SizedBox(height: 10),
-                getCont(Icons.phone, "01032901480", "${S.of(context).Phone}:"),
-                const SizedBox(height: 10),
-                getCont(
-                  Icons.date_range,
-                  da.substring(0, 10),
-                  "${S.of(context).UserbirthDate}:",
-                ),
-                const SizedBox(height: 10),
-                getCont(Icons.credit_card, "301071202023662",
-                    "${S.of(context).NationalId}:"),
-                const SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () async {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (c) => EditBasicInfoScreen(user: pr)));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(
-                        255, 159, 196, 196), // Background color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          20.0), // Set the border radius for circular edges
-                    ),
-                  ),
-                  child: SizedBox(
-                    height: 50, // Set the fixed height of the container
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.settings,
-                          color: Colors.black,
-                          size: 35.0,
-                        ),
-                        const SizedBox(width: 25),
-                        Text(
-                          S.of(context).editInfor,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    ),
-                    Text(' We serve you with tender , care and love '),
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Container dumy(context, Uint8List ima) {
+  //   String da = "03-04-2017:022150";
+  //   Profile pr = Profile(
+  //     profileImage: ima,
+  //     userName: "jsonData",
+  //     name: 'name',
+  //     gender: 'gender',
+  //     government: 'government',
+  //     email: 'email',
+  //     phone: 'phone',
+  //     date: 'date'[0],
+  //     ID: 'id',
+  //     viewemail: true,
+  //     viewphone: true,
+  //     viewdate: true,
+  //     viewID: true,
+  //     viewGovernment: true,
+  //     viewDepartment: true,
+  //     clinicLocation: "true",
+  //     department: "true",
+  //     viewClinicLocation: true,
+  //     location: 'true',
+  //     viewLocation: true,
+  //   );
+  //   return Container(
+  //     color: const Color.fromARGB(255, 233, 255, 255),
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(15.0),
+  //       child: Center(
+  //         child: SingleChildScrollView(
+  //           child: Column(
+  //             children: [
+  //               Stack(children: [
+  //                 // ignore: unnecessary_null_comparison
+  //                 ima != null
+  //                     ? CircleAvatar(
+  //                         radius: 100.0,
+  //                         backgroundImage: MemoryImage(ima),
+  //                       )
+  //                     : const CircleAvatar(
+  //                         radius: 100.0,
+  //                         backgroundImage: AssetImage('Images/profile.png'),
+  //                       ),
+  //                 Positioned(
+  //                   bottom: -5,
+  //                   left: 160,
+  //                   child: IconButton(
+  //                       onPressed: () async {
+  //                         selectImage();
+  //                         // ignore: unnecessary_new
+  //                         changePicApi changePicrequest = new changePicApi();
+  //                         await changePicrequest.changePic(profileImage: ima);
+  //                       },
+  //                       icon: const Icon(
+  //                         Icons.add_a_photo,
+  //                         size: 30,
+  //                       )),
+  //                 )
+  //               ]),
+  //               const Text(
+  //                 "Mohamed Mostafa Ibrahim",
+  //                 style: TextStyle(
+  //                     fontSize: 25.5, color: Color.fromARGB(255, 1, 14, 15)),
+  //               ),
+  //               const SizedBox(height: 30),
+  //               getCont(Icons.email, "hamomemo@gmail.com",
+  //                   "${S.of(context).email}:"),
+  //               const SizedBox(height: 10),
+  //               getCont(Icons.phone, "01032901480", "${S.of(context).Phone}:"),
+  //               const SizedBox(height: 10),
+  //               getCont(
+  //                 Icons.date_range,
+  //                 da.substring(0, 10),
+  //                 "${S.of(context).UserbirthDate}:",
+  //               ),
+  //               const SizedBox(height: 10),
+  //               getCont(Icons.credit_card, "301071202023662",
+  //                   "${S.of(context).NationalId}:"),
+  //               const SizedBox(height: 40),
+  //               ElevatedButton(
+  //                 onPressed: () async {
+  //                   Navigator.push(
+  //                       context,
+  //                       MaterialPageRoute(
+  //                           builder: (c) => EditBasicInfoScreen(user: pr)));
+  //                 },
+  //                 style: ElevatedButton.styleFrom(
+  //                   backgroundColor: const Color.fromARGB(
+  //                       255, 159, 196, 196), // Background color
+  //                   shape: RoundedRectangleBorder(
+  //                     borderRadius: BorderRadius.circular(
+  //                         20.0), // Set the border radius for circular edges
+  //                   ),
+  //                 ),
+  //                 child: SizedBox(
+  //                   height: 50, // Set the fixed height of the container
+  //                   child: Row(
+  //                     mainAxisAlignment: MainAxisAlignment.center,
+  //                     children: [
+  //                       const Icon(
+  //                         Icons.settings,
+  //                         color: Colors.black,
+  //                         size: 35.0,
+  //                       ),
+  //                       const SizedBox(width: 25),
+  //                       Text(
+  //                         S.of(context).editInfor,
+  //                         style: const TextStyle(
+  //                             fontWeight: FontWeight.bold,
+  //                             fontSize: 20,
+  //                             color: Colors.black),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //               ),
+  //               const SizedBox(height: 20),
+  //               const Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: [
+  //                   Icon(
+  //                     Icons.favorite,
+  //                     color: Colors.red,
+  //                   ),
+  //                   Text(' We serve you with tender , care and love '),
+  //                   Icon(
+  //                     Icons.favorite,
+  //                     color: Colors.red,
+  //                   )
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -200,10 +212,8 @@ class _ProfileViewState extends State<ProfileScreen> {
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (c) => const FriendsScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (c) => const FriendsScreen()));
             },
           ),
           IconButton(
@@ -242,6 +252,7 @@ class _ProfileViewState extends State<ProfileScreen> {
             );
           } else {
             Profile pr = snapshot.data!;
+
             //image = pr.profileImage;
 
             return Container(
@@ -254,15 +265,16 @@ class _ProfileViewState extends State<ProfileScreen> {
                       children: [
                         Stack(children: [
                           // ignore: unnecessary_null_comparison
-                          image.isNotEmpty
+                          pr.profileImage != ""
                               ? CircleAvatar(
                                   radius: 100.0,
-                                  backgroundImage: MemoryImage(image),
+                                  backgroundImage:
+                                      NetworkImage(pr.profileImage),
                                 )
                               : const CircleAvatar(
                                   radius: 100.0,
-                                  backgroundImage:
-                                      AssetImage('Images/profile.png'),
+                                  backgroundImage: NetworkImage(
+                                      'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/912.jpg'),
                                 ),
                           Positioned(
                             bottom: -5,
@@ -280,24 +292,51 @@ class _ProfileViewState extends State<ProfileScreen> {
                         Text(
                           pr.userName,
                           style: const TextStyle(
+                              fontSize: 15,
+                              color: Color.fromARGB(255, 1, 14, 15)),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          pr.name,
+                          style: const TextStyle(
                               fontSize: 25.5,
                               color: Color.fromARGB(255, 1, 14, 15)),
                         ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 20),
                         getCont(
-                            Icons.email, pr.email, "${S.of(context).email}:"),
-                        const SizedBox(height: 10),
+                            Icons.medical_services,
+                            pr.department,
+                            "${S.of(context).department}:",
+                            pr.department != ""),
+                        getCont(Icons.email, pr.email,
+                            "${S.of(context).email}:", pr.email != ""),
+                        getCont(Icons.phone, pr.phone,
+                            "${S.of(context).Phone}:", pr.phone != ""),
                         getCont(
-                            Icons.phone, pr.phone, "${S.of(context).Phone}:"),
-                        const SizedBox(height: 10),
-                        getCont(
-                          Icons.date_range,
-                          pr.date.substring(0, 10),
-                          "${S.of(context).UserbirthDate}:",
-                        ),
-                        const SizedBox(height: 10),
+                            Icons.location_city,
+                            pr.government,
+                            "${S.of(context).government}:",
+                            pr.government != ""),
+                        getCont(Icons.place, pr.location,
+                            "${S.of(context).location}:", pr.location != ""),
                         getCont(Icons.credit_card, pr.ID,
-                            "${S.of(context).NationalId}:"),
+                            "${S.of(context).NationalId}:", pr.ID != ""),
+                        pr.date != ""
+                            ? getCont(
+                                Icons.date_range,
+                                pr.date.substring(0, 10),
+                                "${S.of(context).birthDate}:",
+                                pr.date != "")
+                            : getCont(
+                                Icons.date_range,
+                                pr.date,
+                                "${S.of(context).birthDate}:",
+                                false),
+                        pr.gender == 'm'
+                            ? getCont(Icons.male, S.of(context).male,
+                                "${S.of(context).gender}:", pr.gender != "")
+                            : getCont(Icons.female, S.of(context).female,
+                                "${S.of(context).gender}:", pr.gender != ""),
                         const SizedBox(height: 40),
                         ElevatedButton(
                           onPressed: () async {
@@ -365,45 +404,49 @@ class _ProfileViewState extends State<ProfileScreen> {
   }
 }
 
-Column getCont(IconData icon, dynamic st, String text) {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [
-      Row(children: [
-        Text(
-          text.toString(),
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
+Visibility getCont(IconData icon, dynamic st, String text, bool vis) {
+  return Visibility(
+    visible: vis,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const SizedBox(height: 10),
+        Row(children: [
+          Text(
+            text.toString(),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-      ]),
-      Container(
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 159, 196, 196),
-          borderRadius: BorderRadius.circular(
-              10.0), // Set the border radius for circular edges
-        ),
-        child: SizedBox(
-          height: 50, // Set the fixed width of the container
-          child: Row(
-            children: [
-              const SizedBox(width: 5),
-              Icon(
-                icon,
-                color: Colors.black,
-                size: 35.0,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                st.toString(),
-                style: const TextStyle(
-                  fontSize: 20,
+        ]),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 159, 196, 196),
+            borderRadius: BorderRadius.circular(
+                10.0), // Set the border radius for circular edges
+          ),
+          child: SizedBox(
+            height: 50, // Set the fixed width of the container
+            child: Row(
+              children: [
+                const SizedBox(width: 5),
+                Icon(
+                  icon,
+                  color: Colors.black,
+                  size: 35.0,
                 ),
-              ),
-            ],
+                const SizedBox(width: 10),
+                Text(
+                  st.toString(),
+                  style: const TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    ],
+      ],
+    ),
   );
 }

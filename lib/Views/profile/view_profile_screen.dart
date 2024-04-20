@@ -1,12 +1,9 @@
 // ignore_for_file: camel_case_types, unnecessary_null_comparison
-
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/chat/chat_screen.dart';
 import 'package:rosheta_ui/Views/chat/friends_screen.dart';
 import 'package:rosheta_ui/Views/search/search_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
-import 'package:rosheta_ui/models/profile/profile_model.dart';
 import 'package:rosheta_ui/models/profile/view_profile_model.dart';
 import 'package:rosheta_ui/services/chat/chat_service.dart';
 import 'dart:io';
@@ -23,174 +20,50 @@ class ViewProfileScreen extends StatefulWidget {
 class _viewProfileViewState extends State<ViewProfileScreen> {
   late Future<ViewProfile> _profileFuture;
   late ViewProfile pr;
-
   File imageFile = File('Images/profile.png');
-  Column getCont(IconData icon, dynamic st, String text) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Row(children: [
-          Text(
-            text.toString(),
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
+  Visibility getCont(IconData icon, dynamic st, String text, bool vis) {
+    return Visibility(
+      visible: vis,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          Row(children: [
+            Text(
+              text.toString(),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-        ]),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 159, 196, 196),
-            borderRadius: BorderRadius.circular(
-                10.0), // Set the border radius for circular edges
-          ),
-          child: SizedBox(
-            height: 50, // Set the fixed width of the container
-            child: Row(
-              children: [
-                const SizedBox(width: 5),
-                Icon(
-                  icon,
-                  color: Colors.black,
-                  size: 35.0,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  st.toString(),
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-              ],
+          ]),
+          Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 159, 196, 196),
+              borderRadius: BorderRadius.circular(
+                  10.0), // Set the border radius for circular edges
             ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Container dumy(context, Uint8List ima) {
-    Profile pr = Profile(
-        profileImage: ima,
-        userName: "userName",
-        email: "email",
-        phone: "phone",
-        date: "1901-02-03",
-        ID: "ID",
-        viewemail: false,
-        viewphone: true,
-        viewdate: true,
-        viewID: true);
-    return Container(
-      color: const Color.fromARGB(255, 233, 255, 255),
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(children: [
-                  ima != null
-                      ? CircleAvatar(
-                          radius: 100.0,
-                          backgroundImage: MemoryImage(pr.profileImage),
-                        )
-                      : const CircleAvatar(
-                          radius: 100.0,
-                          backgroundImage: AssetImage('Images/profile.png'),
-                        ),
-                ]),
-                Text(
-                  pr.userName,
-                  style: const TextStyle(
-                      fontSize: 25.5, color: Color.fromARGB(255, 1, 14, 15)),
-                ),
-                const SizedBox(height: 15),
-                Container(
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 25, 155, 155),
-                    borderRadius: BorderRadius.circular(
-                        10.0), // Set the border radius for circular edges
+            child: SizedBox(
+              height: 50, // Set the fixed width of the container
+              child: Row(
+                children: [
+                  const SizedBox(width: 5),
+                  Icon(
+                    icon,
+                    color: Colors.black,
+                    size: 35.0,
                   ),
-                  child: const SizedBox(
-                    height: 50,
-                    width: 200,
-                    child: Row(
-                      children: [
-                        SizedBox(width: 10),
-                        Icon(Icons.message, size: 20, color: Colors.black),
-                        SizedBox(width: 10),
-                        Center(
-                            child: Text(
-                          'Send Message',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ))
-                      ],
+                  const SizedBox(width: 10),
+                  Text(
+                    st.toString(),
+                    style: const TextStyle(
+                      fontSize: 20,
                     ),
                   ),
-                ),
-                const SizedBox(height: 30),
-                Visibility(
-                  visible: pr.viewemail,
-                  child: Column(
-                    children: [
-                      getCont(Icons.email, pr.email, "${S.of(context).email}:"),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-                Visibility(
-                  visible: pr.viewphone,
-                  child: Column(
-                    children: [
-                      getCont(Icons.phone, pr.phone, "${S.of(context).Phone}:"),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-                Visibility(
-                  visible: pr.viewdate,
-                  child: Column(
-                    children: [
-                      getCont(
-                        Icons.date_range,
-                        pr.date.substring(0, 10),
-                        "${S.of(context).UserbirthDate}:",
-                      ),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-                Visibility(
-                  visible: pr.viewdate,
-                  child: Column(
-                    children: [
-                      getCont(Icons.credit_card, pr.ID,
-                          "${S.of(context).NationalId}:"),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    ),
-                    Text(' We serve you with tender , care and love '),
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.red,
-                    )
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -226,10 +99,8 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (c) => const FriendsScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (c) => const FriendsScreen()));
             },
           ),
           IconButton(
@@ -257,12 +128,10 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
         future: _profileFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // return dumy(context, _image);
             return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
-            // return dumy(context, _image);
             return Center(
               child: Text('Error: ${snapshot.error}'),
             );
@@ -280,7 +149,8 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
                           pr.profileImage.isNotEmpty
                               ? CircleAvatar(
                                   radius: 100.0,
-                                  backgroundImage: MemoryImage(pr.profileImage),
+                                  backgroundImage:
+                                      NetworkImage(pr.profileImage),
                                 )
                               : const CircleAvatar(
                                   radius: 100.0,
@@ -291,7 +161,7 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
                         Text(
                           pr.userName,
                           style: const TextStyle(
-                              fontSize: 25.5,
+                              fontSize: 15,
                               color: Color.fromARGB(255, 1, 14, 15)),
                         ),
                         const SizedBox(height: 15),
@@ -338,50 +208,44 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 30),
-                        Visibility(
-                          visible: pr.viewemail,
-                          child: Column(
-                            children: [
-                              getCont(Icons.email, pr.email,
-                                  "${S.of(context).email}:"),
-                              const SizedBox(height: 10),
-                            ],
-                          ),
+                        const SizedBox(height: 10),
+                        Text(
+                          pr.name,
+                          style: const TextStyle(
+                              fontSize: 25.5,
+                              color: Color.fromARGB(255, 1, 14, 15)),
                         ),
-                        Visibility(
-                          visible: pr.viewphone,
-                          child: Column(
-                            children: [
-                              getCont(Icons.phone, pr.phone,
-                                  "${S.of(context).Phone}:"),
-                              const SizedBox(height: 10),
-                            ],
-                          ),
-                        ),
-                        Visibility(
-                          visible: pr.viewdate,
-                          child: Column(
-                            children: [
-                              getCont(
+                        const SizedBox(height: 20),
+                        getCont(
+                            Icons.medical_services,
+                            pr.department,
+                            "${S.of(context).department}:",
+                            pr.department != ""),
+                        getCont(Icons.email, pr.email,
+                            "${S.of(context).email}:", pr.email != ""),
+                        getCont(Icons.phone, pr.phone,
+                            "${S.of(context).Phone}:", pr.phone != ""),
+                        getCont(
+                            Icons.location_city,
+                            pr.government,
+                            "${S.of(context).government}:",
+                            pr.government != ""),
+                        getCont(Icons.place, pr.location,
+                            "${S.of(context).location}:", pr.location != ""),
+                        pr.date != ""
+                            ? getCont(
                                 Icons.date_range,
                                 pr.date.substring(0, 10),
-                                "${S.of(context).UserbirthDate}:",
-                              ),
-                              const SizedBox(height: 10),
-                            ],
-                          ),
-                        ),
-                        Visibility(
-                          visible: pr.viewdate,
-                          child: Column(
-                            children: [
-                              getCont(Icons.credit_card, pr.ID,
-                                  "${S.of(context).NationalId}:"),
-                              const SizedBox(height: 10),
-                            ],
-                          ),
-                        ),
+                                "${S.of(context).birthDate}:",
+                                pr.date != "")
+                            : getCont(Icons.date_range, pr.date,
+                                "${S.of(context).birthDate}:", false),
+                        pr.gender == 'm'
+                            ? getCont(Icons.male, S.of(context).male,
+                                "${S.of(context).gender}:", pr.gender != "")
+                            : getCont(Icons.female, S.of(context).female,
+                                "${S.of(context).gender}:", pr.gender != ""),
+                        const SizedBox(height: 10),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
