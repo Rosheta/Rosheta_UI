@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("LOGIN"),
+        "Lab": MessageLookupByLibrary.simpleMessage("Lab"),
         "LoginNow": MessageLookupByLibrary.simpleMessage("Login Now"),
         "NationalId": MessageLookupByLibrary.simpleMessage("National ID"),
         "Patient": MessageLookupByLibrary.simpleMessage("Patient"),
@@ -35,12 +36,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "clinicLocation":
             MessageLookupByLibrary.simpleMessage("clinicLocation"),
         "department": MessageLookupByLibrary.simpleMessage("department"),
+        "gender": MessageLookupByLibrary.simpleMessage("gender"),
+        "government": MessageLookupByLibrary.simpleMessage("government"),
+        "clinicPosition":
+            MessageLookupByLibrary.simpleMessage("Clinic Position"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("Edit basic information"),
         "email": MessageLookupByLibrary.simpleMessage("Email Address"),
-        "female": MessageLookupByLibrary.simpleMessage("female"),
-        "gender": MessageLookupByLibrary.simpleMessage("gender"),
-        "government": MessageLookupByLibrary.simpleMessage("government"),
+        "enterValidEmail":
+            MessageLookupByLibrary.simpleMessage("Email must contain @"),
+        "enterValidPhone": MessageLookupByLibrary.simpleMessage(
+            "Phone number must contain 11 numbers"),
+        "enterYourName":
+            MessageLookupByLibrary.simpleMessage("Enter your name"),
+        "enterYourNationalId": MessageLookupByLibrary.simpleMessage(
+            "National ID must conatain 14 numbers"),
+        "enterclinicPosition":
+            MessageLookupByLibrary.simpleMessage("Enter your clinic address"),
+        "female": MessageLookupByLibrary.simpleMessage("Female"),
         "havingaccount":
             MessageLookupByLibrary.simpleMessage("Have an accout?"),
         "hintTextID":
@@ -61,9 +74,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "nothavingaccount":
             MessageLookupByLibrary.simpleMessage("Don\'\'t have account? "),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "positionController":
+            MessageLookupByLibrary.simpleMessage("Enter your address"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "savechanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
-        "title": MessageLookupByLibrary.simpleMessage("ROSHETA")
+        "title": MessageLookupByLibrary.simpleMessage("ROSHETA"),
+        "uploadFile": MessageLookupByLibrary.simpleMessage("Upload File")
       };
 }

@@ -16,6 +16,7 @@
     "UserbirthDate" : "Birth Date",
     "Doctor" : "Doctor",
     "Patient" : "Patient",
+    "Lab" : "Lab",
     "register" : "Register",
     "editInfor": "Edit basic information",
     "hintTextname": "Enter your name",
@@ -33,4 +34,12 @@
     "clinicLocation":"clinicLocation",
     "male":"male",
     "female":"female"
+    "enterYourName": "Enter your name",
+    "enterYourNationalId" : "National ID must conatain 14 numbers",
+    "enterValidEmail" : "Email must contain @",
+    "enterValidPhone": "Phone number must contain 11 numbers",   
+    "uploadFile" : "Upload File",
+    "clinicPosition" : "Clinic Position",
+    "enterclinicPosition" : "Enter your clinic address",
+    "positionController": "Enter your address"
 }
