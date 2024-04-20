@@ -4,11 +4,17 @@ import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/Views/signup_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:rosheta_ui/Views/search_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure plugin services are initialized
   await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => SearchProvider(), // Provide the SearchProvider
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

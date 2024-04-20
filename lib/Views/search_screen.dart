@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/services/search_service.dart';
-// import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 
 // import 'package:rosheta_ui/Views/profile_screen.dart';
+
+class SearchProvider extends ChangeNotifier {
+  String selectedSpecialization = 'Any';
+  String selectedLocation = 'Any';
+
+  void updateSpecialization(String specialization) {
+    selectedSpecialization = specialization;
+    notifyListeners(); // Notify listeners that the state has changed
+  }
+
+  void updateLocation(String location) {
+    selectedLocation = location;
+    notifyListeners(); // Notify listeners that the state has changed
+  }
+}
 
 class searchWidget extends StatefulWidget {
   const searchWidget({Key? key}) : super(key: key);
@@ -37,223 +52,68 @@ class _searchWidgetState extends State<searchWidget> {
   }
 }
 
-
-// class FilterWidget extends StatefulWidget {
-//   @override
-//   _FilterWidgetState createState() => _FilterWidgetState();
-// }
-
-// class _FilterWidgetState extends State<FilterWidget> {
-//   String selectedSpecialization = '';
-//   String selectedHospital = '';
-
-//   List<String> specializations = [
-//     'Specialization 1',
-//     'Specialization 2',
-//     'Specialization 3',
-//   ];
-
-//   List<String> hospitals = [
-//     'Hospital 1',
-//     'Hospital 2',
-//     'Hospital 3',
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(16.0),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Expanded(
-//             child: GestureDetector(
-//               onTap: () {
-//                 _showSpecializationDialog(context);
-//               },
-//               child: Container(
-//                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-//                 decoration: BoxDecoration(
-//                   border: Border.all(color: Colors.grey),
-//                   borderRadius: BorderRadius.circular(10.0),
-//                 ),
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Text(
-//                       'Specialization',
-//                       style: TextStyle(fontSize: 16.0, color: Colors.grey),
-//                     ),
-//                     SizedBox(height: 4.0),
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         Expanded(
-//                           child: Text(
-//                             selectedSpecialization.isEmpty ? 'Select Specialization' : selectedSpecialization,
-//                             style: TextStyle(fontSize: 16.0),
-//                             overflow: TextOverflow.ellipsis,
-//                           ),
-//                         ),
-//                         Icon(Icons.arrow_drop_down),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//           SizedBox(width: 10.0),
-//           Expanded(
-//             child: GestureDetector(
-//               onTap: () {
-//                 _showHospitalDialog(context);
-//               },
-//               child: Container(
-//                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-//                 decoration: BoxDecoration(
-//                   border: Border.all(color: Colors.grey),
-//                   borderRadius: BorderRadius.circular(10.0),
-//                 ),
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Text(
-//                       'Hospital Name',
-//                       style: TextStyle(fontSize: 16.0, color: Colors.grey),
-//                     ),
-//                     SizedBox(height: 4.0),
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         Expanded(
-//                           child: Text(
-//                             selectedHospital.isEmpty ? 'Select Hospital Name' : selectedHospital,
-//                             style: TextStyle(fontSize: 16.0),
-//                             overflow: TextOverflow.ellipsis,
-//                           ),
-//                         ),
-//                         Icon(Icons.arrow_drop_down),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   void _showSpecializationDialog(BuildContext context) {
-//     showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return AlertDialog(
-//           title: Text('Select Specialization'),
-//           content: SingleChildScrollView(
-//             child: ListBody(
-//               children: specializations.map((String specialization) {
-//                 return GestureDetector(
-//                   onTap: () {
-//                     setState(() {
-//                       selectedSpecialization = specialization;
-//                     });
-//                     Navigator.of(context).pop();
-//                   },
-//                   child: Padding(
-//                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-//                     child: Text(specialization),
-//                   ),
-//                 );
-//               }).toList(),
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-
-//   void _showHospitalDialog(BuildContext context) {
-//     showDialog(
-//       context: context,
-//       builder: (BuildContext context) {
-//         return AlertDialog(
-//           title: Text('Select Hospital Name'),
-//           content: SingleChildScrollView(
-//             child: ListBody(
-//               children: hospitals.map((String hospital) {
-//                 return GestureDetector(
-//                   onTap: () {
-//                     setState(() {
-//                       selectedHospital = hospital;
-//                     });
-//                     Navigator.of(context).pop();
-//                   },
-//                   child: Padding(
-//                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-//                     child: Text(hospital),
-//                   ),
-//                 );
-//               }).toList(),
-//             ),
-//           ),
-//         );
-//       },
-//     );
-//   }
-// }
-
-// class SearchData extends ChangeNotifier {
-//   String selectedSpecialization = 'Any';
-//   String selectedHospital = 'Any';
-
-//   void setSpecialization(String specialization) {
-//     selectedSpecialization = specialization;
-//     notifyListeners(); // Notify listeners of the change
-//   }
-
-//   void setHospital(String hospital) {
-//     selectedHospital = hospital;
-//     notifyListeners(); // Notify listeners of the change
-//   }
-// }
-
 class SearchPeople extends SearchDelegate<String>{
   String selectedUserId = "";
 
   List<String> specializations = [
     'Any',
-    'أمراض القلب والأوعية الدموية (Cardiology)',
-    'جراحة العظام (Orthopedics)',
-    'طب الأطفال (Pediatrics)',
-    'أمراض الجلدية (Dermatology)',
-    'أمراض الأعصاب (Neurology)',
-    'طب العيون (Ophthalmology)',
-    'أمراض الجهاز الهضمي (Gastroenterology)',
-    'أمراض الغدد الصماء (Endocrinology)',
-    'طب الأورام (Oncology)',
-    'طب المسالك البولية (Urology)',
-    'طب النساء والتوليد (Obstetrics and Gynecology)',
-    'طب النفسي (Psychiatry)',
-    'الأشعة التشخيصية (Radiology)',
-    'تخدير (Anesthesiology)',
-    'علم الأمراض (Pathology)',
-    'طب الطوارئ (Emergency Medicine)',
-    'طب العائلة (Family Medicine)',
-    'طب الباطنة (Internal Medicine)',
-    'جراحة عامة (General Surgery)',
-    'جراحة تجميلية (Plastic Surgery)',
-    'جراحة الأعصاب (Neurosurgery)',
-    'أنف وأذن وحنجرة (ENT - Ear, Nose, Throat)',
-    'طب الأسنان (Dentistry)',
-    'علاج طبيعي (Physical Therapy)',
+    'Anesthesiology',
+    'Cardiology',
+    'Dentistry',
+    'Dermatology',
+    'Emergency Medicine',
+    'Endocrinology',
+    'ENT - Ear, Nose, Throat',
+    'Family Medicine',
+    'Gastroenterology',
+    'General Surgery',
+    'Internal Medicine',
+    'Neurology',
+    'Neurosurgery',
+    'Obstetrics and Gynecology',
+    'Oncology',
+    'Ophthalmology',
+    'Orthopedics',
+    'Pathology',
+    'Pediatrics',
+    'Physical Therapy',
+    'Plastic Surgery',
+    'Psychiatry',
+    'Radiology',
+    'Urology'
   ];
-  String selectedSpecialization = 'Any';
 
-  List<String> hospitals = ['None'];
-  String selectedHospital = 'Any';
+  List<String> locations = [
+    'Any',
+    'Alexandria',
+    'Aswan',
+    'Asyut',
+    'Beheira',
+    'Beni Suef',
+    'Cairo',
+    'Dakahlia',
+    'Damietta',
+    'Faiyum',
+    'Gharbia',
+    'Giza',
+    'Ismailia',
+    'Kafr El Sheikh',
+    'Luxor',
+    'Matruh',
+    'Minya',
+    'Monufia',
+    'New Valley',
+    'North Sinai',
+    'Port Said',
+    'Qalyubia',
+    'Qena',
+    'Red Sea',
+    'Sharqia',
+    'Sohag',
+    'South Sinai',
+    'Suez'
+  ];
+
   // to be called from l10n for arabic
   @override
   String get searchFieldLabel => "Search";
@@ -334,195 +194,154 @@ class SearchPeople extends SearchDelegate<String>{
   @override
   Widget buildSuggestions(BuildContext context) {
     search_service s = search_service();
+    final searchProvider = Provider.of<SearchProvider>(context);
+
     Map<String, dynamic> requestData = {
       'query': query,
-      'hospitalName': selectedHospital,
-      'specialization': selectedSpecialization,
+      'location': searchProvider.selectedLocation,
+      'specialization': searchProvider.selectedSpecialization,
     };
-    return FutureBuilder<List<dynamic>>(
-      future: s.fetchSuggestions(requestData),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
-        } else {
-          return ListView.builder(
-            itemCount: snapshot.data?.length ?? 0,
-            itemBuilder: (context, index) {
-              final item = snapshot.data?[index];
-              String location = item?['location'] ?? "";
-              String specialization = item?['specialization'] ?? "";
-              return ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  radius: 30.0,
-                  backgroundImage: item?['image'] != null
-                      ? NetworkImage(item?['image'])
-                      : null,
-                ),
-                title: Text(
-                  // item?['username'] ?? "",
-                  item?['name']['f_name'] ?? "",
-                  style: const TextStyle(fontSize: 16.0),
-                ),
-                subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (location.isNotEmpty)
-                  Text(
-                    specialization,
-                    style: TextStyle(fontSize: 14.0, color: Colors.grey),
-                  ),
-                  if (specialization.isNotEmpty)
-                  Text(
-                    location,
-                    style: TextStyle(fontSize: 14.0, color: Colors.grey),
-                  ),
-                ],
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: buildFilterBox(context, 'Specialization', specializations),
               ),
-                onTap: () {
-                  selectedUserId = item?['_id'];
-                  showResults(context);
-                },
-              );
+              SizedBox(width: 10.0),
+              Expanded(
+                child: buildFilterBox(context, 'Location', locations),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        Expanded(
+          child: FutureBuilder<List<dynamic>>(
+            future: s.fetchSuggestions(requestData),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                return ListView.builder(
+                  itemCount: snapshot.data?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    final item = snapshot.data?[index];
+                    String location = item?['location'] ?? "";
+                    String specialization = item?['department'] ?? "";
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        radius: 30.0,
+                        backgroundImage: item?['profile_picture'] != null
+                            ? NetworkImage(item?['profile_picture'])
+                            : null,
+                      ),
+                      title: Text(
+                        item?['name'] ?? "",
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (specialization.isNotEmpty)
+                            Text(
+                              specialization,
+                              style: TextStyle(fontSize: 14.0, color: Colors.grey),
+                            ),
+                          if (location.isNotEmpty)
+                            Text(
+                              location,
+                              style: TextStyle(fontSize: 14.0, color: Colors.grey),
+                            ),
+                        ],
+                      ),
+                      onTap: () {
+                        selectedUserId = item?['_id'];
+                        showResults(context);
+                      },
+                    );
+                  },
+                );
+              }
             },
-          );
-        }
-      },
+          ),
+        ),
+      ],
     );
   }
 
-  @override
-  PreferredSizeWidget? buildBottom(BuildContext context) {
-    return PreferredSize(
-      preferredSize: Size.fromHeight(100.0), // Adjust the preferred height as needed
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // First filter box (Location)
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  // Open a dropdown menu to choose from the list of Specialization
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Select Specialization'),
-                        content: SingleChildScrollView(
-                          child: ListBody(
-                            children: specializations.map((String specialization) {
-                              return GestureDetector(
-                                onTap: () {
-                                  // Set the selected specialization
-                                  selectedSpecialization = specialization;
-                                  print(selectedSpecialization);
-                                  buildSuggestions(context);
-                                  Navigator.of(context).pop(); // Close the dialog
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Text(specialization),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('ٍSpecialization', style: TextStyle(fontSize: 16.0, color: Colors.grey)),
-                      SizedBox(height: 4.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(selectedSpecialization.isEmpty ? 'Select Specialization' : selectedSpecialization,
-                                style: TextStyle(fontSize: 16.0),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1),
-                          ),
-                          Icon(Icons.arrow_drop_down),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(width: 10.0), // Add spacing between filter boxes
+  Widget buildFilterBox(BuildContext context, String title, List<String> items) {
+    final searchProvider = Provider.of<SearchProvider>(context);
 
-            // Second filter box (Another filter)
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  // Open a dropdown menu to choose from the list of Specialization
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Select Hospital Name'),
-                        content: SingleChildScrollView(
-                          child: ListBody(
-                            children: hospitals.map((String hospital) {
-                              return GestureDetector(
-                                onTap: () {
-                                  // Set the selected hospital
-                                  selectedHospital = hospital;
-                                  buildSuggestions(context);
-                                  print(selectedHospital);
-                                  Navigator.of(context).pop(); // Close the dialog
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Text(hospital),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Hospital Name', style: TextStyle(fontSize: 16.0, color: Colors.grey)),
-                      SizedBox(height: 4.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(selectedHospital.isEmpty ? 'Select Hospital Name' : selectedHospital, 
-                                style: TextStyle(fontSize: 16.0) , 
-                                overflow: TextOverflow.ellipsis, 
-                                maxLines: 1, ),
-                          Icon(Icons.arrow_drop_down),
-                        ],
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Select $title'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: items.map((String item) {
+                    return GestureDetector(
+                      onTap: () {
+                        if (title == 'Specialization') {
+                          searchProvider.updateSpecialization(item);
+                        } else if (title == 'Location') {
+                          searchProvider.updateLocation(item);
+                        }
+                        Navigator.of(context).pop(); // Close the dialog
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(item),
                       ),
-                    ],
-                  ),
+                    );
+                  }).toList(),
                 ),
               ),
+            );
+          },
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('$title', style: TextStyle(fontSize: 16.0, color: Colors.grey)),
+            SizedBox(height: 4.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    title == 'Specialization'
+                        ? searchProvider.selectedSpecialization.isEmpty
+                            ? 'Select Specialization'
+                            : searchProvider.selectedSpecialization
+                        : searchProvider.selectedLocation.isEmpty
+                            ? 'Select Location'
+                            : searchProvider.selectedLocation,
+                    style: TextStyle(fontSize: 16.0),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ),
+                Icon(Icons.arrow_drop_down),
+              ],
             ),
           ],
         ),
