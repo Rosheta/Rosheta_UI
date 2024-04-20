@@ -1,47 +1,84 @@
 import 'dart:typed_data';
 
 class ViewProfile {
-  final Uint8List profileImage;
+  final String profileImage;
   final String userName;
+  final String name;
+  final String gender;
+  final String government;
   final String email;
   final String phone;
   final String date;
-  final String ID;
-  final bool viewemail;
-  final bool viewphone;
-  final bool viewdate;
-  final bool viewID;
+  final String department;
+  final String location;
 
-  ViewProfile(
-      {required this.profileImage,
-      required this.userName,
-      required this.email,
-      required this.phone,
-      required this.date,
-      required this.ID,
-      required this.viewemail,
-      required this.viewphone,
-      required this.viewdate,
-      required this.viewID});
+  ViewProfile({
+    required this.department,
+    required this.profileImage,
+    required this.userName,
+    required this.name,
+    required this.gender,
+    required this.government,
+    required this.email,
+    required this.phone,
+    required this.date,
+    required this.location,
+  });
 
   factory ViewProfile.fromJson(Map<String, dynamic> jsonData) {
-    Uint8List proImage;
-    if (jsonData['profileImage'] == null) {
-      proImage = Uint8List.fromList([]);
+    final String profileImage;
+    final String userName;
+    final String name;
+    final String gender;
+    final String ID;
+    final String government;
+    final String email;
+    final String phone;
+    final String date;
+    final String department;
+    final String location;
+    final bool viewemail;
+    final bool viewphone;
+    final bool viewdate;
+
+    if (jsonData['profile_image'] == null) {
+      profileImage = "";
     } else {
-      proImage = jsonData['profileImage'];
+      profileImage = jsonData['profile_image'];
     }
+    jsonData['location'] == null
+        ? location = ""
+        : location = jsonData['location'];
+
+    jsonData['department'] == null
+        ? department = ""
+        : department = jsonData['department'];
+    jsonData['phone'] == null ? phone = "" : phone = jsonData['phone'];
+
+    
+    
+      jsonData['birthdate'] == null
+        ? date = ""
+        : date = jsonData['birthdate'][0];
+
+    jsonData['email'] == null ? email = "" : email = jsonData['email'];
+    jsonData['government'] == null
+        ? government = ""
+        : government = jsonData['government'];
+    jsonData['gender'] == null ? gender = "" : gender = jsonData['gender'];
+    jsonData['name'] == null ? name = "" : name = jsonData['name'];
+
     return ViewProfile(
-      profileImage: proImage,
-      userName: jsonData['userName'],
-      email: jsonData['email'],
-      phone: jsonData['phone'],
-      date: jsonData['date'][0],
-      ID: jsonData['ID'],
-      viewemail: jsonData['viewemail'],
-      viewphone: jsonData['viewphone'],
-      viewdate: jsonData['viewdate'],
-      viewID: jsonData['viewID'],
+      profileImage: profileImage,
+      userName: jsonData['user_name'],
+      name: name,
+      gender: gender,
+      government: government,
+      email: email,
+      phone: phone,
+      date: date,
+      department: department,
+      location: location,
     );
   }
 }

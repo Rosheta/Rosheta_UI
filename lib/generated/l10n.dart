@@ -330,6 +330,16 @@ class S {
     );
   }
 
+  /// `gender`
+  String get gender {
+    return Intl.message(
+      'gender',
+      name: 'gender',
+      desc: '',
+      args: [],
+    );
+  }
+      
   /// `Enter your name`
   String get enterYourName {
     return Intl.message(
@@ -340,11 +350,32 @@ class S {
     );
   }
 
+
+  /// `government`
+  String get government {
+    return Intl.message(
+      'government',
+      name: 'government'
+      desc: '',
+      args: [],
+    );
+  },
+
   /// `National ID must conatain 14 numbers`
   String get enterYourNationalId {
     return Intl.message(
       'National ID must conatain 14 numbers',
       name: 'enterYourNationalId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `department`
+  String get department {
+    return Intl.message(
+      'department',
+      name: 'department',
       desc: '',
       args: [],
     );
@@ -360,11 +391,30 @@ class S {
     );
   }
 
+  /// `location`
+  String get location {
+    return Intl.message(
+      'location',
+      name: 'location',
+      desc: '',
+      args: [],
+          );
+        }
   /// `Phone number must contain 11 numbers`
   String get enterValidPhone {
     return Intl.message(
       'Phone number must contain 11 numbers',
       name: 'enterValidPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `clinicLocation`
+  String get clinicLocation {
+    return Intl.message(
+      'clinicLocation',
+      name: 'clinicLocation',
       desc: '',
       args: [],
     );
@@ -380,11 +430,30 @@ class S {
     );
   }
 
+  /// `male`
+  String get male {
+    return Intl.message(
+      'male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
   /// `Male`
   String get male {
     return Intl.message(
       'Male',
       name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+ 
+  /// `female`
+  String get female {
+    return Intl.message(
+      'female',
+      name: 'female',
       desc: '',
       args: [],
     );

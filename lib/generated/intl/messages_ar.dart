@@ -33,10 +33,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
         "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
         "chat": MessageLookupByLibrary.simpleMessage("المحادثة"),
-        "clinicPosition": MessageLookupByLibrary.simpleMessage("موقع العيادة"),
+        "clinicLocation": MessageLookupByLibrary.simpleMessage("عنوان العيادة"),
+        "department": MessageLookupByLibrary.simpleMessage("القسم"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("تعديل المعلومات الاساسية"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
+        "female": MessageLookupByLibrary.simpleMessage("انثي"),
+        "gender": MessageLookupByLibrary.simpleMessage("النوع"),
+        "government": MessageLookupByLibrary.simpleMessage("المحافظة"),
+        "clinicPosition": MessageLookupByLibrary.simpleMessage("موقع العيادة"),
+        
         "enterValidEmail":
             MessageLookupByLibrary.simpleMessage("الايميل يحتوى على @"),
         "enterValidPhone":
@@ -46,7 +52,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرقم القومى يتكون من 14 رقم"),
         "enterclinicPosition":
             MessageLookupByLibrary.simpleMessage("ادخل موقع العيادة"),
-        "female": MessageLookupByLibrary.simpleMessage("انثى"),
         "havingaccount": MessageLookupByLibrary.simpleMessage("هل لديك حساب؟"),
         "hintTextID": MessageLookupByLibrary.simpleMessage("ادخل الرقم القومي"),
         "hintTextdate":
@@ -58,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ادخل رقم الهاتف"),
         "hinttextmsg":
             MessageLookupByLibrary.simpleMessage("اكتب رسالتك هنا..."),
+        "location": MessageLookupByLibrary.simpleMessage("العنوان"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "male": MessageLookupByLibrary.simpleMessage("ذكر"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم"),
