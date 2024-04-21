@@ -35,11 +35,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "chat": MessageLookupByLibrary.simpleMessage("Chats"),
         "clinicLocation":
             MessageLookupByLibrary.simpleMessage("clinicLocation"),
-        "department": MessageLookupByLibrary.simpleMessage("department"),
-        "gender": MessageLookupByLibrary.simpleMessage("gender"),
-        "government": MessageLookupByLibrary.simpleMessage("government"),
         "clinicPosition":
             MessageLookupByLibrary.simpleMessage("Clinic Position"),
+        "department": MessageLookupByLibrary.simpleMessage("department"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("Edit basic information"),
         "email": MessageLookupByLibrary.simpleMessage("Email Address"),
@@ -53,7 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "National ID must conatain 14 numbers"),
         "enterclinicPosition":
             MessageLookupByLibrary.simpleMessage("Enter your clinic address"),
-        "female": MessageLookupByLibrary.simpleMessage("Female"),
+        "female": MessageLookupByLibrary.simpleMessage("female"),
+        "gender": MessageLookupByLibrary.simpleMessage("gender"),
+        "government": MessageLookupByLibrary.simpleMessage("government"),
         "havingaccount":
             MessageLookupByLibrary.simpleMessage("Have an accout?"),
         "hintTextID":

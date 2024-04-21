@@ -33,7 +33,7 @@
     "location":"العنوان",
     "clinicLocation":"عنوان العيادة",
     "male":"ذكر",
-    "female":"انثي"
+    "female":"انثي",
     "enterYourName": "ادخل اسمك",
     "enterYourNationalId" : "الرقم القومى يتكون من 14 رقم",
     "enterValidEmail" : "الايميل يحتوى على @",

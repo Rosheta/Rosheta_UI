@@ -33,7 +33,7 @@
     "location":"location",
     "clinicLocation":"clinicLocation",
     "male":"male",
-    "female":"female"
+    "female":"female",
     "enterYourName": "Enter your name",
     "enterYourNationalId" : "National ID must conatain 14 numbers",
     "enterValidEmail" : "Email must contain @",

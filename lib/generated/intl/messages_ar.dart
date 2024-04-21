@@ -34,15 +34,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
         "chat": MessageLookupByLibrary.simpleMessage("المحادثة"),
         "clinicLocation": MessageLookupByLibrary.simpleMessage("عنوان العيادة"),
+        "clinicPosition": MessageLookupByLibrary.simpleMessage("موقع العيادة"),
         "department": MessageLookupByLibrary.simpleMessage("القسم"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("تعديل المعلومات الاساسية"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
-        "female": MessageLookupByLibrary.simpleMessage("انثي"),
-        "gender": MessageLookupByLibrary.simpleMessage("النوع"),
-        "government": MessageLookupByLibrary.simpleMessage("المحافظة"),
-        "clinicPosition": MessageLookupByLibrary.simpleMessage("موقع العيادة"),
-        
         "enterValidEmail":
             MessageLookupByLibrary.simpleMessage("الايميل يحتوى على @"),
         "enterValidPhone":
@@ -52,6 +48,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرقم القومى يتكون من 14 رقم"),
         "enterclinicPosition":
             MessageLookupByLibrary.simpleMessage("ادخل موقع العيادة"),
+        "female": MessageLookupByLibrary.simpleMessage("انثي"),
+        "gender": MessageLookupByLibrary.simpleMessage("النوع"),
+        "government": MessageLookupByLibrary.simpleMessage("المحافظة"),
         "havingaccount": MessageLookupByLibrary.simpleMessage("هل لديك حساب؟"),
         "hintTextID": MessageLookupByLibrary.simpleMessage("ادخل الرقم القومي"),
         "hintTextdate":
