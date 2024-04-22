@@ -227,12 +227,14 @@ class SearchPeople extends SearchDelegate<String>{
               Expanded(
                 child: buildFilterBox(context, 'Organization', organizations),
               ),
-              SizedBox(width: 5.0),
+              if(searchProvider.selectedOrganization == 'Doctor')
+              const SizedBox(width: 5.0),
               if(searchProvider.selectedOrganization == 'Doctor')
               Expanded(
                 child: buildFilterBox(context, 'Specialization', specializations),
               ),
-              SizedBox(width: 5.0),
+              if(searchProvider.selectedOrganization == 'Lab' || searchProvider.selectedOrganization == 'Doctor')
+              const SizedBox(width: 5.0),
               if(searchProvider.selectedOrganization == 'Lab' || searchProvider.selectedOrganization == 'Doctor')
               Expanded(
                 child: buildFilterBox(context, 'Location', locations),
