@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 class SearchProvider extends ChangeNotifier {
   String selectedSpecialization = 'Any';
   String selectedLocation = 'Any';
+  String selectedOrganization = 'Any';
 
   void updateSpecialization(String specialization) {
     selectedSpecialization = specialization;
@@ -15,7 +16,12 @@ class SearchProvider extends ChangeNotifier {
 
   void updateLocation(String location) {
     selectedLocation = location;
-    notifyListeners(); // Notify listeners that the state has changed
+    notifyListeners(); 
+  }
+
+  void updateOrganization(String organization){
+    selectedOrganization = organization;
+    notifyListeners();
   }
 }
 
@@ -114,6 +120,13 @@ class SearchPeople extends SearchDelegate<String>{
     'Suez'
   ];
 
+  List<String> organizations = [
+    'Any',
+    'Doctor',
+    'Patient',
+    'Lab'
+  ];
+
   // to be called from l10n for arabic
   @override
   String get searchFieldLabel => "Search";
@@ -121,20 +134,20 @@ class SearchPeople extends SearchDelegate<String>{
   @override
   ThemeData appBarTheme(BuildContext context) {
     return Theme.of(context).copyWith(
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: Color.fromARGB(255, 233, 255, 255),
       ),
-      scaffoldBackgroundColor: Color.fromARGB(255, 233, 255, 255), // Background color of search page
+      scaffoldBackgroundColor: const Color.fromARGB(255, 233, 255, 255), // Background color of search page
       inputDecorationTheme: InputDecorationTheme(
-        fillColor: Color.fromARGB(10, 0, 0, 0), // Background color of the search box
+        fillColor: const Color.fromARGB(10, 0, 0, 0), // Background color of the search box
         filled: true,
-        hintStyle: TextStyle(color: Color.fromARGB(255, 172, 172, 172), fontSize: 18.0), // Text color of search box hint
+        hintStyle: const TextStyle(color: Color.fromARGB(255, 172, 172, 172), fontSize: 18.0), // Text color of search box hint
         isCollapsed: false, // Allow the search box to expand horizontally
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
           borderSide: BorderSide.none, // No border
         ),
-        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+        contentPadding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
       ),
     );
   }
@@ -149,11 +162,11 @@ class SearchPeople extends SearchDelegate<String>{
         icon: Container(
           // width: 30.0, // Adjust the width to fit the IconButton
           // height: 60.0, // Adjust the height to fit the IconButton
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.black, // Customize circle background color
           ),
-          child: Icon(
+          child: const Icon(
             Icons.clear,
             color: Colors.white, // Customize icon color
           ),
@@ -170,11 +183,11 @@ class SearchPeople extends SearchDelegate<String>{
         close(context, "");
       },
       icon: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.black, // Customize circle background color
         ),
-        child: Center(
+        child: const Center(
           child: Icon(
             Icons.arrow_back,
             color: Colors.white, // Customize icon color
@@ -200,6 +213,7 @@ class SearchPeople extends SearchDelegate<String>{
       'query': query,
       'location': searchProvider.selectedLocation,
       'specialization': searchProvider.selectedSpecialization,
+      'organization' : searchProvider.selectedOrganization,
     };
 
     return Column(
@@ -211,9 +225,15 @@ class SearchPeople extends SearchDelegate<String>{
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
+                child: buildFilterBox(context, 'Organization', organizations),
+              ),
+              SizedBox(width: 5.0),
+              if(searchProvider.selectedOrganization == 'Doctor')
+              Expanded(
                 child: buildFilterBox(context, 'Specialization', specializations),
               ),
-              SizedBox(width: 10.0),
+              SizedBox(width: 5.0),
+              if(searchProvider.selectedOrganization == 'Lab' || searchProvider.selectedOrganization == 'Doctor')
               Expanded(
                 child: buildFilterBox(context, 'Location', locations),
               ),
@@ -226,7 +246,7 @@ class SearchPeople extends SearchDelegate<String>{
             future: s.fetchSuggestions(requestData),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else {
@@ -298,6 +318,9 @@ class SearchPeople extends SearchDelegate<String>{
                         } else if (title == 'Location') {
                           searchProvider.updateLocation(item);
                         }
+                        else if(title == 'Organization'){
+                          searchProvider.updateOrganization(item);
+                        }
                         Navigator.of(context).pop(); // Close the dialog
                       },
                       child: Padding(
@@ -313,7 +336,7 @@ class SearchPeople extends SearchDelegate<String>{
         );
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(10.0),
@@ -321,26 +344,24 @@ class SearchPeople extends SearchDelegate<String>{
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('$title', style: TextStyle(fontSize: 16.0, color: Colors.grey)),
-            SizedBox(height: 4.0),
+            Text(title, style: const TextStyle(fontSize: 16.0, color: Colors.grey),overflow: TextOverflow.ellipsis),
+            const SizedBox(height: 4.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: Text(
                     title == 'Specialization'
-                        ? searchProvider.selectedSpecialization.isEmpty
-                            ? 'Select Specialization'
-                            : searchProvider.selectedSpecialization
-                        : searchProvider.selectedLocation.isEmpty
-                            ? 'Select Location'
-                            : searchProvider.selectedLocation,
-                    style: TextStyle(fontSize: 16.0),
+                        ? searchProvider.selectedSpecialization
+                        : title == 'Location'
+                        ? searchProvider.selectedLocation
+                        : searchProvider.selectedOrganization,    
+                    style: const TextStyle(fontSize: 16.0),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
                 ),
-                Icon(Icons.arrow_drop_down),
+                const Icon(Icons.arrow_drop_down),
               ],
             ),
           ],
@@ -354,14 +375,14 @@ class SearchPeople extends SearchDelegate<String>{
 
 
     // @override
-// void showResults(BuildContext context) {
-//   // Push the user profile screen with userID as arguments
-//   Navigator.of(context).push(
-//     MaterialPageRoute(
-//       builder: (context) => ViewProfileScreen(userID: selectedUserId),
-//     ),
-//   );
-// }
+    // void showResults(BuildContext context) {
+    //   // Push the user profile screen with userID as arguments
+    //   Navigator.of(context).push(
+    //     MaterialPageRoute(
+    //       builder: (context) => ViewProfileScreen(userID: selectedUserId),
+    //     ),
+    //   );
+    // }
 
   
 }
