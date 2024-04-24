@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 class ViewProfile {
   final String profileImage;
   final String userName;
@@ -27,19 +25,15 @@ class ViewProfile {
 
   factory ViewProfile.fromJson(Map<String, dynamic> jsonData) {
     final String profileImage;
-    final String userName;
     final String name;
     final String gender;
-    final String ID;
     final String government;
     final String email;
     final String phone;
     final String date;
     final String department;
     final String location;
-    final bool viewemail;
-    final bool viewphone;
-    final bool viewdate;
+ 
 
     if (jsonData['profile_image'] == null) {
       profileImage = "";

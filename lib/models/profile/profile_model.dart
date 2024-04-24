@@ -1,4 +1,5 @@
-import 'dart:typed_data';
+
+// ignore_for_file: non_constant_identifier_names
 
 class Profile {
   final String profileImage;
@@ -35,7 +36,6 @@ class Profile {
 
   factory Profile.fromJson(Map<String, dynamic> jsonData) {
     final String profileImage;
-    final String userName;
     final String name;
     final String gender;
     final String ID;
@@ -91,7 +91,6 @@ class Profile {
     jsonData['email']['visible'] == null
         ? viewemail = false
         : viewemail = jsonData['email']['visible'];
-    print(profileImage);
     return Profile(
       profileImage: profileImage,
       userName: jsonData['user_name'],

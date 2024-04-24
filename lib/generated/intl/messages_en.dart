@@ -32,11 +32,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "LoginNow": MessageLookupByLibrary.simpleMessage("Login Now"),
         "Logout": MessageLookupByLibrary.simpleMessage("Log out"),
         "NationalId": MessageLookupByLibrary.simpleMessage("National ID"),
+        "Notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "Patient": MessageLookupByLibrary.simpleMessage("Patient"),
         "Phone": MessageLookupByLibrary.simpleMessage("Phonenumber"),
         "QrCode": MessageLookupByLibrary.simpleMessage("Qr Code"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("SIGNUP"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
+        "assignDate": MessageLookupByLibrary.simpleMessage("Date"),
         "birthDate": MessageLookupByLibrary.simpleMessage("Select Birth Date"),
         "chat": MessageLookupByLibrary.simpleMessage("Chats"),
         "clinicLocation":

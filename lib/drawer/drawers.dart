@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/Languages/language_screen.dart';
+import 'package:rosheta_ui/Views/patient_medical_data/Chronic_screen.dart';
 import 'package:rosheta_ui/Views/profile/profile_screen.dart';
 import 'package:rosheta_ui/Views/register/login_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
@@ -172,7 +173,10 @@ Drawer patient_drawer(context) {
                 ],
               ),
               onTap: () {
-                // Handle button 1 tap
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (c) => const ChronicDiseaseListScreen()));
               },
             ),
           ),

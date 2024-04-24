@@ -51,5 +51,7 @@
     "uploadFile": "رفع ملف",
     "clinicPosition" : "موقع العيادة",
     "enterclinicPosition" : "ادخل موقع العيادة",
-    "positionController": "موقع معمل التحاليل"
+    "positionController": "موقع معمل التحاليل",
+    "assignDate":"التاريخ",
+    "Notes":"ملاحظات"
 }

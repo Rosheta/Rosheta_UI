@@ -579,6 +579,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Date`
+  String get assignDate {
+    return Intl.message(
+      'Date',
+      name: 'assignDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notes`
+  String get Notes {
+    return Intl.message(
+      'Notes',
+      name: 'Notes',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

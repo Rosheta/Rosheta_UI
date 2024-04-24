@@ -52,5 +52,7 @@
     "uploadFile" : "Upload File",
     "clinicPosition" : "Clinic Position",
     "enterclinicPosition" : "Enter your clinic address",
-    "positionController": "Enter your address"
+    "positionController": "Enter your address",
+    "assignDate":"Date",
+    "Notes":"Notes"
 }
