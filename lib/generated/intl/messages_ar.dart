@@ -22,13 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Appointment": MessageLookupByLibrary.simpleMessage("الكشوفات"),
+        "Attachments": MessageLookupByLibrary.simpleMessage("الملفات الطبية"),
+        "Chronic": MessageLookupByLibrary.simpleMessage("الامراض المزمنة"),
         "Doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
+        "Emergency": MessageLookupByLibrary.simpleMessage("الطوارئ"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "Lab": MessageLookupByLibrary.simpleMessage("معمل تحاليل"),
         "LoginNow": MessageLookupByLibrary.simpleMessage("سجل الان"),
+        "Logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "NationalId": MessageLookupByLibrary.simpleMessage("الرقم القومى"),
         "Patient": MessageLookupByLibrary.simpleMessage("مستخدم"),
         "Phone": MessageLookupByLibrary.simpleMessage("رقم التليفون"),
+        "QrCode": MessageLookupByLibrary.simpleMessage("رمز الاستجابة"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("انشاء"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
         "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
@@ -48,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرقم القومى يتكون من 14 رقم"),
         "enterclinicPosition":
             MessageLookupByLibrary.simpleMessage("ادخل موقع العيادة"),
+        "examination": MessageLookupByLibrary.simpleMessage("كشف جديد"),
         "female": MessageLookupByLibrary.simpleMessage("انثي"),
         "gender": MessageLookupByLibrary.simpleMessage("النوع"),
         "government": MessageLookupByLibrary.simpleMessage("المحافظة"),
@@ -62,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ادخل رقم الهاتف"),
         "hinttextmsg":
             MessageLookupByLibrary.simpleMessage("اكتب رسالتك هنا..."),
+        "langauege": MessageLookupByLibrary.simpleMessage("اللغة"),
         "location": MessageLookupByLibrary.simpleMessage("العنوان"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "male": MessageLookupByLibrary.simpleMessage("ذكر"),
@@ -71,10 +79,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
         "positionController":
             MessageLookupByLibrary.simpleMessage("موقع معمل التحاليل"),
+        "profile": MessageLookupByLibrary.simpleMessage("الصفحة الشخصية"),
         "register": MessageLookupByLibrary.simpleMessage("سجل"),
         "savechanges": MessageLookupByLibrary.simpleMessage("حفظ التعديلات"),
         "signup": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
-        "title": MessageLookupByLibrary.simpleMessage("ROSHETA"),
+        "title": MessageLookupByLibrary.simpleMessage("روشتة"),
+        "uploadAttachment": MessageLookupByLibrary.simpleMessage("رفع ملف"),
         "uploadFile": MessageLookupByLibrary.simpleMessage("رفع ملف")
       };
 }

@@ -22,13 +22,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Appointment": MessageLookupByLibrary.simpleMessage("Appointment"),
+        "Attachments": MessageLookupByLibrary.simpleMessage("Attachments"),
+        "Chronic": MessageLookupByLibrary.simpleMessage("Chronic Diseases"),
         "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
+        "Emergency": MessageLookupByLibrary.simpleMessage("Emergency"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("LOGIN"),
         "Lab": MessageLookupByLibrary.simpleMessage("Lab"),
         "LoginNow": MessageLookupByLibrary.simpleMessage("Login Now"),
+        "Logout": MessageLookupByLibrary.simpleMessage("Log out"),
         "NationalId": MessageLookupByLibrary.simpleMessage("National ID"),
         "Patient": MessageLookupByLibrary.simpleMessage("Patient"),
         "Phone": MessageLookupByLibrary.simpleMessage("Phonenumber"),
+        "QrCode": MessageLookupByLibrary.simpleMessage("Qr Code"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("SIGNUP"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
         "birthDate": MessageLookupByLibrary.simpleMessage("Select Birth Date"),
@@ -51,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "National ID must conatain 14 numbers"),
         "enterclinicPosition":
             MessageLookupByLibrary.simpleMessage("Enter your clinic address"),
+        "examination": MessageLookupByLibrary.simpleMessage("New Examination"),
         "female": MessageLookupByLibrary.simpleMessage("female"),
         "gender": MessageLookupByLibrary.simpleMessage("gender"),
         "government": MessageLookupByLibrary.simpleMessage("government"),
@@ -67,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter your phone number"),
         "hinttextmsg":
             MessageLookupByLibrary.simpleMessage("type your message here ..."),
+        "langauege": MessageLookupByLibrary.simpleMessage("Langauege"),
         "location": MessageLookupByLibrary.simpleMessage("location"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "male": MessageLookupByLibrary.simpleMessage("male"),
@@ -76,10 +84,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "positionController":
             MessageLookupByLibrary.simpleMessage("Enter your address"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "savechanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
         "title": MessageLookupByLibrary.simpleMessage("ROSHETA"),
+        "uploadAttachment": MessageLookupByLibrary.simpleMessage("Upload File"),
         "uploadFile": MessageLookupByLibrary.simpleMessage("Upload File")
       };
 }

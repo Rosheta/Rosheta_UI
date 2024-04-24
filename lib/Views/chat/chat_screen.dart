@@ -68,7 +68,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
     _scrollController.addListener(() async {
       if ((_scrollController.position.pixels ==
-          _scrollController.position.minScrollExtent) && flag2) {
+              _scrollController.position.minScrollExtent) &&
+          flag2) {
         flag = false;
         ChatApi chat = ChatApi();
         Messages message = await chat.getmsgs(widget.chatId, page);
@@ -80,8 +81,7 @@ class _ChatScreenState extends State<ChatScreen> {
         setState(() {
           page++;
           messages = Future.value(updatedMessages);
-          if(listOfMsgs.isEmpty)
-            flag2 = false;
+          if (listOfMsgs.isEmpty) flag2 = false;
         });
       }
     });
@@ -144,8 +144,16 @@ class _ChatScreenState extends State<ChatScreen> {
                     tmpOffset = _scrollController.position.maxScrollExtent;
                     _scrollToBottom();
                   } else {
-                    print('tmpOffset: $tmpOffset  max: ${_scrollController.position.maxScrollExtent}');
-                    double tmm = (_scrollController.position.maxScrollExtent - tmpOffset - 20) < 0 ? 0 : (_scrollController.position.maxScrollExtent - tmpOffset - 20);
+                    print(
+                        'tmpOffset: $tmpOffset  max: ${_scrollController.position.maxScrollExtent}');
+                    double tmm = (_scrollController.position.maxScrollExtent -
+                                tmpOffset -
+                                20) <
+                            0
+                        ? 0
+                        : (_scrollController.position.maxScrollExtent -
+                            tmpOffset -
+                            20);
                     _scrollController.jumpTo(tmm);
                     tmpOffset = _scrollController.position.maxScrollExtent;
                   }

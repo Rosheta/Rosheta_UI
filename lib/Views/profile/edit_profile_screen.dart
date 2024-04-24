@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rosheta_ui/Views/chat/friends_screen.dart';
+import 'package:rosheta_ui/Views/search/search_screen.dart';
+import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile/profile_model.dart';
 import 'package:rosheta_ui/Views/profile/profile_screen.dart';
@@ -161,7 +163,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+     appBar: AppBar(
         backgroundColor: Colors.cyan,
         title: Text(
           S.of(context).title,
@@ -186,22 +188,16 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
             iconSize: 30,
             color: Colors.white,
             onPressed: () {
-              //showSearch(
-              //context: context,
-              // delegate to customize the search bar
-              //delegate: SearchPeople());
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.menu),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: () {
-              // Handle icon3 onPressed action
+              showSearch(
+                  context: context,
+                  // delegate to customize the search bar
+                  delegate: SearchPeople());
             },
           ),
         ],
       ),
+      drawer: select_drawer(context),
+      
       body: Container(
         color: const Color.fromARGB(255, 233, 255, 255),
         width: double.infinity,

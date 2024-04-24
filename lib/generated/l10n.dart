@@ -380,6 +380,106 @@ class S {
     );
   }
 
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Qr Code`
+  String get QrCode {
+    return Intl.message(
+      'Qr Code',
+      name: 'QrCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Appointment`
+  String get Appointment {
+    return Intl.message(
+      'Appointment',
+      name: 'Appointment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chronic Diseases`
+  String get Chronic {
+    return Intl.message(
+      'Chronic Diseases',
+      name: 'Chronic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attachments`
+  String get Attachments {
+    return Intl.message(
+      'Attachments',
+      name: 'Attachments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Langauege`
+  String get langauege {
+    return Intl.message(
+      'Langauege',
+      name: 'langauege',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get Logout {
+    return Intl.message(
+      'Log out',
+      name: 'Logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emergency`
+  String get Emergency {
+    return Intl.message(
+      'Emergency',
+      name: 'Emergency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Examination`
+  String get examination {
+    return Intl.message(
+      'New Examination',
+      name: 'examination',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload File`
+  String get uploadAttachment {
+    return Intl.message(
+      'Upload File',
+      name: 'uploadAttachment',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `male`
   String get male {
     return Intl.message(

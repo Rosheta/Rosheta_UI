@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/chat/chat_screen.dart';
 import 'package:rosheta_ui/Views/chat/friends_screen.dart';
 import 'package:rosheta_ui/Views/search/search_screen.dart';
+import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile/view_profile_model.dart';
 import 'package:rosheta_ui/services/chat/chat_service.dart';
@@ -114,16 +115,9 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
                   delegate: SearchPeople());
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.menu),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: () {
-              // Handle icon3 onPressed action
-            },
-          ),
         ],
       ),
+      drawer: select_drawer(context),
       body: FutureBuilder<ViewProfile>(
         future: _profileFuture,
         builder: (context, snapshot) {
