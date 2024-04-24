@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rosheta_ui/services/search_service.dart';
 import 'package:provider/provider.dart';
 
-// import 'package:rosheta_ui/Views/profile_screen.dart';
-
 class SearchProvider extends ChangeNotifier {
   String selectedSpecialization = 'Any';
   String selectedLocation = 'Any';
@@ -256,7 +254,7 @@ class SearchPeople extends SearchDelegate<String>{
                   itemCount: snapshot.data?.length ?? 0,
                   itemBuilder: (context, index) {
                     final item = snapshot.data?[index];
-                    String location = item?['location'] ?? "";
+                    String location = item?['government'] ?? "";
                     String specialization = item?['department'] ?? "";
                     return ListTile(
                       leading: CircleAvatar(
@@ -372,21 +370,16 @@ class SearchPeople extends SearchDelegate<String>{
     );
   }
   
+  // @override
+  // void showResults(BuildContext context) {
+  //   // Push the user profile screen with userID as arguments
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(
+  //       builder: (context) => ViewProfileScreen(userID: selectedUserId),
+  //     ),
+  //   );
+  // }
 
-
-
-
-    // @override
-    // void showResults(BuildContext context) {
-    //   // Push the user profile screen with userID as arguments
-    //   Navigator.of(context).push(
-    //     MaterialPageRoute(
-    //       builder: (context) => ViewProfileScreen(userID: selectedUserId),
-    //     ),
-    //   );
-    // }
-
-  
 }
 
 
