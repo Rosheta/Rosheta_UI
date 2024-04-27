@@ -599,6 +599,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Please enter username for patient`
+  String get username {
+    return Intl.message(
+      'Please enter username for patient',
+      name: 'username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get SUBMIT {
+    return Intl.message(
+      'Submit',
+      name: 'SUBMIT',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

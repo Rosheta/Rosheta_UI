@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Phone": MessageLookupByLibrary.simpleMessage("رقم التليفون"),
         "QrCode": MessageLookupByLibrary.simpleMessage("رمز الاستجابة"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("انشاء"),
+        "SUBMIT": MessageLookupByLibrary.simpleMessage("ارسال"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
         "assignDate": MessageLookupByLibrary.simpleMessage("التاريخ"),
         "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
@@ -87,6 +88,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signup": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
         "title": MessageLookupByLibrary.simpleMessage("روشتة"),
         "uploadAttachment": MessageLookupByLibrary.simpleMessage("رفع ملف"),
-        "uploadFile": MessageLookupByLibrary.simpleMessage("رفع ملف")
+        "uploadFile": MessageLookupByLibrary.simpleMessage("رفع ملف"),
+        "username":
+            MessageLookupByLibrary.simpleMessage("من فضلك ادخل اسم المستخدم")
       };
 }

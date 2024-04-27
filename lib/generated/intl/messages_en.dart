@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Phone": MessageLookupByLibrary.simpleMessage("Phonenumber"),
         "QrCode": MessageLookupByLibrary.simpleMessage("Qr Code"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("SIGNUP"),
+        "SUBMIT": MessageLookupByLibrary.simpleMessage("Submit"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
         "assignDate": MessageLookupByLibrary.simpleMessage("Date"),
         "birthDate": MessageLookupByLibrary.simpleMessage("Select Birth Date"),
@@ -92,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
         "title": MessageLookupByLibrary.simpleMessage("ROSHETA"),
         "uploadAttachment": MessageLookupByLibrary.simpleMessage("Upload File"),
-        "uploadFile": MessageLookupByLibrary.simpleMessage("Upload File")
+        "uploadFile": MessageLookupByLibrary.simpleMessage("Upload File"),
+        "username": MessageLookupByLibrary.simpleMessage(
+            "Please enter username for patient")
       };
 }

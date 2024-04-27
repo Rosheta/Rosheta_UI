@@ -42,7 +42,6 @@
     "Emergency" : "Emergency",
     "examination": "New Examination",
     "uploadAttachment": "Upload File",
-
     "male":"male",
     "female":"female",
     "enterYourName": "Enter your name",
@@ -54,5 +53,7 @@
     "enterclinicPosition" : "Enter your clinic address",
     "positionController": "Enter your address",
     "assignDate":"Date",
-    "Notes":"Notes"
+    "Notes":"Notes",
+    "username": "Please enter username for patient",
+    "SUBMIT": "Submit"
 }

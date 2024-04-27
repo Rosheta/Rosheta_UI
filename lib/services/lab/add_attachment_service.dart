@@ -1,0 +1,28 @@
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+class AddAttachmentApi {
+  Future<String> Addattachment({required userame, required selectedFile}) async {
+    final String apiUrl = dotenv.env['API_URL']!;
+    final String url = '$apiUrl/upload/file';
+
+    try {
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+      request.files
+          .add(await http.MultipartFile.fromPath('file', selectedFile.path));
+
+      request.fields['name'] = userame;
+
+      var response = await request.send();
+      String responseBody = await response.stream.bytesToString();
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return 'true';
+      } else {
+        return responseBody;
+      }
+    } catch (e) {
+      print("Exception: $e");
+      return 'Error , Please try again later';
+    }
+  }
+}

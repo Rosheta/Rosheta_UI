@@ -53,5 +53,7 @@
     "enterclinicPosition" : "ادخل موقع العيادة",
     "positionController": "موقع معمل التحاليل",
     "assignDate":"التاريخ",
-    "Notes":"ملاحظات"
+    "Notes":"ملاحظات",
+    "username": "من فضلك ادخل اسم المستخدم",
+    "SUBMIT": "ارسال"
 }
