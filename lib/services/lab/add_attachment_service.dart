@@ -1,15 +1,23 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddAttachmentApi {
+  Future<String> getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('acesstoken') ?? '';
+  }
+  
   Future<String> Addattachment({required userame, required selectedFile}) async {
     final String apiUrl = dotenv.env['API_URL']!;
     final String url = '$apiUrl/upload/file';
+    String accessToken = await getAccessToken();
 
     try {
       var request = http.MultipartRequest('POST', Uri.parse(url));
       request.files
           .add(await http.MultipartFile.fromPath('file', selectedFile.path));
+      request.headers['Authorization'] = 'Bearer $accessToken';
 
       request.fields['name'] = userame;
 
