@@ -7,10 +7,11 @@ class AddAttachmentApi {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('acesstoken') ?? '';
   }
-  
-  Future<String> Addattachment({required userame, required selectedFile}) async {
+
+  Future<String> Addattachment(
+      {required userame, required selectedFile}) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final String url = '$apiUrl/upload/file';
+    final String url = '$apiUrl/lab/upload';
     String accessToken = await getAccessToken();
 
     try {
@@ -19,10 +20,11 @@ class AddAttachmentApi {
           .add(await http.MultipartFile.fromPath('file', selectedFile.path));
       request.headers['Authorization'] = 'Bearer $accessToken';
 
-      request.fields['name'] = userame;
+      request.fields['username'] = userame;
 
       var response = await request.send();
       String responseBody = await response.stream.bytesToString();
+      print(responseBody);
       if (response.statusCode == 200 || response.statusCode == 201) {
         return 'true';
       } else {

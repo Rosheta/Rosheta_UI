@@ -13,7 +13,7 @@ class AttachmentApi {
 
   Future<List<Attachment>> getAttachments() async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/getChats';
+    final url = '$apiUrl/patient/getFiles';
     final String token = await getAccessToken();
 
     try {
@@ -21,8 +21,7 @@ class AttachmentApi {
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization':
-              'Bearer $token',
+          'Authorization': 'Bearer $token',
         },
       );
 
@@ -46,7 +45,7 @@ class AttachmentApi {
 
   Future<bool> deleteAttachment(String hash) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/deleteAttachment?hash=$hash';
+    final url = '$apiUrl/patient/deleteFile?hash=$hash';
     final String token = await getAccessToken();
 
     try {

@@ -8,10 +8,10 @@ class Attachment {
 
   factory Attachment.fromJson(Map<String, dynamic> jsonData) {
     return Attachment(
-      fileHash: jsonData['fileHash'],
-      name: jsonData['name'],
-      ext: jsonData['ext'],
-      time: jsonData['time']
+      fileHash: jsonData['Hash'],
+      name: jsonData['Filename'],
+      ext: jsonData['Extension'],
+      time: jsonData['date']
     );
   }
 }
