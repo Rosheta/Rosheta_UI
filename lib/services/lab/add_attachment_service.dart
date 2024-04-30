@@ -24,7 +24,6 @@ class AddAttachmentApi {
 
       var response = await request.send();
       String responseBody = await response.stream.bytesToString();
-      print(responseBody);
       if (response.statusCode == 200 || response.statusCode == 201) {
         return 'true';
       } else {

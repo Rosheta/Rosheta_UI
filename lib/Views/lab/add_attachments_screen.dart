@@ -150,10 +150,14 @@ class _AddAttachmentsState extends State<AddAttachments> {
                                     selectedFile: _selectedFile!,
                                   );
                                   Navigator.of(context).pop(); // Close loading dialog
-                                  if (check != 'false') {
+                                  if (check == 'true') {
                                     // If the form is valid and attachment added successfully
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(content: Text('Successfully uploaded')),
+                                    );
+                                  }else{
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("Not uploaded, please try again later")),
                                     );
                                   }
                                 } catch (e) {
