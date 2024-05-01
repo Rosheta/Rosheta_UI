@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rosheta_ui/Views/Languages/language_screen.dart';
+import 'package:rosheta_ui/Views/patient_medical_data/give_access_screen.dart';
 import 'package:rosheta_ui/Views/share_screen.dart';
 import 'package:rosheta_ui/Views/register/login_screen.dart';
 import 'package:rosheta_ui/Views/search/search_screen.dart';

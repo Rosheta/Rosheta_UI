@@ -1,14 +1,13 @@
 import 'dart:convert';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rosheta_ui/Views/share_screen.dart';
 import 'package:rosheta_ui/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
-  print(message);
-  // if (message == null) return;
+  
+  if (message == null) return;
 
   navigatorKey.currentState?.pushNamed(
     SharingScreen.routeName,
@@ -90,17 +89,17 @@ class FirebaseApi {
   }
 
   Future<void> initNotifications() async {
-    final FirebaseMessaging _firebaseMessaging =
-        await FirebaseMessaging.instance;
-    await _firebaseMessaging.requestPermission(
+    final FirebaseMessaging firebaseMessaging = await FirebaseMessaging.instance;
+    await firebaseMessaging.requestPermission(
       alert: true,
       badge: true,
       provisional: false,
       sound: true,
     );
-    final token = await _firebaseMessaging.getToken();
+    final token = await firebaseMessaging.getToken();
     // store token in your server and refrences it to send notifications
-    print('Token: $token');
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('devicetoken', token!);
 
     await initPushNotifications();
     await initLocalNotifications();
