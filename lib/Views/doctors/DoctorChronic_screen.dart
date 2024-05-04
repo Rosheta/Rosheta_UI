@@ -1,14 +1,18 @@
 // ignore_for_file: library_private_types_in_public_api, avoid_print, file_names
 
+import 'dart:typed_data';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/chat/friends_screen.dart';
+import 'package:rosheta_ui/Views/patient_medical_data/show_file_screen.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/doctors/MidicalData_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Appointment_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Chronic_model.dart';
+import 'package:rosheta_ui/models/patient_medical_data/attachment_model.dart';
 import 'package:rosheta_ui/services/doctors/DoctorData_service.dart';
+import 'package:rosheta_ui/services/patient_medical_data/give_access_service.dart';
 
 import '../search/search_screen.dart'; // Import your ChronicDiseaseApi service
 
@@ -26,7 +30,6 @@ class _DoctorViewState extends State<DoctorView> {
   void initState() {
     super.initState();
     final message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
-
     _medicalData = _fetchChronicDiseases("message.data.token");
   }
 
@@ -129,9 +132,7 @@ class _DoctorViewState extends State<DoctorView> {
             DoctorAppointmentListWidget(medicalDataFeture: _medicalData),
 
             // Fourth tab content
-            const Center(
-              child: Text('Attachments'),
-            ),
+            DoctorAttachmentsListWidget(medicalDataFeture: _medicalData),
           ],
         ),
       ),
@@ -605,6 +606,107 @@ class _PrescriptionAndNotesScreenState
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class DoctorAttachmentsListWidget extends StatefulWidget {
+  final Future<MedicalData> medicalDataFeture;
+
+  const DoctorAttachmentsListWidget(
+      {super.key, required this.medicalDataFeture});
+
+  @override
+  _DoctorAttachmentsListWidgetState createState() =>
+      _DoctorAttachmentsListWidgetState();
+}
+
+class _DoctorAttachmentsListWidgetState
+    extends State<DoctorAttachmentsListWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<MedicalData>(
+      future: widget.medicalDataFeture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else {
+          List<Attachment> attachments = snapshot.data!.attachments;
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ListView.builder(
+                      itemCount: attachments.length,
+                      itemBuilder: (context, index) {
+                        Attachment attach = attachments[index];
+                        return fileCard(
+                            fileHash: attach.fileHash!,
+                            name: attach.name!,
+                            ext: attach.ext!,
+                            time: attach.time!,
+                            index: index,
+                            context: context,
+                        );
+                      },
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget fileCard({
+    required String fileHash,
+    required String name,
+    required String ext,
+    required String time,
+    required int index,
+    required BuildContext context,
+  }) {
+    IconData iconData;
+    switch (ext.toLowerCase()) {
+      case '.pdf':
+        iconData = Icons.picture_as_pdf;
+        break;
+      case '.png':
+      case '.jpeg':
+      case '.jpg':
+        iconData = Icons.image;
+        break;
+      default:
+        iconData = Icons.insert_drive_file;
+        break;
+    }
+
+    return InkWell(
+      onTap: () async {
+        GiveAccessApi attachmentApi = GiveAccessApi();
+        Uint8List tmp = await attachmentApi.getAttachment(fileHash,/*write sharedtoken here*/);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ShowFileScreen(serverData: tmp, ext: ext)),
+        );
+      },
+      child: Card(
+        child: ListTile(
+          leading: Icon(iconData),
+          title: Text(
+            '$name$ext',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          subtitle: Text(time),
         ),
       ),
     );

@@ -51,8 +51,8 @@ class DoctorDataApi {
             {"name": "Chronic Disease 2", "date": "2023-02-01", "notes": "Chronic Disease 2 notes"}
           ],
           "attachments": [
-            "Attachment 1",
-            "Attachment 2"
+            {"Hash": "hash1", "Filename": "File 1", "Extension": ".pdf", "date": "2023-01-01"},
+            {"Hash": "hash2", "Filename": "File 2", "Extension": ".jpg", "date": "2023-02-01"}
           ]
         }
         ''';
