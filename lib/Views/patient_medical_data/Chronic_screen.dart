@@ -119,31 +119,21 @@ class _ChronicDiseaseListScreenState extends State<ChronicDiseaseListScreen> {
                             ListTile(
                               visualDensity:
                                   VisualDensity(horizontal: 0, vertical: -4),
-                              title: Text(
-                                '${S.of(context).assignDate}:',
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
+                              title: getTitle(S.of(context).assignDate),
                               subtitle: Text(
                                 disease.date,
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
+                                    color: Colors.white, fontSize: 20),
                               ),
                             ),
-                            const Divider(
-                                height: 0, thickness: 1, color: Colors.black),
                             ListTile(
                               visualDensity:
                                   VisualDensity(horizontal: 0, vertical: -4),
-                              title: Text(
-                                '${S.of(context).Notes}:',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
+                              title: getTitle(S.of(context).Notes),
                               subtitle: Text(
                                 disease.notes,
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
+                                    color: Colors.white, fontSize: 20),
                               ),
                             ),
                           ],
@@ -157,6 +147,33 @@ class _ChronicDiseaseListScreenState extends State<ChronicDiseaseListScreen> {
           }
         },
       ),
+    );
+  }
+
+  Row getTitle(T) {
+    return Row(
+      mainAxisSize:
+          MainAxisSize.min, // Ensure the Row takes minimum space required
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(
+              vertical: 4, horizontal: 8), // Padding around the text
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(
+                255, 13, 122, 134), // Background color of the rectangle
+            borderRadius: BorderRadius.circular(
+                10), // Border radius to make it rectangular
+          ),
+          child: Text(
+            T,
+            style: const TextStyle(
+              color: Color.fromARGB(255, 255, 254, 255),
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

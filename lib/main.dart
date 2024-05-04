@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rosheta_ui/Views/Languages/language_screen.dart';
+import 'package:rosheta_ui/Views/doctors/DoctorChronic_screen.dart';
+import 'package:rosheta_ui/Views/patient_medical_data/Appointment_screen.dart';
 import 'package:rosheta_ui/Views/patient_medical_data/Chronic_screen.dart';
 import 'package:rosheta_ui/Views/profile/profile_screen.dart';
 import 'package:rosheta_ui/Views/register/login_screen.dart';
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: ChronicDiseaseListScreen(),
+      home: DoctorView(),
     );
   }
 }

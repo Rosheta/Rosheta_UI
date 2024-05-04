@@ -53,5 +53,17 @@
     "enterclinicPosition" : "ادخل موقع العيادة",
     "positionController": "موقع معمل التحاليل",
     "assignDate":"التاريخ",
-    "Notes":"ملاحظات"
+    "Notes":"ملاحظات",
+    "doctorName":"اسم الطبيب",
+    "prescription":"الروشتة",
+    "save":"حفظ",
+    "saveAndLeaveQ":"هل تريد الحفظ و المغادرة ؟",
+    "Cancel":"الغاء",
+    "Prescription":"الروشتة",
+    "AddChronicDisease":"اضافة مرض مزمن",
+    "ChronicDis" : "المرض المزمن",
+    "CurrentAppointment":"الكشف الحالي"
+
+
+
 }

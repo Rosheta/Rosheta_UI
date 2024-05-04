@@ -599,6 +599,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Doctor name`
+  String get doctorName {
+    return Intl.message(
+      'Doctor name',
+      name: 'doctorName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `prescription`
+  String get prescription {
+    return Intl.message(
+      'prescription',
+      name: 'prescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `save`
+  String get save {
+    return Intl.message(
+      'save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to save and leave?`
+  String get saveAndLeaveQ {
+    return Intl.message(
+      'Do you want to save and leave?',
+      name: 'saveAndLeaveQ',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get Cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'Cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prescription`
+  String get Prescription {
+    return Intl.message(
+      'Prescription',
+      name: 'Prescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Chronic Disease`
+  String get AddChronicDisease {
+    return Intl.message(
+      'Add Chronic Disease',
+      name: 'AddChronicDisease',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chronic Disease`
+  String get ChronicDis {
+    return Intl.message(
+      'Chronic Disease',
+      name: 'ChronicDis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Appointment`
+  String get CurrentAppointment {
+    return Intl.message(
+      'Current Appointment',
+      name: 'CurrentAppointment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

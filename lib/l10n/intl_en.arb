@@ -54,5 +54,16 @@
     "enterclinicPosition" : "Enter your clinic address",
     "positionController": "Enter your address",
     "assignDate":"Date",
-    "Notes":"Notes"
+    "Notes":"Notes",
+    "doctorName":"Doctor name",
+    "prescription":"prescription",
+    "save":"save",
+    "saveAndLeaveQ":"Do you want to save and leave?",
+    "Cancel":"Cancel",
+    "Prescription":"Prescription",
+    "AddChronicDisease":"Add Chronic Disease",
+    "ChronicDis" : "Chronic Disease",
+    "CurrentAppointment":"Current Appointment"
+
+
 }
