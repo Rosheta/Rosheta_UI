@@ -22,9 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AddChronicDisease":
+            MessageLookupByLibrary.simpleMessage("Add Chronic Disease"),
         "Appointment": MessageLookupByLibrary.simpleMessage("Appointment"),
         "Attachments": MessageLookupByLibrary.simpleMessage("Attachments"),
+        "Cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "Chronic": MessageLookupByLibrary.simpleMessage("Chronic Diseases"),
+        "ChronicDis": MessageLookupByLibrary.simpleMessage("Chronic Disease"),
+        "CurrentAppointment":
+            MessageLookupByLibrary.simpleMessage("Current Appointment"),
         "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
         "Emergency": MessageLookupByLibrary.simpleMessage("Emergency"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("LOGIN"),
@@ -35,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "Patient": MessageLookupByLibrary.simpleMessage("Patient"),
         "Phone": MessageLookupByLibrary.simpleMessage("Phonenumber"),
+        "Prescription": MessageLookupByLibrary.simpleMessage("Prescription"),
         "QrCode": MessageLookupByLibrary.simpleMessage("Qr Code"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("SIGNUP"),
         "SUBMIT": MessageLookupByLibrary.simpleMessage("Submit"),
@@ -47,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "clinicPosition":
             MessageLookupByLibrary.simpleMessage("Clinic Position"),
         "department": MessageLookupByLibrary.simpleMessage("department"),
+        "doctorName": MessageLookupByLibrary.simpleMessage("Doctor name"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("Edit basic information"),
         "email": MessageLookupByLibrary.simpleMessage("Email Address"),
@@ -87,8 +95,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "positionController":
             MessageLookupByLibrary.simpleMessage("Enter your address"),
+        "prescription": MessageLookupByLibrary.simpleMessage("prescription"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "save": MessageLookupByLibrary.simpleMessage("save"),
+        "saveAndLeaveQ": MessageLookupByLibrary.simpleMessage(
+            "Do you want to save and leave?"),
         "savechanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
         "title": MessageLookupByLibrary.simpleMessage("ROSHETA"),

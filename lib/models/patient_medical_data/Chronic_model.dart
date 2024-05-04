@@ -31,4 +31,6 @@ class ChronicDiseaseList {
 
     return ChronicDiseaseList(diseases: diseases);
   }
+
+  get length => diseases.length;
 }
