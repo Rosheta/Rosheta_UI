@@ -33,7 +33,7 @@
     "location":"location",
     "clinicLocation":"clinicLocation",
     "profile":"Profile",
-    "QrCode":"Qr Code",
+    "QrCode":"Response code",
     "Appointment": "Appointment",
     "Chronic" : "Chronic Diseases",
     "Attachments" : "Attachments",
@@ -55,7 +55,7 @@
     "assignDate":"Date",
     "Notes":"Notes",
     "username": "Please enter username for patient",
-    "SUBMIT": "Submit"
+    "SUBMIT": "Submit",
     "doctorName":"Doctor name",
     "prescription":"prescription",
     "save":"save",

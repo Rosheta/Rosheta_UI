@@ -390,10 +390,10 @@ class S {
     );
   }
 
-  /// `Qr Code`
+  /// `Response code`
   String get QrCode {
     return Intl.message(
-      'Qr Code',
+      'Response code',
       name: 'QrCode',
       desc: '',
       args: [],
@@ -600,7 +600,6 @@ class S {
     );
   }
 
-
   /// `Please enter username for patient`
   String get username {
     return Intl.message(
@@ -611,20 +610,21 @@ class S {
     );
   }
 
-  /// `Doctor name`
-  String get doctorName {
+  /// `Submit`
+  String get SUBMIT {
     return Intl.message(
-      'Doctor name',
-      name: 'doctorName',
+      'Submit',
+      name: 'SUBMIT',
       desc: '',
       args: [],
     );
   }
 
-  String get SUBMIT {
+  /// `Doctor name`
+  String get doctorName {
     return Intl.message(
-      'Submit',
-      name: 'SUBMIT',
+      'Doctor name',
+      name: 'doctorName',
       desc: '',
       args: [],
     );

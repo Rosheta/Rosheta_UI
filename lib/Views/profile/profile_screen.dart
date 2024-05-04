@@ -107,16 +107,6 @@ class _ProfileViewState extends State<ProfileScreen> {
             );
           } else {
             Profile pr = snapshot.data!;
-            DataManager dataManager = DataManager();
-            dataManager.profile_image = pr.profileImage;
-            dataManager.name = pr.name;
-            dataManager.username = pr.userName;
-            if (pr.gender == "")
-              dataManager.type = 3;
-            else if (pr.location == "")
-              dataManager.type = 1;
-            else
-              dataManager.type = 2;
 
             //image = pr.profileImage;
 
@@ -216,25 +206,28 @@ class _ProfileViewState extends State<ProfileScreen> {
                                   20.0), // Set the border radius for circular edges
                             ),
                           ),
-                          child: SizedBox(
-                            height: 50, // Set the fixed height of the container
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 30),
-                                const Icon(
-                                  Icons.settings,
-                                  color: Colors.black,
-                                  size: 35.0,
-                                ),
-                                const SizedBox(width: 25),
-                                Text(
-                                  S.of(context).editInfor,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      color: Colors.black),
-                                ),
-                              ],
+                          child: Center(
+                            child: SizedBox(
+                              height:
+                                  50, // Set the fixed height of the container
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.settings,
+                                    color: Colors.black,
+                                    size: 35.0,
+                                  ),
+                                  const SizedBox(width: 25),
+                                  Text(
+                                    S.of(context).editInfor,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        color: Colors.black),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

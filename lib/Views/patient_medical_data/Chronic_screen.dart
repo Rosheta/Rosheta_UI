@@ -45,14 +45,14 @@ class _ChronicDiseaseListScreenState extends State<ChronicDiseaseListScreen> {
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.message),
             iconSize: 30,
-            color: Colors.white,
+            color: Colors.black,
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (c) => const FriendsScreen()));
@@ -61,7 +61,7 @@ class _ChronicDiseaseListScreenState extends State<ChronicDiseaseListScreen> {
           IconButton(
             icon: const Icon(Icons.search),
             iconSize: 30,
-            color: Colors.white,
+            color: Colors.black,
             onPressed: () {
               showSearch(
                   context: context,
@@ -123,7 +123,7 @@ class _ChronicDiseaseListScreenState extends State<ChronicDiseaseListScreen> {
                               subtitle: Text(
                                 disease.date,
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
+                                    color: Colors.black, fontSize: 20),
                               ),
                             ),
                             ListTile(
@@ -133,7 +133,7 @@ class _ChronicDiseaseListScreenState extends State<ChronicDiseaseListScreen> {
                               subtitle: Text(
                                 disease.notes,
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
+                                    color: Colors.black, fontSize: 20),
                               ),
                             ),
                           ],

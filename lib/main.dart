@@ -18,8 +18,7 @@ import 'services/firebase_api.dart';
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -57,7 +56,7 @@ class MyApp extends StatelessWidget {
       home: const LoginScreen(),
       navigatorKey: navigatorKey,
       routes: {
-        '/share-screen' :(context) => SharingScreen(),
+        '/share-screen': (context) => DoctorView(),
       },
     );
   }

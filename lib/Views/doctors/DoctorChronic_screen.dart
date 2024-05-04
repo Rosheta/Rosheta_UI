@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, avoid_print, file_names
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/chat/friends_screen.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
@@ -24,13 +25,15 @@ class _DoctorViewState extends State<DoctorView> {
   @override
   void initState() {
     super.initState();
-    _medicalData = _fetchChronicDiseases();
+    final message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
+
+    _medicalData = _fetchChronicDiseases("message.data.token");
   }
 
-  Future<MedicalData> _fetchChronicDiseases() async {
+  Future<MedicalData> _fetchChronicDiseases(String token) async {
     try {
       DoctorDataApi midicalData = DoctorDataApi();
-      return await midicalData.fetchDoctorData("Token");
+      return await midicalData.fetchDoctorData(token);
     } catch (e) {
       throw Exception('Failed to fetch chronic diseases');
     }

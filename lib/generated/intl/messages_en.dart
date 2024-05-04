@@ -42,7 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Patient": MessageLookupByLibrary.simpleMessage("Patient"),
         "Phone": MessageLookupByLibrary.simpleMessage("Phonenumber"),
         "Prescription": MessageLookupByLibrary.simpleMessage("Prescription"),
-        "QrCode": MessageLookupByLibrary.simpleMessage("Qr Code"),
+        "QrCode": MessageLookupByLibrary.simpleMessage("Response code"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("SIGNUP"),
         "SUBMIT": MessageLookupByLibrary.simpleMessage("Submit"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),

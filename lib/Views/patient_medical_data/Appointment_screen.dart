@@ -43,14 +43,14 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.search),
             iconSize: 30,
-            color: Colors.white,
+            color: Colors.black,
             onPressed: () {
               showSearch(
                 context: context,
@@ -137,7 +137,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
                                       subtitle: Text(
                                         appointment.notes,
                                         style: const TextStyle(
-                                          color: Colors.white,
+                                          color: Colors.black,
                                           fontSize: 20,
                                         ),
                                       ),
@@ -162,7 +162,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
                                               subtitle: Text(
                                                 disease.notes,
                                                 style: const TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.black,
                                                   fontSize: 18,
                                                 ),
                                               ),

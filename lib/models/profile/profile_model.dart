@@ -1,4 +1,3 @@
-
 // ignore_for_file: non_constant_identifier_names
 
 class Profile {
@@ -66,9 +65,9 @@ class Profile {
         ? phone = ""
         : phone = jsonData['phone']['value'];
 
-    jsonData['birthdate'] == null
-        ? date = ""
-        : date = jsonData['birthdate']['value'][0];
+    // jsonData['birthdate'] == null
+    //     ? date = ""
+    //     : date = jsonData['birthdate']['value'][0];
 
     jsonData['email']['value'] == null
         ? email = ""
@@ -84,9 +83,9 @@ class Profile {
         ? viewphone = false
         : viewphone = jsonData['phone']['visible'];
 
-    jsonData['birthdate'] == null
-        ? viewdate = false
-        : viewdate = jsonData['birthdate']['visible'];
+    // jsonData['birthdate'] == null
+    //     ? viewdate = false
+    //     : viewdate = jsonData['birthdate']['visible'];
 
     jsonData['email']['visible'] == null
         ? viewemail = false
@@ -99,11 +98,11 @@ class Profile {
       government: government,
       email: email,
       phone: phone,
-      date: date,
+      date: "2024/03/20",
       ID: ID,
       viewemail: viewemail,
       viewphone: viewphone,
-      viewdate: viewdate,
+      viewdate: true,
       department: department,
       location: location,
     );

@@ -33,7 +33,6 @@ class ViewProfile {
     final String date;
     final String department;
     final String location;
- 
 
     if (jsonData['profile_image'] == null) {
       profileImage = "";
@@ -49,11 +48,9 @@ class ViewProfile {
         : department = jsonData['department'];
     jsonData['phone'] == null ? phone = "" : phone = jsonData['phone'];
 
-    
-    
-      jsonData['birthdate'] == null
-        ? date = ""
-        : date = jsonData['birthdate'][0];
+    // jsonData['birthdate'] == null
+    //   ? date = ""
+    //   : date = jsonData['birthdate'][0];
 
     jsonData['email'] == null ? email = "" : email = jsonData['email'];
     jsonData['government'] == null
@@ -70,7 +67,7 @@ class ViewProfile {
       government: government,
       email: email,
       phone: phone,
-      date: date,
+      date: "2001/03/23",
       department: department,
       location: location,
     );

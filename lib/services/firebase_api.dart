@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:rosheta_ui/Views/doctors/DoctorChronic_screen.dart';
 import 'package:rosheta_ui/Views/share_screen.dart';
 import 'package:rosheta_ui/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,7 +11,7 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
   if (message == null) return;
 
   navigatorKey.currentState?.pushNamed(
-    SharingScreen.routeName,
+    "/share-screen",
     arguments: message,
   );
 }
