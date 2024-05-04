@@ -1,8 +1,7 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rosheta_ui/Views/chat/chat_screen.dart';
+import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/chat/friend_model.dart';
 import 'package:rosheta_ui/services/chat/chat_service.dart';
@@ -39,18 +38,9 @@ class _FriendsScreenState extends State<FriendsScreen> {
             color: Colors.white,
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.menu),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: () {
-              // Handle icon2 onPressed action
-            },
-          ),
-        ],
+        centerTitle: true,
       ),
-      // create ListView.builder here to show friends which return from calling getfriends function
+      drawer: select_drawer(context),
       backgroundColor: const Color.fromARGB(255, 233, 255, 255),
       body: FutureBuilder<List<Friend>>(
         future: friends,
@@ -95,6 +85,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
           }
         },
       ),
+    
     );
   }
 

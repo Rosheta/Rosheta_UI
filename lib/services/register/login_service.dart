@@ -6,11 +6,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LoginApi {
   Future<bool> login(String email, String password) async {
+    final prefs = await SharedPreferences.getInstance();
     final String apiUrl = dotenv.env['API_URL']!;
     final url = '$apiUrl/login';
-    print(email);
 
     try {
+      print('devicetoken: ${prefs.getString('devicetoken')}');
       http.Response response = await http.post(
         Uri.parse(url),
         headers: {
@@ -19,6 +20,7 @@ class LoginApi {
         body: json.encode({
           'email': email,
           'password': password,
+          'devicetoken' : prefs.getString('devicetoken'),
         }),
       );
 

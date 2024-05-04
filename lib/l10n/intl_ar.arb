@@ -54,6 +54,8 @@
     "positionController": "موقع معمل التحاليل",
     "assignDate":"التاريخ",
     "Notes":"ملاحظات",
+    "username": "من فضلك ادخل اسم المستخدم",
+    "SUBMIT": "ارسال"
     "doctorName":"اسم الطبيب",
     "prescription":"الروشتة",
     "save":"حفظ",
@@ -63,7 +65,4 @@
     "AddChronicDisease":"اضافة مرض مزمن",
     "ChronicDis" : "المرض المزمن",
     "CurrentAppointment":"الكشف الحالي"
-
-
-
 }

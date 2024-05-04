@@ -23,11 +23,9 @@ class ChatApi {
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
-              'Bearer $token', // Include access token in Authorization header
+              'Bearer $token',
         },
       );
-
-      // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
         var jsonData = jsonDecode(data);
@@ -58,14 +56,11 @@ class ChatApi {
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
-              'Bearer $token', // Include access token in Authorization header
+              'Bearer $token',
         },
       );
-
-      // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
-        print(data);
         var jsonData = jsonDecode(data);
         Messages messages = Messages.fromJson(jsonData);
         return messages;
@@ -101,12 +96,9 @@ class ChatApi {
         String data = response.body;
         var jsonData = jsonDecode(data);
         String chatId = jsonData['chatId'];
-
-        print('startChat: ${chatId}');
         return chatId;
       } else {
         print('Status code: ${response.statusCode}');
-        print('startChat: ${response.body}');
         return " ";
       }
     } catch (e) {

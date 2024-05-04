@@ -600,11 +600,31 @@ class S {
     );
   }
 
+
+  /// `Please enter username for patient`
+  String get username {
+    return Intl.message(
+      'Please enter username for patient',
+      name: 'username',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Doctor name`
   String get doctorName {
     return Intl.message(
       'Doctor name',
       name: 'doctorName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get SUBMIT {
+    return Intl.message(
+      'Submit',
+      name: 'SUBMIT',
       desc: '',
       args: [],
     );

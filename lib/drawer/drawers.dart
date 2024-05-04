@@ -2,7 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/Languages/language_screen.dart';
+import 'package:rosheta_ui/Views/lab/add_attachments_screen.dart';
 import 'package:rosheta_ui/Views/patient_medical_data/Chronic_screen.dart';
+import 'package:rosheta_ui/Views/patient_medical_data/attachments_screen.dart';
+import 'package:rosheta_ui/Views/patient_medical_data/give_access_screen.dart';
 import 'package:rosheta_ui/Views/profile/profile_screen.dart';
 import 'package:rosheta_ui/Views/register/login_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
@@ -119,7 +122,9 @@ Drawer patient_drawer(context) {
                     ),
                   ],
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (c) => GiveAccessScreen()));
+                },
               ),
             ),
           ),
@@ -204,6 +209,8 @@ Drawer patient_drawer(context) {
               ),
               onTap: () {
                 // Handle button 1 tap
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) =>  AttachmentScreen()));
               },
             ),
           ),
@@ -574,7 +581,7 @@ Drawer lab_drawer(context) {
                 ),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (c) => const ProfileScreen()));
+                      MaterialPageRoute(builder: (c) =>  const AddAttachments()));
                 },
               ),
             ),

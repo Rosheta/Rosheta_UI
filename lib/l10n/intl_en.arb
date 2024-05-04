@@ -42,7 +42,6 @@
     "Emergency" : "Emergency",
     "examination": "New Examination",
     "uploadAttachment": "Upload File",
-
     "male":"male",
     "female":"female",
     "enterYourName": "Enter your name",
@@ -55,6 +54,8 @@
     "positionController": "Enter your address",
     "assignDate":"Date",
     "Notes":"Notes",
+    "username": "Please enter username for patient",
+    "SUBMIT": "Submit"
     "doctorName":"Doctor name",
     "prescription":"prescription",
     "save":"save",
@@ -64,6 +65,4 @@
     "AddChronicDisease":"Add Chronic Disease",
     "ChronicDis" : "Chronic Disease",
     "CurrentAppointment":"Current Appointment"
-
-
 }
