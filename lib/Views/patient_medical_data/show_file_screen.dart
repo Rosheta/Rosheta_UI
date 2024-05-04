@@ -1,95 +1,73 @@
+import 'dart:async';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:http/http.dart' as http;
-import "package:rosheta_ui/generated/l10n.dart";
+import 'package:rosheta_ui/generated/l10n.dart';
 
-class ShowFileScreen extends StatelessWidget {
-  Uint8List? serverData;
+class ShowFileScreen extends StatefulWidget {
+  final Uint8List? serverData;
+  final String ext;
 
-  Future<void> _fetchattachments() async {
-    try {
-      print("login");
-      await login();
-      return;
-    } catch (e) {
-      throw Exception('Failed to fetch profile');
-    }
-  }
+  const ShowFileScreen({super.key, required this.serverData , required this.ext});
 
-  Future<bool> login() async {
-    final url = 'http://192.168.1.8:5000/ipfs/get?hash=QmPmWNY9icXLfoFiLqjge8RVFszVH4CU7qXR2XzDbhtkgz';
+  @override
+  _ShowFileScreenState createState() => _ShowFileScreenState();
+}
 
-    try {
-      print("enterr");
-      http.Response response = await http.get(
-        Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      );
+class _ShowFileScreenState extends State<ShowFileScreen> {
+  int pages = 0;
+  bool isReady = false;
+  final Completer<PDFViewController> _controller = Completer<PDFViewController>();
 
-      print(response.statusCode);
-
-      // Deserialize body to be accessible
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        print(response.body);
-        serverData = response.bodyBytes;
-        return true;
-      } else {
-        print('Status code: ${response.statusCode}');
-        return false;
-      }
-    } catch (e) {
-      print('Exception: $e');
-      return false;
+  @override
+  void initState() {
+    super.initState();
+    if (widget.serverData != null) {
+      setState(() {
+        isReady = true;
+      });
     }
   }
 
   @override
-@override
-Widget build(BuildContext context) {
-  return FutureBuilder(
-    future: _fetchattachments(),
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        // Show loading indicator while fetching data
-        return CircularProgressIndicator();
-      } else if (snapshot.hasError) {
-        // Show error message if fetch failed
-        return Center(
-          child: Text('Error: ${snapshot.error}'),
-        );
-      } else {
-        // Data fetched successfully, build PDFView widget
-        Uint8List image = Uint8List.fromList(serverData!);
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.cyan,
-            title: Text(
-              S.of(context).title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: Colors.white,
-              ),
-            ),
-            centerTitle: true,
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.cyan,
+        title: Text(
+          S.of(context).title,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+            color: Colors.white,
           ),
-          body: Center(
-            child: PDFView(
-              enableSwipe: true,
-              swipeHorizontal: true,
-              autoSpacing: false,
-              pageFling: false,
-              pageSnap: true,
-              pdfData: image,
-            ),
-          ),
-        );
-      }
-    },
-  );
-}
+        ),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: widget.serverData != null
+              ? widget.ext == ".pdf" ? PDFView(
+                  pdfData: widget.serverData!,
+                  enableSwipe: true,
+                  swipeHorizontal: false,
+                  autoSpacing: true,
+                  pageFling: true,
+                  onRender: (pages) {
+                    setState(() {
+                      pages = pages!;
+                      isReady = true;
+                    });
+                  },
+                  onViewCreated: (PDFViewController pdfViewController) {
+                    _controller.complete(pdfViewController);
+                  },
+                  onPageChanged: (int? page, int? total) {},
+                ) : Image.memory(widget.serverData!)
+              : const CircularProgressIndicator(),
+        ),
+      ),
+    );
+  }
 }

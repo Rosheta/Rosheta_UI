@@ -1,9 +1,9 @@
 import 'dart:io';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:rosheta_ui/Views/chat/friends_screen.dart';
-import 'package:rosheta_ui/Views/search/search_screen.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
+import 'package:rosheta_ui/components/shared/appbar.dart';
 import 'package:rosheta_ui/services/lab/add_attachment_service.dart';
 
 class AddAttachments extends StatefulWidget {
@@ -22,40 +22,8 @@ class _AddAttachmentsState extends State<AddAttachments> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.cyan,
-        title: Text(
-          S.of(context).title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 25,
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.message),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (c) => const FriendsScreen()));
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.search),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: () {
-              showSearch(
-                  context: context,
-                  // delegate to customize the search bar
-                  delegate: SearchPeople());
-            },
-          ),
-        ],
-      ),
+      appBar: appBar(context),
+      drawer: select_drawer(context),
       body: Padding(
           padding: const EdgeInsets.all(20),
           child: Center(
@@ -122,16 +90,14 @@ class _AddAttachmentsState extends State<AddAttachments> {
                             if (_selectedFile == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    content:
-                                        Text('Please select a file to upload')),
+                                    content:Text('Please select a file to upload')),
                               );
                             }
                             if (_formKey.currentState!.validate() && _selectedFile != null) {
                                 AddAttachmentApi tmp = AddAttachmentApi();
-                                // Show loading indicator
                                 showDialog(
                                   context: context,
-                                  barrierDismissible: false, // Prevent dismissing dialog by tapping outside
+                                  barrierDismissible: false, 
                                   builder: (BuildContext context) {
                                     return const AlertDialog(
                                       content: Row(
@@ -149,9 +115,8 @@ class _AddAttachmentsState extends State<AddAttachments> {
                                     userame: usernameController.text,
                                     selectedFile: _selectedFile!,
                                   );
-                                  Navigator.of(context).pop(); // Close loading dialog
+                                  Navigator.of(context).pop(); 
                                   if (check == 'true') {
-                                    // If the form is valid and attachment added successfully
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(content: Text('Successfully uploaded')),
                                     );
@@ -161,8 +126,7 @@ class _AddAttachmentsState extends State<AddAttachments> {
                                     );
                                   }
                                 } catch (e) {
-                                  Navigator.of(context).pop(); // Close loading dialog
-                                  // Handle error, maybe show an error message
+                                  Navigator.of(context).pop(); 
                                 }
                               }
                           })),

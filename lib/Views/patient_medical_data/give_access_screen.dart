@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rosheta_ui/Views/chat/friends_screen.dart';
-import 'package:rosheta_ui/Views/search/search_screen.dart';
+import 'package:rosheta_ui/components/shared/appbar.dart';
+import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/services/patient_medical_data/give_access_service.dart';
 
@@ -13,40 +13,8 @@ class GiveAccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.cyan,
-        title: Text(
-          S.of(context).title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 25,
-            color: Colors.white,
-          ),
-        ),
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.message),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (c) => const FriendsScreen()));
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.search),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: () {
-              showSearch(
-                  context: context,
-                  // delegate to customize the search bar
-                  delegate: SearchPeople());
-            },
-          ),
-        ],
-      ),
+      appBar: appBar(context),
+      drawer: select_drawer(context),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Center(
@@ -119,9 +87,7 @@ class GiveAccessScreen extends StatelessWidget {
                         Navigator.of(context).pop(); // Close loading dialog
                         // Handle error, maybe show an error message
                       }
-                    }
-
-                    
+                    }                    
                   }),
               ],
             ),

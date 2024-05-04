@@ -1,62 +1,41 @@
+import "dart:typed_data";
 import "package:flutter/material.dart";
-import "package:rosheta_ui/Views/chat/friends_screen.dart";
+import 'package:rosheta_ui/drawer/drawers.dart';
+import "package:rosheta_ui/components/shared/appbar.dart";
 import "package:rosheta_ui/Views/patient_medical_data/show_file_screen.dart";
-import "package:rosheta_ui/Views/search/search_screen.dart";
-import "package:rosheta_ui/generated/l10n.dart";
 import "package:rosheta_ui/models/patient_medical_data/attachment_model.dart";
 import "package:rosheta_ui/services/patient_medical_data/attachment_service.dart";
 
-class AttachmentScreen extends StatelessWidget {
+class AttachmentScreen extends StatefulWidget {
+  const AttachmentScreen({super.key});
+
+  @override
+  _AttachmentScreenState createState() => _AttachmentScreenState();
+}
+
+class _AttachmentScreenState extends State<AttachmentScreen> {
   late Future<List<Attachment>> attachments;
 
-  AttachmentScreen({super.key});
+  @override
+  void initState() {
+    super.initState();
+    attachments = _fetchAttachments();
+  }
 
-  Future<List<Attachment>> _fetchattachments() async {
+  Future<List<Attachment>> _fetchAttachments() async {
     try {
       AttachmentApi attachmentApi = AttachmentApi();
       return await attachmentApi.getAttachments();
     } catch (e) {
-      throw Exception('Failed to fetch profile');
+      throw Exception('Failed to fetch attachments');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    attachments = _fetchattachments();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.cyan,
-        title: Text(
-          S.of(context).title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 25,
-            color: Colors.white,
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.message),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (c) => const FriendsScreen()));
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.search),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: () {
-              showSearch(
-                  context: context,
-                  // delegate to customize the search bar
-                  delegate: SearchPeople());
-            },
-          ),
-        ],
-      ),
+      appBar: appBar(context),
+      drawer: select_drawer(context),
       body: FutureBuilder<List<Attachment>>(
         future: attachments,
         builder: (context, snapshot) {
@@ -85,6 +64,7 @@ class AttachmentScreen extends StatelessWidget {
                         name: pr[index].name!,
                         ext: pr[index].ext!,
                         time: pr[index].time!,
+                        index: index,
                         context: context,
                       ),
                       separatorBuilder: (context, index) => const SizedBox(
@@ -107,50 +87,54 @@ class AttachmentScreen extends StatelessWidget {
     required String name,
     required String ext,
     required String time,
+    required int index,
     required BuildContext context,
   }) {
-    // Determine icon based on file extension
     IconData iconData;
     switch (ext.toLowerCase()) {
-      case 'pdf':
+      case '.pdf':
         iconData = Icons.picture_as_pdf;
         break;
-      case 'doc':
-      case 'docx':
-        iconData = Icons.description;
+      case '.png':
+      case '.jpeg':
+      case '.jpg':
+        iconData = Icons.image;
         break;
-      case 'txt':
-        iconData = Icons.article;
-        break;
-      // Add more cases for different file types as needed
       default:
         iconData = Icons.insert_drive_file;
         break;
     }
 
     return InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ShowFileScreen()),
-          );
-        },
-        child: Card(
+      onTap: () async {
+        AttachmentApi attachmentApi = AttachmentApi();
+        Uint8List tmp = await attachmentApi.getAttachment(fileHash);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ShowFileScreen(serverData: tmp , ext: ext)),
+        );
+      },
+      child: Card(
         child: ListTile(
           leading: Icon(iconData),
           title: Text(
-            '$name.$ext',
-            maxLines: 1,
+            '$name$ext',
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
-          ), // Show file name with extension
-          subtitle: Text(time), // Show upload time
+          ), 
+          subtitle: Text(time),
           trailing: IconButton(
             icon: const Icon(Icons.delete),
-            onPressed: () async {
+            onPressed:  () async {
               AttachmentApi attachmentApi = AttachmentApi();
               bool check = await attachmentApi.deleteAttachment(fileHash);
               if (check) {
+                setState(() {
+                  attachments = attachments.then((attachmentList) {
+                    attachmentList.removeAt(index);
+                    return attachmentList;
+                  });
+                });
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('File deleted successfully'),

@@ -14,9 +14,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
-
-  static const String loginroute = '/login';
-
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -105,7 +102,6 @@ class _LoginScreen extends State<LoginScreen> {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState?.save();
                                 LoginApi loginapi = LoginApi();
-                                print('before request.....................');
                                 bool tmp = await loginapi.login(emailController.text,passwordController.text);
                                 if(tmp){
                                   Navigator.push(context,
