@@ -8,8 +8,7 @@ class AddAttachmentApi {
     return prefs.getString('acesstoken') ?? '';
   }
 
-  Future<String> Addattachment(
-      {required userame, required selectedFile}) async {
+  Future<String> addAttachment({required userame, required selectedFile}) async {
     final String apiUrl = dotenv.env['API_URL']!;
     final String url = '$apiUrl/lab/upload';
     String accessToken = await getAccessToken();
@@ -19,7 +18,6 @@ class AddAttachmentApi {
       request.files
           .add(await http.MultipartFile.fromPath('file', selectedFile.path));
       request.headers['Authorization'] = 'Bearer $accessToken';
-
       request.fields['username'] = userame;
 
       var response = await request.send();

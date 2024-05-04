@@ -111,7 +111,7 @@ class _AddAttachmentsState extends State<AddAttachments> {
                                   },
                                 );
                                 try {
-                                  String check = await tmp.Addattachment(
+                                  String check = await tmp.addAttachment(
                                     userame: usernameController.text,
                                     selectedFile: _selectedFile!,
                                   );
