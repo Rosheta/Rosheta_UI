@@ -12,6 +12,7 @@ import 'package:rosheta_ui/models/patient_medical_data/Appointment_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Chronic_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/attachment_model.dart';
 import 'package:rosheta_ui/services/doctors/DoctorData_service.dart';
+import 'package:rosheta_ui/services/doctors/currentAppointment_service.dart';
 import 'package:rosheta_ui/services/patient_medical_data/give_access_service.dart';
 
 import '../search/search_screen.dart'; // Import your ChronicDiseaseApi service
@@ -25,12 +26,15 @@ class DoctorView extends StatefulWidget {
 
 class _DoctorViewState extends State<DoctorView> {
   late Future<MedicalData> _medicalData;
+  late String token;
 
   @override
   void initState() {
     super.initState();
     final message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
-    _medicalData = _fetchChronicDiseases("message.data.token");
+    print(message);
+    token = message.data["dataAccessTocken"];
+    _medicalData = _fetchChronicDiseases(token);
   }
 
   Future<MedicalData> _fetchChronicDiseases(String token) async {
@@ -124,7 +128,9 @@ class _DoctorViewState extends State<DoctorView> {
         body: TabBarView(
           children: [
             // First tab content
-            const PrescriptionAndNotesScreen(),
+            PrescriptionAndNotesScreen(
+              token: token,
+            ),
             // Second tab content
             DoctorChronicDiseaseListWidget(medicalDataFeture: _medicalData),
             // Third tab content
@@ -132,7 +138,10 @@ class _DoctorViewState extends State<DoctorView> {
             DoctorAppointmentListWidget(medicalDataFeture: _medicalData),
 
             // Fourth tab content
-            DoctorAttachmentsListWidget(medicalDataFeture: _medicalData),
+            DoctorAttachmentsListWidget(
+              medicalDataFeture: _medicalData,
+              token: token,
+            ),
           ],
         ),
       ),
@@ -429,7 +438,8 @@ Row getTitle(T) {
 }
 
 class PrescriptionAndNotesScreen extends StatefulWidget {
-  const PrescriptionAndNotesScreen({super.key});
+  final String token;
+  const PrescriptionAndNotesScreen({super.key, required this.token});
 
   @override
   _PrescriptionAndNotesScreenState createState() =>
@@ -488,7 +498,22 @@ class _PrescriptionAndNotesScreenState
           content: Text(S.of(context).saveAndLeaveQ),
           actions: <Widget>[
             TextButton(
-              onPressed: () {
+              onPressed: () async {
+                SendAppointment sendAppointment = SendAppointment();
+                // Call the sendAppointment method and pass prescription, note, and chronicDiseases as parameters
+                bool success = await sendAppointment.sendAppointment(
+                  prescription: prescriptionController.text,
+                  note: notesController.text,
+                  chronicDiseases: chronicDiseases,
+                );
+
+                if (success) {
+                  // Show success message or navigate to another screen
+                  print('Appointment sent successfully!');
+                } else {
+                  // Show error message
+                  print('Failed to send appointment!');
+                }
                 Navigator.of(context).pop();
               },
               child: Text(S.of(context).Cancel),
@@ -614,9 +639,10 @@ class _PrescriptionAndNotesScreenState
 
 class DoctorAttachmentsListWidget extends StatefulWidget {
   final Future<MedicalData> medicalDataFeture;
+  final String token;
 
   const DoctorAttachmentsListWidget(
-      {super.key, required this.medicalDataFeture});
+      {super.key, required this.medicalDataFeture, required this.token});
 
   @override
   _DoctorAttachmentsListWidgetState createState() =>
@@ -643,18 +669,18 @@ class _DoctorAttachmentsListWidgetState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ListView.builder(
-                      itemCount: attachments.length,
-                      itemBuilder: (context, index) {
-                        Attachment attach = attachments[index];
-                        return fileCard(
-                            fileHash: attach.fileHash!,
-                            name: attach.name!,
-                            ext: attach.ext!,
-                            time: attach.time!,
-                            index: index,
-                            context: context,
-                        );
-                      },
+                    itemCount: attachments.length,
+                    itemBuilder: (context, index) {
+                      Attachment attach = attachments[index];
+                      return fileCard(
+                        fileHash: attach.fileHash!,
+                        name: attach.name!,
+                        ext: attach.ext!,
+                        time: attach.time!,
+                        index: index,
+                        context: context,
+                      );
+                    },
                   ),
                 ],
               ),
@@ -691,7 +717,9 @@ class _DoctorAttachmentsListWidgetState
     return InkWell(
       onTap: () async {
         GiveAccessApi attachmentApi = GiveAccessApi();
-        Uint8List tmp = await attachmentApi.getAttachment(fileHash,/*write sharedtoken here*/);
+        Uint8List tmp = await attachmentApi.getAttachment(
+            fileHash, widget.token /*write sharedtoken here*/
+            );
         Navigator.push(
           context,
           MaterialPageRoute(
