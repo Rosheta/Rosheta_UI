@@ -31,10 +31,6 @@ class _DoctorViewState extends State<DoctorView> {
   @override
   void initState() {
     super.initState();
-    final message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
-    print(message);
-    token = message.data["dataAccessTocken"];
-    _medicalData = _fetchChronicDiseases(token);
   }
 
   Future<MedicalData> _fetchChronicDiseases(String token) async {
@@ -48,6 +44,9 @@ class _DoctorViewState extends State<DoctorView> {
 
   @override
   Widget build(BuildContext context) {
+    final message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
+    token = message.data["dataAccessToken"];
+    _medicalData = _fetchChronicDiseases(token);
     return DefaultTabController(
       length: 4, // Number of tabs
       child: Scaffold(
@@ -61,29 +60,8 @@ class _DoctorViewState extends State<DoctorView> {
               color: Colors.black,
             ),
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.message),
-              iconSize: 30,
-              color: Colors.black,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (c) => const FriendsScreen()));
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.search),
-              iconSize: 30,
-              color: Colors.black,
-              onPressed: () {
-                showSearch(
-                    context: context,
-                    // delegate to customize the search bar
-                    delegate: SearchPeople());
-              },
-            ),
-          ],
           bottom: TabBar(
+            isScrollable: true,
             tabs: [
               Tab(
                 child: Text(
@@ -664,25 +642,29 @@ class _DoctorAttachmentsListWidgetState
           List<Attachment> attachments = snapshot.data!.attachments;
           return Padding(
             padding: const EdgeInsets.all(20.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ListView.builder(
-                    itemCount: attachments.length,
-                    itemBuilder: (context, index) {
-                      Attachment attach = attachments[index];
-                      return fileCard(
-                        fileHash: attach.fileHash!,
-                        name: attach.name!,
-                        ext: attach.ext!,
-                        time: attach.time!,
-                        index: index,
-                        context: context,
-                      );
-                    },
-                  ),
-                ],
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListView.builder(
+                      shrinkWrap: true, 
+                      itemCount: attachments.length,
+                      itemBuilder: (context, index) {
+                        Attachment attach = attachments[index];
+                        return fileCard(
+                          fileHash: attach.fileHash!,
+                          name: attach.name!,
+                          ext: attach.ext!,
+                          time: attach.time!,
+                          index: index,
+                          context: context,
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           );
