@@ -24,10 +24,6 @@ class ProfileApi {
       // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
-        print("--------------------------------------------");
-        print(data);
-        print("--------------------------------------------");
-
         var jsonData = jsonDecode(data);
 
         Profile dataProfile = Profile.fromJson(jsonData);

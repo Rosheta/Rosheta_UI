@@ -1,15 +1,13 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:rosheta_ui/Views/doctors/DoctorChronic_screen.dart';
-import 'package:rosheta_ui/Views/share_screen.dart';
 import 'package:rosheta_ui/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
-  
   if (message == null) return;
-
+  
   navigatorKey.currentState?.pushNamed(
     "/share-screen",
     arguments: message,
@@ -31,7 +29,7 @@ class FirebaseApi {
     if (message == null) return;
 
     navigatorKey.currentState?.pushNamed(
-      SharingScreen.routeName,
+      "/share-screen",
       arguments: message,
     );
   }
@@ -74,29 +72,44 @@ class FirebaseApi {
     FirebaseMessaging.onMessage.listen((message) {
       final notification = message.notification;
       if (notification == null) return;
-      _flutterLocalNotificationsPlugin.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-              _androidChannel.id, _androidChannel.name,
-              channelDescription: _androidChannel.description,
-              icon: '@mipmap/ic_launcher'),
-        ),
-        payload: jsonEncode(message.toMap()),
+      showDialog(
+        context: navigatorKey.currentContext!,
+        builder: (context) {
+          return SimpleDialog(
+            contentPadding: EdgeInsets.all(16),
+            children: [
+              Text("You have a new message to share data of patient"),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                  // Navigate to the share screen
+                  navigatorKey.currentState?.pushNamed(
+                    "/share-screen",
+                    arguments: message,
+                  );
+                },
+                child: Text('View Details'), // Button text
+              ),
+            ],
+          );
+        },
       );
     });
   }
 
   Future<void> initNotifications() async {
-    final FirebaseMessaging firebaseMessaging = await FirebaseMessaging.instance;
-    await firebaseMessaging.requestPermission(
+    final FirebaseMessaging firebaseMessaging =
+        await FirebaseMessaging.instance;
+    NotificationSettings settings = await firebaseMessaging.requestPermission(
       alert: true,
       badge: true,
       provisional: false,
       sound: true,
+      announcement: false,
+      carPlay: false,
+      criticalAlert: false,
     );
+
     final token = await firebaseMessaging.getToken();
     // store token in your server and refrences it to send notifications
     final prefs = await SharedPreferences.getInstance();
