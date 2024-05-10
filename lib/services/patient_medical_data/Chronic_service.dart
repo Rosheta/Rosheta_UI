@@ -7,41 +7,50 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ChronicDiseaseListApi {
   Future<List<ChronicDisease>> fetchChronicDiseaseList() async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/chronic_disease_list';
+    final url = '$apiUrl/patient/diseases';
+    String accessToken = await getAccessToken();
+
+    print(url);
     try {
-      // String accessToken = await getAccessToken();
+      http.Response response = await http.get(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+      );
+      print(
+          ".......................................................................");
+      print("chronic");
+      print(accessToken);
+      print(response.statusCode);
+      print(response.body);
 
-      // http.Response response = await http.get(
-      //   Uri.parse(url),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': 'Bearer $accessToken',
-      //   },
-      // );
-
-      // if (response.statusCode == 200 || response.statusCode == 201) {
-      if (true) {
-        // List<dynamic> jsonData = jsonDecode(response.body);
-        List<dynamic> jsonData = [
-          {
-            "name": "Diabetes",
-            "date": "2020-01-15",
-            "notes": "Requires daily insulin injections."
-          },
-          {
-            "name": "Hypertension",
-            "date": "2018-05-10",
-            "notes": "Blood pressure under control with medication."
-          },
-          {
-            "name": "Asthma",
-            "date": "2019-09-20",
-            "notes": "Uses inhaler as needed."
-          }
-        ];
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // if (true) {
+        List<dynamic> jsonData = jsonDecode(response.body);
+        // List<dynamic> jsonData = [
+        //   {
+        //     "name": "Diabetes",
+        //     "date": "2020-01-15",
+        //     "notes": "Requires daily insulin injections."
+        //   },
+        //   {
+        //     "name": "Hypertension",
+        //     "date": "2018-05-10",
+        //     "notes": "Blood pressure under control with medication."
+        //   },
+        //   {
+        //     "name": "Asthma",
+        //     "date": "2019-09-20",
+        //     "notes": "Uses inhaler as needed."
+        //   }
+        // ];
         List<ChronicDisease> chronicDiseaseList = jsonData
+            .where((json) => json['Name'] != null && json['Name'].isNotEmpty)
             .map((json) => ChronicDisease.fromJson(json))
-            .toList(); // Map JSON data to ChronicDisease objects
+            .toList();
+        // Map JSON data to ChronicDisease objects
 
         return chronicDiseaseList;
       } else {
@@ -54,6 +63,6 @@ class ChronicDiseaseListApi {
 
   Future<String> getAccessToken() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('access_token') ?? '';
+    return prefs.getString('acesstoken') ?? '';
   }
 }

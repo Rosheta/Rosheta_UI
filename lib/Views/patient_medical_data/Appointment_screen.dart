@@ -29,7 +29,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
       AppointmentListApi appointmentApi = AppointmentListApi();
       return await appointmentApi.fetchAppointments();
     } catch (e) {
-      throw Exception('Failed to fetch appointments');
+      return [];
     }
   }
 
@@ -104,7 +104,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
                                     horizontal: 8.0,
                                   ),
                                   title: Text(
-                                    "${appointment.doctorName}\n${appointment.date}",
+                                    "${appointment.doctorName}\n${appointment.date.substring(0, 10)}",
                                     style: const TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
@@ -158,7 +158,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
                                                 horizontal: 0,
                                                 vertical: -4,
                                               ),
-                                              title: getDis(disease.name),
+                                              title: getDis(disease!.name),
                                               subtitle: Text(
                                                 disease.notes,
                                                 style: const TextStyle(

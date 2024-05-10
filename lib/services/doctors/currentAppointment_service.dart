@@ -2,29 +2,38 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class SendAppointment {
-  Future<bool> sendAppointment({
-    required String prescription,
-    required String note,
-    required List<Map<String, String>> chronicDiseases,
-  }) async {
+  Future<bool> sendAppointment(
+      {required String prescription,
+      required String note,
+      required List<Map<String, String>> chronicDiseases,
+      required String token}) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/appointments';
+    final url = '$apiUrl/doctor/appointment';
     try {
-      String accessToken = await getAccessToken(); 
+      String accessToken = await getAccessToken();
 
       http.Response response = await http.post(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $accessToken',
+          'accesscontrol': token
         },
         body: json.encode({
           'prescription': prescription,
-          'note': note,
-          'chronicDiseases': chronicDiseases,
+          'notes': note,
+          'chronics': chronicDiseases,
         }),
       );
+      print(
+          ".......................................................................");
+      print("send");
+      print(accessToken);
+      print(response.statusCode);
+      print(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         return true;
       } else {
@@ -37,7 +46,7 @@ class SendAppointment {
   }
 
   Future<String> getAccessToken() async {
-    // Assume this method retrieves the access token from SharedPreferences
-    return 'your_access_token_here';
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('acesstoken') ?? '';
   }
 }

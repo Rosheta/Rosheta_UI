@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/chat/friends_screen.dart';
 import 'package:rosheta_ui/Views/patient_medical_data/show_file_screen.dart';
+import 'package:rosheta_ui/Views/profile/profile_screen.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/doctors/MidicalData_model.dart';
@@ -38,7 +39,12 @@ class _DoctorViewState extends State<DoctorView> {
       DoctorDataApi midicalData = DoctorDataApi();
       return await midicalData.fetchDoctorData(token);
     } catch (e) {
-      throw Exception('Failed to fetch chronic diseases');
+      MedicalData medicalData = MedicalData(
+        appointments: [],
+        chronicDiseases: [],
+        attachments: [],
+      );
+      return medicalData;
     }
   }
 
@@ -183,7 +189,7 @@ class DoctorChronicDiseaseListWidget extends StatelessWidget {
                                 horizontal: 0, vertical: -4),
                             title: getChronicTitle(S.of(context).assignDate),
                             subtitle: Text(
-                              disease.date,
+                              disease.date.substring(0, 10),
                               style: const TextStyle(
                                   color: Colors.black, fontSize: 20),
                             ),
@@ -287,7 +293,7 @@ class DoctorAppointmentListWidget extends StatelessWidget {
                                   horizontal: 8.0,
                                 ),
                                 title: Text(
-                                  "${appointment.doctorName}\n${appointment.date}",
+                                  "${appointment.doctorName}\n${appointment.date.substring(0, 10)}",
                                   style: const TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold,
@@ -339,7 +345,7 @@ class DoctorAppointmentListWidget extends StatelessWidget {
                                             horizontal: 0,
                                             vertical: -4,
                                           ),
-                                          title: getDis(disease.name),
+                                          title: getDis(disease!.name),
                                           subtitle: Text(
                                             disease.notes,
                                             style: const TextStyle(
@@ -451,8 +457,8 @@ class _PrescriptionAndNotesScreenState
       notesDiseaseControllers.add(newNotesController);
 
       chronicDiseases.add({
-        'disease': newDiseaseController.text,
-        'notes': newNotesController.text,
+        'Name': newDiseaseController.text,
+        'Notes': newNotesController.text,
       });
     });
   }
@@ -478,11 +484,20 @@ class _PrescriptionAndNotesScreenState
             TextButton(
               onPressed: () async {
                 SendAppointment sendAppointment = SendAppointment();
-                // Call the sendAppointment method and pass prescription, note, and chronicDiseases as parameters
+                List<Map<String, String>> chronicDiseases2 = [];
+
+                for (int i = 0; i < chronicDiseases.length; i++) {
+                  chronicDiseases2.add({
+                    'Name': diseaseControllers[i].text,
+                    'Notes': notesDiseaseControllers[i].text,
+                  });
+                }
+
                 bool success = await sendAppointment.sendAppointment(
                   prescription: prescriptionController.text,
                   note: notesController.text,
-                  chronicDiseases: chronicDiseases,
+                  chronicDiseases: chronicDiseases2,
+                  token: widget.token,
                 );
 
                 if (success) {
@@ -492,16 +507,21 @@ class _PrescriptionAndNotesScreenState
                   // Show error message
                   print('Failed to send appointment!');
                 }
-                Navigator.of(context).pop();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfileScreen(),
+                  ),
+                );
               },
-              child: Text(S.of(context).Cancel),
+              child: Text(S.of(context).save),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 // Perform save operation here
               },
-              child: Text(S.of(context).save),
+              child: Text(S.of(context).Cancel),
             ),
           ],
         );
@@ -649,7 +669,7 @@ class _DoctorAttachmentsListWidgetState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListView.builder(
-                      shrinkWrap: true, 
+                      shrinkWrap: true,
                       itemCount: attachments.length,
                       itemBuilder: (context, index) {
                         Attachment attach = attachments[index];

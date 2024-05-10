@@ -31,7 +31,7 @@ class _ChronicDiseaseListScreenState extends State<ChronicDiseaseListScreen> {
       ChronicDiseaseListApi chronicDiseaseApi = ChronicDiseaseListApi();
       return await chronicDiseaseApi.fetchChronicDiseaseList();
     } catch (e) {
-      throw Exception('Failed to fetch chronic diseases');
+      return [];
     }
   }
 
@@ -121,7 +121,7 @@ class _ChronicDiseaseListScreenState extends State<ChronicDiseaseListScreen> {
                                   VisualDensity(horizontal: 0, vertical: -4),
                               title: getTitle(S.of(context).assignDate),
                               subtitle: Text(
-                                disease.date,
+                                disease.date.substring(0, 10),
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 20),
                               ),

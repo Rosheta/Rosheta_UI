@@ -15,17 +15,19 @@ class AttachmentApi {
   Future<List<Attachment>> getAttachments() async {
     final String apiUrl = dotenv.env['API_URL']!;
     final url = '$apiUrl/patient/getFiles';
-    final String token = await getAccessToken();
+    final String accessToken = await getAccessToken();
 
     try {
+      print(accessToken);
+
       http.Response response = await http.get(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $accessToken',
         },
       );
-
+     
       // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
@@ -87,7 +89,8 @@ class AttachmentApi {
         await for (final List<int> chunk in response.stream) {
           chunks.add(Uint8List.fromList(chunk));
         }
-        final Uint8List data = Uint8List.fromList(chunks.expand((x) => x).toList());
+        final Uint8List data =
+            Uint8List.fromList(chunks.expand((x) => x).toList());
         print('Attachment retrieved successfully');
         return data;
       } else {

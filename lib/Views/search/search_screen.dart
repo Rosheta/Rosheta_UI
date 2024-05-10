@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/profile/view_profile_screen.dart';
+import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/services/search/search_service.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +28,8 @@ class SearchProvider extends ChangeNotifier {
 }
 
 class SearchPeople extends SearchDelegate<String> {
+  DataManager dataManager = DataManager();
+  late int type = dataManager.type;
   String selectedUserId = "";
 
   List<String> specializations = [
@@ -87,8 +90,6 @@ class SearchPeople extends SearchDelegate<String> {
     'South Sinai',
     'Suez'
   ];
-
-  List<String> organizations = ['Any', 'Doctor', 'Patient', 'Lab'];
 
   // to be called from l10n for arabic
   @override
@@ -182,6 +183,22 @@ class SearchPeople extends SearchDelegate<String> {
       'organization': searchProvider.selectedOrganization,
     };
 
+    List<String> organizations = [];
+    if (type == 1) {
+      organizations = [
+        'Any',
+        'Doctor',
+        'Lab',
+      ];
+    } else {
+      organizations = [
+        'Any',
+        'Doctor',
+        'Patient',
+        'Lab',
+      ];
+    }
+    print(type);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

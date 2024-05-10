@@ -18,14 +18,14 @@ class MedicalData {
     List<Appointment> appointments = (jsonData['appointments'] as List)
         .map((appointmentJson) => Appointment.fromJson(appointmentJson))
         .toList();
-
-    List<ChronicDisease> chronicDiseases = (jsonData['chronic_diseases']
-            as List)
+    List<ChronicDisease> chronicDiseases = (jsonData['chronics'] as List)
         .map(
             (chronicDiseaseJson) => ChronicDisease.fromJson(chronicDiseaseJson))
         .toList();
-
-    List<Attachment> attachments = (jsonData['attachments'] as List).map((attachmentJson) => Attachment.fromJson(attachmentJson)).toList();
+    print(3);
+    List<Attachment> attachments = (jsonData['files'] as List)
+        .map((attachmentJson) => Attachment.fromJson(attachmentJson))
+        .toList();
 
     return MedicalData(
       appointments: appointments,
