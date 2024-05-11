@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "78116113745",
+    "project_id": "rosheta-b6472",
+    "storage_bucket": "rosheta-b6472.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78116113745:android:eb3e1256f9252bb06e5770",
+        "android_client_info": {
+          "package_name": "com.example.rosheta_ui"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1xegOem95bh6CWEkRRhFVspsJzm6TmCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

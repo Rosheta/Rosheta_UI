@@ -33,7 +33,7 @@
     "location":"location",
     "clinicLocation":"clinicLocation",
     "profile":"Profile",
-    "QrCode":"Qr Code",
+    "QrCode":"Response code",
     "Appointment": "Appointment",
     "Chronic" : "Chronic Diseases",
     "Attachments" : "Attachments",
@@ -42,7 +42,6 @@
     "Emergency" : "Emergency",
     "examination": "New Examination",
     "uploadAttachment": "Upload File",
-
     "male":"male",
     "female":"female",
     "enterYourName": "Enter your name",
@@ -52,5 +51,18 @@
     "uploadFile" : "Upload File",
     "clinicPosition" : "Clinic Position",
     "enterclinicPosition" : "Enter your clinic address",
-    "positionController": "Enter your address"
+    "positionController": "Enter your address",
+    "assignDate":"Date",
+    "Notes":"Notes",
+    "username": "Please enter username for patient",
+    "SUBMIT": "Submit",
+    "doctorName":"Doctor name",
+    "prescription":"prescription",
+    "save":"save",
+    "saveAndLeaveQ":"Do you want to save and leave?",
+    "Cancel":"Cancel",
+    "Prescription":"Prescription",
+    "AddChronicDisease":"Add Chronic Disease",
+    "ChronicDis" : "Chronic Disease",
+    "CurrentAppointment":"Current Appointment"
 }

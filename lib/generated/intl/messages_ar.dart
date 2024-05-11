@@ -22,9 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "AddChronicDisease":
+            MessageLookupByLibrary.simpleMessage("اضافة مرض مزمن"),
         "Appointment": MessageLookupByLibrary.simpleMessage("الكشوفات"),
         "Attachments": MessageLookupByLibrary.simpleMessage("الملفات الطبية"),
+        "Cancel": MessageLookupByLibrary.simpleMessage("الغاء"),
         "Chronic": MessageLookupByLibrary.simpleMessage("الامراض المزمنة"),
+        "ChronicDis": MessageLookupByLibrary.simpleMessage("المرض المزمن"),
+        "CurrentAppointment":
+            MessageLookupByLibrary.simpleMessage("الكشف الحالي"),
         "Doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
         "Emergency": MessageLookupByLibrary.simpleMessage("الطوارئ"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
@@ -32,16 +38,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "LoginNow": MessageLookupByLibrary.simpleMessage("سجل الان"),
         "Logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "NationalId": MessageLookupByLibrary.simpleMessage("الرقم القومى"),
+        "Notes": MessageLookupByLibrary.simpleMessage("ملاحظات"),
         "Patient": MessageLookupByLibrary.simpleMessage("مستخدم"),
         "Phone": MessageLookupByLibrary.simpleMessage("رقم التليفون"),
+        "Prescription": MessageLookupByLibrary.simpleMessage("الروشتة"),
         "QrCode": MessageLookupByLibrary.simpleMessage("رمز الاستجابة"),
         "SIGNUP": MessageLookupByLibrary.simpleMessage("انشاء"),
+        "SUBMIT": MessageLookupByLibrary.simpleMessage("ارسال"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
+        "assignDate": MessageLookupByLibrary.simpleMessage("التاريخ"),
         "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
         "chat": MessageLookupByLibrary.simpleMessage("المحادثة"),
         "clinicLocation": MessageLookupByLibrary.simpleMessage("عنوان العيادة"),
         "clinicPosition": MessageLookupByLibrary.simpleMessage("موقع العيادة"),
         "department": MessageLookupByLibrary.simpleMessage("القسم"),
+        "doctorName": MessageLookupByLibrary.simpleMessage("اسم الطبيب"),
         "editInfor":
             MessageLookupByLibrary.simpleMessage("تعديل المعلومات الاساسية"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
@@ -79,12 +90,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
         "positionController":
             MessageLookupByLibrary.simpleMessage("موقع معمل التحاليل"),
+        "prescription": MessageLookupByLibrary.simpleMessage("الروشتة"),
         "profile": MessageLookupByLibrary.simpleMessage("الصفحة الشخصية"),
         "register": MessageLookupByLibrary.simpleMessage("سجل"),
+        "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+        "saveAndLeaveQ":
+            MessageLookupByLibrary.simpleMessage("هل تريد الحفظ و المغادرة ؟"),
         "savechanges": MessageLookupByLibrary.simpleMessage("حفظ التعديلات"),
         "signup": MessageLookupByLibrary.simpleMessage("انشاء حساب"),
         "title": MessageLookupByLibrary.simpleMessage("روشتة"),
         "uploadAttachment": MessageLookupByLibrary.simpleMessage("رفع ملف"),
-        "uploadFile": MessageLookupByLibrary.simpleMessage("رفع ملف")
+        "uploadFile": MessageLookupByLibrary.simpleMessage("رفع ملف"),
+        "username":
+            MessageLookupByLibrary.simpleMessage("من فضلك ادخل اسم المستخدم")
       };
 }

@@ -2,6 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/Languages/language_screen.dart';
+import 'package:rosheta_ui/Views/lab/add_attachments_screen.dart';
+import 'package:rosheta_ui/Views/patient_medical_data/Appointment_screen.dart';
+import 'package:rosheta_ui/Views/patient_medical_data/Chronic_screen.dart';
+import 'package:rosheta_ui/Views/patient_medical_data/attachments_screen.dart';
+import 'package:rosheta_ui/Views/patient_medical_data/give_access_screen.dart';
 import 'package:rosheta_ui/Views/profile/profile_screen.dart';
 import 'package:rosheta_ui/Views/register/login_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
@@ -118,7 +123,10 @@ Drawer patient_drawer(context) {
                     ),
                   ],
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (c) => GiveAccessScreen()));
+                },
               ),
             ),
           ),
@@ -145,6 +153,11 @@ Drawer patient_drawer(context) {
                 ],
               ),
               onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (c) => const AppointmentListScreen()));
+
                 // Handle button 1 tap
               },
             ),
@@ -172,7 +185,10 @@ Drawer patient_drawer(context) {
                 ],
               ),
               onTap: () {
-                // Handle button 1 tap
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (c) => const ChronicDiseaseListScreen()));
               },
             ),
           ),
@@ -200,6 +216,8 @@ Drawer patient_drawer(context) {
               ),
               onTap: () {
                 // Handle button 1 tap
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => AttachmentScreen()));
               },
             ),
           ),
@@ -347,60 +365,34 @@ Drawer doctor_drawer(context) {
               ),
             ),
           ),
-          Container(
-            color: Colors.black38,
-            child: const SizedBox(
-              height: 3,
-            ),
-          ),
-          Container(
-            color: Colors.white,
-            child: ListTile(
-              leading: const Icon(
-                Icons.medical_services,
-                size: 30,
-              ),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    S.of(context).examination,
-                    style: const TextStyle(fontSize: 25),
-                  ),
-                ],
-              ),
-              onTap: () {
-                // Handle button 1 tap
-              },
-            ),
-          ),
-          Container(
-            color: Colors.black38,
-            child: const SizedBox(
-              height: 3,
-            ),
-          ),
-          Container(
-            color: Colors.white,
-            child: ListTile(
-              leading: const Icon(
-                Icons.emergency,
-                size: 30,
-              ),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    S.of(context).Emergency,
-                    style: const TextStyle(fontSize: 25),
-                  ),
-                ],
-              ),
-              onTap: () {
-                // Handle button 1 tap
-              },
-            ),
-          ),
+
+          // Container(
+          //   color: Colors.black38,
+          //   child: const SizedBox(
+          //     height: 3,
+          //   ),
+          // ),
+          // Container(
+          //   color: Colors.white,
+          //   child: ListTile(
+          //     leading: const Icon(
+          //       Icons.emergency,
+          //       size: 30,
+          //     ),
+          //     title: Row(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         Text(
+          //           S.of(context).Emergency,
+          //           style: const TextStyle(fontSize: 25),
+          //         ),
+          //       ],
+          //     ),
+          //     onTap: () {
+          //       // Handle button 1 tap
+          //     },
+          //   ),
+          // ),
           Container(
             color: Colors.black38,
             child: const SizedBox(
@@ -569,8 +561,10 @@ Drawer lab_drawer(context) {
                   ],
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (c) => const ProfileScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (c) => const AddAttachments()));
                 },
               ),
             ),

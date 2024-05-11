@@ -51,5 +51,18 @@
     "uploadFile": "رفع ملف",
     "clinicPosition" : "موقع العيادة",
     "enterclinicPosition" : "ادخل موقع العيادة",
-    "positionController": "موقع معمل التحاليل"
+    "positionController": "موقع معمل التحاليل",
+    "assignDate":"التاريخ",
+    "Notes":"ملاحظات",
+    "username": "من فضلك ادخل اسم المستخدم",
+    "SUBMIT": "ارسال",
+    "doctorName":"اسم الطبيب",
+    "prescription":"الروشتة",
+    "save":"حفظ",
+    "saveAndLeaveQ":"هل تريد الحفظ و المغادرة ؟",
+    "Cancel":"الغاء",
+    "Prescription":"الروشتة",
+    "AddChronicDisease":"اضافة مرض مزمن",
+    "ChronicDis" : "المرض المزمن",
+    "CurrentAppointment":"الكشف الحالي"
 }

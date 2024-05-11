@@ -25,6 +25,7 @@ class ProfileApi {
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
         var jsonData = jsonDecode(data);
+
         Profile dataProfile = Profile.fromJson(jsonData);
 
         return dataProfile;
@@ -34,7 +35,7 @@ class ProfileApi {
     } catch (e) {
       print('Exception: $e');
     }
-    throw Exception('Login failed');
+    throw Exception('Profile failed');
   }
 
   Future<String> getAccessToken() async {

@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/profile/profile_screen.dart';
+import 'package:rosheta_ui/drawer/drawers.dart';
+import 'package:rosheta_ui/models/profile/profile_model.dart';
+import 'package:rosheta_ui/services/profile/Profile_service.dart';
 import 'package:rosheta_ui/services/register/login_service.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/Views/register/signup_screen.dart';
@@ -14,12 +17,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
-
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
-
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +79,9 @@ class _LoginScreen extends State<LoginScreen> {
                               suffixIcon: GestureDetector(
                                 onTap: _togglePasswordVisibility,
                                 child: Icon(
-                                  _obscureText ? Icons.visibility_off : Icons.visibility,
+                                  _obscureText
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
                                 ),
                               ),
                               border: const OutlineInputBorder(),
@@ -103,12 +106,29 @@ class _LoginScreen extends State<LoginScreen> {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState?.save();
                                 LoginApi loginapi = LoginApi();
-                                print('before request.....................');
-                                bool tmp = await loginapi.login(emailController.text,passwordController.text);
-                                if(tmp){
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (c) => const ProfileScreen()));
-                                }else{
+                                bool tmp = await loginapi.login(
+                                    emailController.text,
+                                    passwordController.text);
+                                if (tmp) {
+                                  ProfileApi pa = ProfileApi();
+                                  Profile pr = await pa.featchProfile();
+                                  DataManager dataManager = DataManager();
+                                  dataManager.profile_image = pr.profileImage;
+                                  dataManager.name = pr.name;
+                                  dataManager.username = pr.userName;
+                                  if (pr.gender == "")
+                                    dataManager.type = 3;
+                                  else if (pr.location == "")
+                                    dataManager.type = 1;
+                                  else
+                                    dataManager.type = 2;
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (c) =>
+                                              const ProfileScreen()));
+                                } else {
                                   print('error');
                                 }
                               }
@@ -124,10 +144,8 @@ class _LoginScreen extends State<LoginScreen> {
                       TextButton(
                         child: Text(S.of(context).register),
                         onPressed: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (c) => SignupScreen()))
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (c) => SignupScreen()))
                         },
                       )
                     ],
