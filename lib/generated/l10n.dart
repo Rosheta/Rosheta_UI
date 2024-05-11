@@ -709,6 +709,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Yes`
+  String get Yes {
+    return Intl.message(
+      'Yes',
+      name: 'Yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get No {
+    return Intl.message(
+      'No',
+      name: 'No',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to give access to the following user?`
+  String get giveaccess {
+    return Intl.message(
+      'Are you sure you want to give access to the following user?',
+      name: 'giveaccess',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

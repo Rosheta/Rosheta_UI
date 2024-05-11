@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "LoginNow": MessageLookupByLibrary.simpleMessage("Login Now"),
         "Logout": MessageLookupByLibrary.simpleMessage("Log out"),
         "NationalId": MessageLookupByLibrary.simpleMessage("National ID"),
+        "No": MessageLookupByLibrary.simpleMessage("No"),
         "Notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "Patient": MessageLookupByLibrary.simpleMessage("Patient"),
         "Phone": MessageLookupByLibrary.simpleMessage("Phonenumber"),
@@ -46,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "SIGNUP": MessageLookupByLibrary.simpleMessage("SIGNUP"),
         "SUBMIT": MessageLookupByLibrary.simpleMessage("Submit"),
         "UserbirthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
+        "Yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "assignDate": MessageLookupByLibrary.simpleMessage("Date"),
         "birthDate": MessageLookupByLibrary.simpleMessage("Select Birth Date"),
         "chat": MessageLookupByLibrary.simpleMessage("Chats"),
@@ -71,6 +73,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "examination": MessageLookupByLibrary.simpleMessage("New Examination"),
         "female": MessageLookupByLibrary.simpleMessage("female"),
         "gender": MessageLookupByLibrary.simpleMessage("gender"),
+        "giveaccess": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to give access to the following user?"),
         "government": MessageLookupByLibrary.simpleMessage("government"),
         "havingaccount":
             MessageLookupByLibrary.simpleMessage("Have an accout?"),

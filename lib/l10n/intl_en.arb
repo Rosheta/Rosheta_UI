@@ -64,5 +64,8 @@
     "Prescription":"Prescription",
     "AddChronicDisease":"Add Chronic Disease",
     "ChronicDis" : "Chronic Disease",
-    "CurrentAppointment":"Current Appointment"
+    "CurrentAppointment":"Current Appointment",
+    "Yes":"Yes",
+    "No":"No",
+    "giveaccess": "Are you sure you want to give access to the following user?"
 }

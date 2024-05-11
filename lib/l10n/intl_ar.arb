@@ -64,5 +64,8 @@
     "Prescription":"الروشتة",
     "AddChronicDisease":"اضافة مرض مزمن",
     "ChronicDis" : "المرض المزمن",
-    "CurrentAppointment":"الكشف الحالي"
+    "CurrentAppointment":"الكشف الحالي",
+    "Yes":"نعم",
+    "No":"لا",
+    "giveaccess":"هل تريد اعطاء الوصول للملفات الطبية للدكتور؟"
 }

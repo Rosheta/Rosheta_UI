@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rosheta_ui/components/shared/appbar.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
+import 'package:rosheta_ui/models/patient_medical_data/user_model.dart';
 import 'package:rosheta_ui/services/patient_medical_data/give_access_service.dart';
 
 class GiveAccessScreen extends StatelessWidget {
@@ -45,50 +46,89 @@ class GiveAccessScreen extends StatelessWidget {
                       value!.isEmpty ? S.of(context).enterYourName : null,
                 ),
                 MaterialButton(
-                  child: Text(
-                    S.of(context).SUBMIT,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    child: Text(
+                      S.of(context).SUBMIT,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      GiveAccessApi tmp = GiveAccessApi();
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false, // Prevent dismissing dialog by tapping outside
-                        builder: (BuildContext context) {
-                          return const AlertDialog(
-                            content: Row(
-                              children: [
-                                CircularProgressIndicator(),
-                                SizedBox(width: 20),
-                                Text('loading...'),
-                              ],
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        GiveAccessApi tmp = GiveAccessApi();
+                        User data = await tmp.getUser(usernameController.text);
+                        if (data.flag == false) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('User not found'),
                             ),
                           );
-                        },
-                      );
-                      try {
-                        bool check = await tmp.giveAccess(usernameController.text);
-                        Navigator.of(context).pop(); // Close loading dialog
-                        if (check) {
-                          // If the form is valid and attachment added successfully
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Successfully giving access to the user')),
-                          );
-                        }else{
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Failure, please try again later")),
-                          );
+                        } else {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  content: SizedBox(
+                                    height: 600,
+                                    child: Column(
+                                      children: [
+                                        Text(S.of(context).giveaccess),
+                                        Image.network(data.profileImage),
+                                        const SizedBox(height: 10),
+                                        Text(data.name),
+                                        const SizedBox(height: 10),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                Navigator.of(context).pop();
+                                                try {
+                                                  bool check =
+                                                      await tmp.giveAccess(
+                                                          usernameController
+                                                              .text);
+                                                  if (check) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                          content: Text(
+                                                              'Successfully giving access to the user')),
+                                                    );
+                                                  } else {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                          content: Text(
+                                                              "Failure, please try again later")),
+                                                    );
+                                                  }
+                                                } catch (e) {}
+                                              },
+                                              child: Text(S.of(context).Yes),
+                                            ),
+                                            const SizedBox(width: 10),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(S.of(context).No),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              });
+                        
                         }
-                      } catch (e) {
-                        Navigator.of(context).pop(); // Close loading dialog
-                        // Handle error, maybe show an error message
                       }
-                    }                    
-                  }),
+                    }),
               ],
             ),
           ),
