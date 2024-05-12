@@ -45,7 +45,7 @@ class _searchWidgetState extends State<searchWidget> {
               showSearch(
                   context: context,
                   // delegate to customize the search bar
-                  delegate: SearchPeople()
+                  delegate: SearchPeople(1)
               );
             },
             icon: const Icon(Icons.search),
@@ -57,6 +57,9 @@ class _searchWidgetState extends State<searchWidget> {
 }
 
 class SearchPeople extends SearchDelegate<String>{
+  final int type;
+  SearchPeople(this.type);
+
   String selectedUserId = "";
 
   List<String> specializations = [
@@ -116,13 +119,6 @@ class SearchPeople extends SearchDelegate<String>{
     'Sohag',
     'South Sinai',
     'Suez'
-  ];
-
-  List<String> organizations = [
-    'Any',
-    'Doctor',
-    'Patient',
-    'Lab'
   ];
 
   // to be called from l10n for arabic
@@ -213,6 +209,22 @@ class SearchPeople extends SearchDelegate<String>{
       'specialization': searchProvider.selectedSpecialization,
       'organization' : searchProvider.selectedOrganization,
     };
+
+    List<String> organizations = [];
+    if (type == 1) {
+      organizations = [
+        'Any',
+        'Doctor',
+        'Lab',
+      ];
+    } else {
+      organizations = [
+        'Any',
+        'Doctor',
+        'Patient',
+        'Lab',
+      ];
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
