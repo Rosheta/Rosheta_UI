@@ -15,70 +15,62 @@ class DoctorDataApi {
     print(url);
 
     try {
-      String accessToken = await getAccessToken();
+      // String accessToken = await getAccessToken();
 
-      http.Response response = await http.get(
-        Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $accessToken',
-          'accesscontrol': token
-        },
-      );
-      print(
-          ".......................................................................");
-      print("all");
-      print(accessToken);
-      print(response.statusCode);
-      print(response.body);
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        // // if (true) {
-        // String jsonData = '''
-        // {
-        //   "appointments": [
-        //     {
-        //       "name": "Appointment 1",
-        //       "date": "2024-05-03",
-        //       "doctor_name": "Dr. Smith",
-        //       "prescription": "Prescription 1",
-        //       "notes": "Notes 1",
-        //       "chronic_diseases": [
-        //         {"name": "Disease 1", "date": "2023-01-01", "notes": "Disease 1 notes"},
-        //         {"name": "Disease 2", "date": "2023-02-01", "notes": "Disease 2 notes"}
-        //       ]
-        //     },
-        //     {
-        //       "name": "Appointment 2",
-        //       "date": "2024-05-05",
-        //       "doctor_name": "Dr. Johnson",
-        //       "prescription": "Prescription 2",
-        //       "notes": "Notes 2",
-        //       "chronic_diseases": [
-        //         {"name": "Disease 3", "date": "2023-03-01", "notes": "Disease 3 notes"}
-        //       ]
-        //     }
-        //   ],
-        //   "chronic_diseases": [
-        //     {"name": "Chronic Disease 1", "date": "2023-01-01", "notes": "Chronic Disease 1 notes"},
-        //     {"name": "Chronic Disease 2", "date": "2023-02-01", "notes": "Chronic Disease 2 notes"}
-        //   ],
-        //   "attachments": [
-        //     {"Hash": "hash1", "Filename": "File 1", "Extension": ".pdf", "date": "2023-01-01"},
-        //     {"Hash": "hash2", "Filename": "File 2", "Extension": ".jpg", "date": "2023-02-01"}
-        //   ]
-        // }
-        // ''';
-        Map<String, dynamic> jsonMap = jsonDecode(response.body);
-        print(jsonMap);
-
-        // Create MedicalData instance using the fromJson factory constructor
+      // http.Response response = await http.get(
+      //   Uri.parse(url),
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': 'Bearer $accessToken',
+      //     'accesscontrol': token
+      //   },
+      // );
+      // if (response.statusCode == 200 || response.statusCode == 201) {
+      if (true) {
+        String jsonData = '''
+        {
+          "appointments": [
+            {
+              "Name": "Appointment 1",
+              "Date": "2024-05-03",
+              "DoctorId": "Dr. Smith",
+              "Prescription": "Prescription 1",
+              "Notes": "Notes 1",
+              "ChronicDiseases": [
+                {"Name": "Disease 1", "Date": "2023-01-01", "Notes": "Disease 1 notes"},
+                {"Name": "Disease 2", "Date": "2023-02-01", "Notes": "Disease 2 notes"}
+              ]
+            },
+            {
+              "Name": "Appointment 2",
+              "Date": "2024-05-05",
+              "DoctorId": "Dr. Johnson",
+              "Prescription": "Prescription 2",
+              "Notes": "Notes 2",
+              "ChronicDiseases": [
+                {"Name": "Disease 3", "Date": "2023-03-01", "Notes": "Disease 3 notes"}
+              ]
+            }
+          ],
+          "chronics": [
+            {"Name": "Chronic Disease 1", "Date": "2023-01-01", "Notes": "Chronic Disease 1 notes"},
+            {"Name": "Chronic Disease 2", "Date": "2023-02-01", "Notes": "Chronic Disease 2 notes"}
+          ],
+          "files": [
+            {"Hash": "hash1", "Filename": "File 1", "Extension": ".pdf", "date": "2023-01-01"},
+            {"Hash": "hash2", "Filename": "File 2", "Extension": ".jpg", "date": "2023-02-01"}
+          ]
+        }
+        ''';
+        // Map<String, dynamic> jsonMap = jsonDecode(response.body);
+        Map<String, dynamic> jsonMap = jsonDecode(jsonData);
         MedicalData medicalData = MedicalData.fromJson(jsonMap);
         return medicalData;
       } else {
-        throw Exception('Failed to load appointments');
+        throw Exception('Failed to load data');
       }
     } catch (e) {
-      throw Exception('Failed to load appointments');
+      throw Exception('Failed to load data');
     }
   }
 

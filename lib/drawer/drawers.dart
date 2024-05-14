@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/Languages/language_screen.dart';
+import 'package:rosheta_ui/Views/emergancy/usingId_view.dart';
 import 'package:rosheta_ui/Views/lab/add_attachments_screen.dart';
 import 'package:rosheta_ui/Views/patient_medical_data/Appointment_screen.dart';
 import 'package:rosheta_ui/Views/patient_medical_data/Chronic_screen.dart';
@@ -24,7 +25,7 @@ class DataManager {
   }
 
   // Your shared data
-  int type = 1;
+  int type = 4;
   String profile_image = '';
   String name = "";
   String username = "";
@@ -467,6 +468,182 @@ Drawer doctor_drawer(context) {
   );
 }
 
+Drawer emergency_drawer(context) {
+  DataManager dataManager = DataManager();
+
+  return Drawer(
+    backgroundColor: Colors.white,
+    child: Center(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          Center(
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.only(top: 40),
+              color: Colors.cyan,
+              child: Column(children: [
+                Stack(children: [
+                  dataManager.profile_image.isNotEmpty
+                      ? CircleAvatar(
+                          radius: 40.0,
+                          backgroundImage:
+                              NetworkImage(dataManager.profile_image),
+                        )
+                      : const CircleAvatar(
+                          radius: 40.0,
+                          backgroundImage: AssetImage('Images/profile.png'),
+                        ),
+                ]),
+                Text(
+                  dataManager.name,
+                  style: const TextStyle(
+                      fontSize: 25, color: Color.fromARGB(255, 1, 14, 15)),
+                ),
+                Text(
+                  dataManager.username,
+                  style: const TextStyle(
+                      fontSize: 20, color: Color.fromARGB(255, 1, 14, 15)),
+                ),
+              ]),
+            ),
+          ),
+          Container(
+            color: Colors.black38,
+            child: const SizedBox(
+              height: 3,
+            ),
+          ),
+          Center(
+            child: Container(
+              color: Colors.white,
+              child: ListTile(
+                leading: const Icon(
+                  Icons.person_4,
+                  size: 30,
+                ),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      S.of(context).profile,
+                      style: const TextStyle(fontSize: 25),
+                    ),
+                  ],
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (c) => const ProfileScreen()));
+                },
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.black38,
+            child: const SizedBox(
+              height: 3,
+            ),
+          ),
+          Container(
+            color: Colors.white,
+            child: ListTile(
+              leading: const Icon(
+                Icons.emergency,
+                size: 30,
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    S.of(context).Emergency,
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (c) => GiveAccessUsingIdScreen()));
+
+                // Handle button 1 tap
+              },
+            ),
+          ),
+          Container(
+            color: Colors.black38,
+            child: const SizedBox(
+              height: 3,
+            ),
+          ),
+          Container(
+            color: Colors.white,
+            child: ListTile(
+              leading: const Icon(
+                Icons.language,
+                size: 30,
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    S.of(context).langauege,
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => LanguageScreen()));
+
+                // Handle button 1 tap
+              },
+            ),
+          ),
+          Container(
+            color: Colors.black38,
+            child: const SizedBox(
+              height: 3,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(220, 218, 214, 214),
+              borderRadius: BorderRadius.circular(
+                  20.0), // Set the border radius for circular edges
+            ),
+            child: ListTile(
+              leading: const Icon(
+                Icons.logout,
+                size: 30,
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    S.of(context).Logout,
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (c) => const LoginScreen()));
+              },
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 Drawer lab_drawer(context) {
   DataManager dataManager = DataManager();
 
@@ -647,5 +824,6 @@ Drawer select_drawer(context) {
   DataManager dataManager = DataManager();
   if (dataManager.type == 1) return patient_drawer(context);
   if (dataManager.type == 2) return doctor_drawer(context);
-  return lab_drawer(context);
+  if (dataManager.type == 2) return lab_drawer(context);
+  return emergency_drawer(context);
 }

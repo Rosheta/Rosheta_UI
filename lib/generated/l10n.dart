@@ -700,6 +700,26 @@ class S {
     );
   }
 
+  /// `Please enter patient national ID `
+  String get userID {
+    return Intl.message(
+      'Please enter patient national ID ',
+      name: 'userID',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter patient national ID`
+  String get enterPatientID {
+    return Intl.message(
+      'Enter patient national ID',
+      name: 'enterPatientID',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Current Appointment`
   String get CurrentAppointment {
     return Intl.message(

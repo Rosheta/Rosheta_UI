@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editInfor":
             MessageLookupByLibrary.simpleMessage("تعديل المعلومات الاساسية"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
+        "enterPatientID":
+            MessageLookupByLibrary.simpleMessage("ادخل الرقم القومي للمريض"),
         "enterValidEmail":
             MessageLookupByLibrary.simpleMessage("الايميل يحتوى على @"),
         "enterValidPhone":
@@ -101,6 +103,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("روشتة"),
         "uploadAttachment": MessageLookupByLibrary.simpleMessage("رفع ملف"),
         "uploadFile": MessageLookupByLibrary.simpleMessage("رفع ملف"),
+        "userID": MessageLookupByLibrary.simpleMessage(
+            "من فضلك ادخل الرقم القومي للمريض"),
         "username":
             MessageLookupByLibrary.simpleMessage("من فضلك ادخل اسم المستخدم")
       };

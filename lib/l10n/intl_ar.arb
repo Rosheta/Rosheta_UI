@@ -64,5 +64,7 @@
     "Prescription":"الروشتة",
     "AddChronicDisease":"اضافة مرض مزمن",
     "ChronicDis" : "المرض المزمن",
+    "userID": "من فضلك ادخل الرقم القومي للمريض",
+    "enterPatientID": "ادخل الرقم القومي للمريض",
     "CurrentAppointment":"الكشف الحالي"
 }

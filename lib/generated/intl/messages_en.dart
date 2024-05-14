@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editInfor":
             MessageLookupByLibrary.simpleMessage("Edit basic information"),
         "email": MessageLookupByLibrary.simpleMessage("Email Address"),
+        "enterPatientID":
+            MessageLookupByLibrary.simpleMessage("Enter patient national ID"),
         "enterValidEmail":
             MessageLookupByLibrary.simpleMessage("Email must contain @"),
         "enterValidPhone": MessageLookupByLibrary.simpleMessage(
@@ -106,6 +108,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("ROSHETA"),
         "uploadAttachment": MessageLookupByLibrary.simpleMessage("Upload File"),
         "uploadFile": MessageLookupByLibrary.simpleMessage("Upload File"),
+        "userID": MessageLookupByLibrary.simpleMessage(
+            "Please enter patient national ID "),
         "username": MessageLookupByLibrary.simpleMessage(
             "Please enter username for patient")
       };

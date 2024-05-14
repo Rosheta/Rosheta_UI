@@ -64,5 +64,8 @@
     "Prescription":"Prescription",
     "AddChronicDisease":"Add Chronic Disease",
     "ChronicDis" : "Chronic Disease",
+    "userID": "Please enter patient national ID ",
+    "enterPatientID": "Enter patient national ID",
+
     "CurrentAppointment":"Current Appointment"
 }
