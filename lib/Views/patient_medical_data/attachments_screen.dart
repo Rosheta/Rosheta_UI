@@ -111,7 +111,8 @@ class _AttachmentScreenState extends State<AttachmentScreen> {
         Uint8List tmp = await attachmentApi.getAttachment(fileHash);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ShowFileScreen(serverData: tmp , ext: ext)),
+          MaterialPageRoute(
+              builder: (context) => ShowFileScreen(serverData: tmp, ext: ext)),
         );
       },
       child: Card(
@@ -121,11 +122,11 @@ class _AttachmentScreenState extends State<AttachmentScreen> {
             '$name$ext',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-          ), 
-          subtitle: Text(time),
+          ),
+          subtitle: Text(time.substring(0, 10)),
           trailing: IconButton(
             icon: const Icon(Icons.delete),
-            onPressed:  () async {
+            onPressed: () async {
               AttachmentApi attachmentApi = AttachmentApi();
               bool check = await attachmentApi.deleteAttachment(fileHash);
               if (check) {
@@ -153,5 +154,4 @@ class _AttachmentScreenState extends State<AttachmentScreen> {
       ),
     );
   }
-
 }

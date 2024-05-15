@@ -800,7 +800,7 @@ class _DoctorAttachmentsListWidgetState
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          subtitle: Text(time),
+          subtitle: Text(time.substring(0,10)),
         ),
       ),
     );

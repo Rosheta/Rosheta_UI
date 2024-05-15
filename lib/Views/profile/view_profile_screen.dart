@@ -170,8 +170,9 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
                                 MaterialPageRoute(
                                     builder: (c) => ChatScreen(
                                           userIdSecondPerson: widget.userID,
-                                          name: pr.userName,
+                                          name: pr.name,
                                           chatId: chatID,
+                                          imageUrl: pr.profileImage,
                                         )));
                           },
                           child: Container(
