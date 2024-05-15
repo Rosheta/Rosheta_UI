@@ -39,13 +39,14 @@ class GiveAccessApi {
 
   Future<Uint8List> getAttachment(String hash,String sharedtoken) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/doctor/getFile?fileHash=$hash&token=$sharedtoken';
+    final url = '$apiUrl/doctor/getFile?fileHash=$hash';
     final String token = await getAccessToken();
     try {
       final http.Client client = http.Client();
       final http.Request request = http.Request('GET', Uri.parse(url));
       request.headers['Content-Type'] = 'application/json';
       request.headers['Authorization'] = 'Bearer $token';
+      request.headers['accesscontrol'] = 'Bearer $sharedtoken';
 
       final http.StreamedResponse response = await client.send(request);
 

@@ -59,6 +59,7 @@ class DoctorDataApi {
         //     ]
         //   }
         //   ''';
+        print(response.body);
         Map<String, dynamic> jsonMap = jsonDecode(response.body);
         // Map<String, dynamic> jsonMap = jsonDecode(jsonData);
         MedicalData medicalData = MedicalData.fromJson(jsonMap);

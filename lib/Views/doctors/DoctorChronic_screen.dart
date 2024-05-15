@@ -774,14 +774,20 @@ class _DoctorAttachmentsListWidgetState
     return InkWell(
       onTap: () async {
         GiveAccessApi attachmentApi = GiveAccessApi();
-        Uint8List tmp = await attachmentApi.getAttachment(
-            fileHash, widget.token /*write sharedtoken here*/
-            );
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ShowFileScreen(serverData: tmp, ext: ext)),
-        );
+        Uint8List tmp =
+            await attachmentApi.getAttachment(fileHash, widget.token);
+        if(tmp.length != 0){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ShowFileScreen(serverData: tmp, ext: ext)),
+          );
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to load file')),
+          );
+        }
+        
       },
       child: Card(
         child: ListTile(

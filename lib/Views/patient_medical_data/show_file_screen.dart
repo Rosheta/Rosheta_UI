@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class ShowFileScreen extends StatefulWidget {
   final Uint8List? serverData;
@@ -48,23 +49,7 @@ class _ShowFileScreenState extends State<ShowFileScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: widget.serverData != null
-              ? widget.ext == ".pdf" ? PDFView(
-                  pdfData: widget.serverData!,
-                  enableSwipe: true,
-                  swipeHorizontal: false,
-                  autoSpacing: true,
-                  pageFling: true,
-                  onRender: (pages) {
-                    setState(() {
-                      pages = pages!;
-                      isReady = true;
-                    });
-                  },
-                  onViewCreated: (PDFViewController pdfViewController) {
-                    _controller.complete(pdfViewController);
-                  },
-                  onPageChanged: (int? page, int? total) {},
-                ) : Image.memory(widget.serverData!)
+              ? widget.ext == ".pdf" ? SfPdfViewer.memory(widget.serverData!) : Image.memory(widget.serverData!)
               : const CircularProgressIndicator(),
         ),
       ),

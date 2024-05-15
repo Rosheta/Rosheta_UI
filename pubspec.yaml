@@ -49,6 +49,7 @@ dependencies:
   firebase_messaging: ^14.9.1
   firebase_analytics: ^10.10.4
   flutter_local_notifications: ^17.1.0
+  syncfusion_flutter_pdfviewer: ^24.2.8
 
 dev_dependencies:
   flutter_test:
