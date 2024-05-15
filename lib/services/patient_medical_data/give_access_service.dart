@@ -37,7 +37,7 @@ class GiveAccessApi {
     }
   }
 
-  Future<Uint8List> getAttachment(String hash,String sharedtoken) async {
+  Future<Uint8List> getAttachment(String hash, String sharedtoken) async {
     final String apiUrl = dotenv.env['API_URL']!;
     final url = '$apiUrl/doctor/getFile?fileHash=$hash';
     final String token = await getAccessToken();
@@ -47,15 +47,15 @@ class GiveAccessApi {
       request.headers['Content-Type'] = 'application/json';
       request.headers['Authorization'] = 'Bearer $token';
       request.headers['accesscontrol'] = 'Bearer $sharedtoken';
-
       final http.StreamedResponse response = await client.send(request);
-
+      print(response.stream);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final List<Uint8List> chunks = [];
         await for (final List<int> chunk in response.stream) {
           chunks.add(Uint8List.fromList(chunk));
         }
-        final Uint8List data = Uint8List.fromList(chunks.expand((x) => x).toList());
+        final Uint8List data =
+            Uint8List.fromList(chunks.expand((x) => x).toList());
         print('Attachment retrieved successfully');
         return data;
       } else {

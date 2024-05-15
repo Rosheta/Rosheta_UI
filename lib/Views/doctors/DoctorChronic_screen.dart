@@ -52,6 +52,7 @@ class _DoctorViewState extends State<DoctorView> {
   Widget build(BuildContext context) {
     final message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
     token = message.data["dataAccessToken"];
+    print(token);
     // token = "T";
     _medicalData = _fetchChronicDiseases(token);
     return DefaultTabController(
@@ -267,7 +268,6 @@ class DoctorAppointmentListWidget extends StatelessWidget {
             itemCount: appointments.length,
             itemBuilder: (context, index) {
               Appointment appointment = appointments[index];
-              List<String> pointList1 = appointment.prescription.split("///");
 
               return Padding(
                 padding: const EdgeInsets.symmetric(
@@ -314,7 +314,7 @@ class DoctorAppointmentListWidget extends StatelessWidget {
                                     ),
                                     title: getTitle(S.of(context).examination2),
                                     subtitle: Text(
-                                      pointList1[0],
+                                      appointment.examination,
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -328,7 +328,7 @@ class DoctorAppointmentListWidget extends StatelessWidget {
                                     ),
                                     title: getTitle(S.of(context).Diagnosis),
                                     subtitle: Text(
-                                      pointList1[1],
+                                      appointment.diagnosis,
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -342,7 +342,7 @@ class DoctorAppointmentListWidget extends StatelessWidget {
                                     ),
                                     title: getTitle(S.of(context).prescription),
                                     subtitle: Text(
-                                      pointList1[2],
+                                      appointment.prescriptions,
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -530,8 +530,11 @@ class _PrescriptionAndNotesScreenState
                 }
 
                 bool success = await sendAppointment.sendAppointment(
-                  prescription:
-                      "${prescriptionController1.text}///${prescriptionController2.text}///${prescriptionController3.text}",
+                  prescription: {
+                    "Examination": prescriptionController1.text,
+                    "Diagnosis": prescriptionController2.text,
+                    "Prescriptions": prescriptionController3.text,
+                  },
                   note: notesController.text,
                   chronicDiseases: chronicDiseases2,
                   token: widget.token,
@@ -776,18 +779,18 @@ class _DoctorAttachmentsListWidgetState
         GiveAccessApi attachmentApi = GiveAccessApi();
         Uint8List tmp =
             await attachmentApi.getAttachment(fileHash, widget.token);
-        if(tmp.length != 0){
+        if (tmp.length != 0) {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ShowFileScreen(serverData: tmp, ext: ext)),
+                builder: (context) =>
+                    ShowFileScreen(serverData: tmp, ext: ext)),
           );
-        }else{
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Failed to load file')),
           );
         }
-        
       },
       child: Card(
         child: ListTile(

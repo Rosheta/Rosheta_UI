@@ -115,7 +115,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
               children: [
                 CircleAvatar(
                   radius: 30.0,
-                  backgroundImage: imageURL != null
+                  backgroundImage: imageURL != "" && imageURL != null
                       ? Image.network(imageURL).image
                       : Image.asset('Images/profile.png').image
                           as ImageProvider<Object>?,

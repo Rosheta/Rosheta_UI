@@ -75,7 +75,6 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
               itemCount: appointments.length,
               itemBuilder: (context, index) {
                 Appointment appointment = appointments[index];
-                List<String> pointList1 = appointment.prescription.split("///");
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(
@@ -123,7 +122,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
                                       title:
                                           getTitle(S.of(context).examination2),
                                       subtitle: Text(
-                                        pointList1[0],
+                                        appointment.examination,
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 20,
@@ -137,7 +136,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
                                       ),
                                       title: getTitle(S.of(context).Diagnosis),
                                       subtitle: Text(
-                                        pointList1[1],
+                                        appointment.diagnosis,
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 20,
@@ -152,7 +151,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
                                       title:
                                           getTitle(S.of(context).prescription),
                                       subtitle: Text(
-                                        pointList1[2],
+                                        appointment.prescriptions,
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 20,

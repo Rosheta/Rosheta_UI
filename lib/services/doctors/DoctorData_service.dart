@@ -19,9 +19,11 @@ class DoctorDataApi {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $accessToken',
-          'accesscontrol': token
+          'accesscontrol': 'Bearer $token'
         },
       );
+      print("yalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaahwy ${response.body} ");
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         // if (true) {
         //   String jsonData = '''
@@ -59,7 +61,6 @@ class DoctorDataApi {
         //     ]
         //   }
         //   ''';
-        print(response.body);
         Map<String, dynamic> jsonMap = jsonDecode(response.body);
         // Map<String, dynamic> jsonMap = jsonDecode(jsonData);
         MedicalData medicalData = MedicalData.fromJson(jsonMap);
