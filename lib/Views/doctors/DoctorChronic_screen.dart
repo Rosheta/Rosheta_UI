@@ -52,6 +52,7 @@ class _DoctorViewState extends State<DoctorView> {
   Widget build(BuildContext context) {
     final message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
     token = message.data["dataAccessToken"];
+    // token = "T";
     _medicalData = _fetchChronicDiseases(token);
     return DefaultTabController(
       length: 4, // Number of tabs
@@ -266,9 +267,13 @@ class DoctorAppointmentListWidget extends StatelessWidget {
             itemCount: appointments.length,
             itemBuilder: (context, index) {
               Appointment appointment = appointments[index];
+              List<String> pointList1 = appointment.prescription.split("///");
+
               return Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 5.0),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 0.0,
+                  horizontal: 5.0,
+                ),
                 child: Column(
                   children: [
                     Card(
@@ -307,9 +312,37 @@ class DoctorAppointmentListWidget extends StatelessWidget {
                                       horizontal: 0,
                                       vertical: -4,
                                     ),
+                                    title: getTitle(S.of(context).examination2),
+                                    subtitle: Text(
+                                      pointList1[0],
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    visualDensity: const VisualDensity(
+                                      horizontal: 0,
+                                      vertical: -4,
+                                    ),
+                                    title: getTitle(S.of(context).Diagnosis),
+                                    subtitle: Text(
+                                      pointList1[1],
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    visualDensity: const VisualDensity(
+                                      horizontal: 0,
+                                      vertical: -4,
+                                    ),
                                     title: getTitle(S.of(context).prescription),
                                     subtitle: Text(
-                                      appointment.prescription,
+                                      pointList1[2],
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -331,32 +364,31 @@ class DoctorAppointmentListWidget extends StatelessWidget {
                                     ),
                                   ),
                                   ListTile(
-                                    visualDensity: const VisualDensity(
-                                      horizontal: 0,
-                                      vertical: -4,
-                                    ),
-                                    title: getTitle(S.of(context).Chronic),
-                                    subtitle: Column(
-                                      children: appointment
-                                          .chronicDiseases.diseases
-                                          .map((disease) {
-                                        return ListTile(
-                                          visualDensity: const VisualDensity(
-                                            horizontal: 0,
-                                            vertical: -4,
-                                          ),
-                                          title: getDis(disease!.name),
-                                          subtitle: Text(
-                                            disease.notes,
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18,
+                                      visualDensity: const VisualDensity(
+                                        horizontal: 0,
+                                        vertical: -4,
+                                      ),
+                                      title: getTitle(S.of(context).Chronic),
+                                      subtitle: Column(
+                                        children: appointment
+                                            .chronicDiseases.diseases
+                                            .map((disease) {
+                                          return ListTile(
+                                            visualDensity: const VisualDensity(
+                                              horizontal: 0,
+                                              vertical: -4,
                                             ),
-                                          ),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
+                                            title: getDis(disease!.name),
+                                            subtitle: Text(
+                                              disease.notes,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      )),
                                 ],
                               ),
                             ),
@@ -432,7 +464,10 @@ class PrescriptionAndNotesScreen extends StatefulWidget {
 
 class _PrescriptionAndNotesScreenState
     extends State<PrescriptionAndNotesScreen> {
-  TextEditingController prescriptionController = TextEditingController();
+  TextEditingController prescriptionController1 = TextEditingController();
+  TextEditingController prescriptionController2 = TextEditingController();
+  TextEditingController prescriptionController3 = TextEditingController();
+
   TextEditingController notesController = TextEditingController();
   List<TextEditingController> diseaseControllers = [];
   List<TextEditingController> notesDiseaseControllers = [];
@@ -465,7 +500,8 @@ class _PrescriptionAndNotesScreenState
 
   void saveData() {
     setState(() {
-      print('Prescription: ${prescriptionController.text}');
+      print(
+          'Prescription: ${prescriptionController1.text + "///" + prescriptionController2.text + "///" + prescriptionController3.text}');
       print('Notes: ${notesController.text}');
       print('Chronic Diseases:');
       for (int i = 0; i < chronicDiseases.length; i++) {
@@ -494,7 +530,8 @@ class _PrescriptionAndNotesScreenState
                 }
 
                 bool success = await sendAppointment.sendAppointment(
-                  prescription: prescriptionController.text,
+                  prescription:
+                      "${prescriptionController1.text}///${prescriptionController2.text}///${prescriptionController3.text}",
                   note: notesController.text,
                   chronicDiseases: chronicDiseases2,
                   token: widget.token,
@@ -537,9 +574,27 @@ class _PrescriptionAndNotesScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            getTitle(S.of(context).examination2),
+            TextFormField(
+              controller: prescriptionController1,
+              decoration: const InputDecoration(),
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              textInputAction: TextInputAction.newline,
+            ),
+            const SizedBox(height: 16.0),
+            getTitle(S.of(context).Diagnosis),
+            TextFormField(
+              controller: prescriptionController2,
+              decoration: const InputDecoration(),
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              textInputAction: TextInputAction.newline,
+            ),
+            const SizedBox(height: 16.0),
             getTitle(S.of(context).prescription),
             TextFormField(
-              controller: prescriptionController,
+              controller: prescriptionController3,
               decoration: const InputDecoration(),
               keyboardType: TextInputType.multiline,
               maxLines: null,

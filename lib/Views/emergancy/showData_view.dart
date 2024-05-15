@@ -50,7 +50,7 @@ class _EmergencyViewState extends State<EmergencyView> {
     String token = widget.token;
     _medicalData = _fetchData(token);
     return DefaultTabController(
-      length: 4, // Number of tabs
+      length: 3, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan,
@@ -251,9 +251,13 @@ class DoctorAppointmentListWidget extends StatelessWidget {
             itemCount: appointments.length,
             itemBuilder: (context, index) {
               Appointment appointment = appointments[index];
+              List<String> pointList1 = appointment.prescription.split("///");
+
               return Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 5.0),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 0.0,
+                  horizontal: 5.0,
+                ),
                 child: Column(
                   children: [
                     Card(
@@ -292,9 +296,37 @@ class DoctorAppointmentListWidget extends StatelessWidget {
                                       horizontal: 0,
                                       vertical: -4,
                                     ),
+                                    title: getTitle(S.of(context).examination2),
+                                    subtitle: Text(
+                                      pointList1[0],
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    visualDensity: const VisualDensity(
+                                      horizontal: 0,
+                                      vertical: -4,
+                                    ),
+                                    title: getTitle(S.of(context).Diagnosis),
+                                    subtitle: Text(
+                                      pointList1[1],
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  ListTile(
+                                    visualDensity: const VisualDensity(
+                                      horizontal: 0,
+                                      vertical: -4,
+                                    ),
                                     title: getTitle(S.of(context).prescription),
                                     subtitle: Text(
-                                      appointment.prescription,
+                                      pointList1[2],
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -316,32 +348,31 @@ class DoctorAppointmentListWidget extends StatelessWidget {
                                     ),
                                   ),
                                   ListTile(
-                                    visualDensity: const VisualDensity(
-                                      horizontal: 0,
-                                      vertical: -4,
-                                    ),
-                                    title: getTitle(S.of(context).Chronic),
-                                    subtitle: Column(
-                                      children: appointment
-                                          .chronicDiseases.diseases
-                                          .map((disease) {
-                                        return ListTile(
-                                          visualDensity: const VisualDensity(
-                                            horizontal: 0,
-                                            vertical: -4,
-                                          ),
-                                          title: getDis(disease!.name),
-                                          subtitle: Text(
-                                            disease.notes,
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18,
+                                      visualDensity: const VisualDensity(
+                                        horizontal: 0,
+                                        vertical: -4,
+                                      ),
+                                      title: getTitle(S.of(context).Chronic),
+                                      subtitle: Column(
+                                        children: appointment
+                                            .chronicDiseases.diseases
+                                            .map((disease) {
+                                          return ListTile(
+                                            visualDensity: const VisualDensity(
+                                              horizontal: 0,
+                                              vertical: -4,
                                             ),
-                                          ),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
+                                            title: getDis(disease!.name),
+                                            subtitle: Text(
+                                              disease.notes,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          );
+                                        }).toList(),
+                                      )),
                                 ],
                               ),
                             ),

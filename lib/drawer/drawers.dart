@@ -824,6 +824,6 @@ Drawer select_drawer(context) {
   DataManager dataManager = DataManager();
   if (dataManager.type == 1) return patient_drawer(context);
   if (dataManager.type == 2) return doctor_drawer(context);
-  if (dataManager.type == 2) return lab_drawer(context);
+  if (dataManager.type == 3) return lab_drawer(context);
   return emergency_drawer(context);
 }

@@ -21,13 +21,12 @@ class ProfileApi {
               'Bearer $accessToken', // Include access token in Authorization header
         },
       );
+
       // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
         var jsonData = jsonDecode(data);
-
         Profile dataProfile = Profile.fromJson(jsonData);
-
         return dataProfile;
       } else {
         print('Status code: ${response.statusCode}');

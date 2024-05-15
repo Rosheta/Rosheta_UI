@@ -163,7 +163,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.cyan,
         title: Text(
           S.of(context).title,
@@ -197,7 +197,6 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
         ],
       ),
       drawer: select_drawer(context),
-      
       body: Container(
         color: const Color.fromARGB(255, 233, 255, 255),
         width: double.infinity,
@@ -449,6 +448,9 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     child: ElevatedButton(
                       onPressed: () async {
                         String dt = widget.user.date;
+                        print(birthDateController.text.substring(0, 9) +
+                                (int.parse(birthDateController.text[9]))
+                                    .toString());
                         if (dt != '') {
                           setState(() {
                             dt = birthDateController.text.substring(0, 9) +
@@ -456,11 +458,9 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                                     .toString();
                           });
                         }
-                        String gover='';
-                        String dep='';
-                        String gen='';
-
-
+                        String gover = '';
+                        String dep = '';
+                        String gen = '';
 
                         widget.user.government != ""
                             ? gover = selectedGovernment
@@ -472,7 +472,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                         widget.user.gender != ""
                             ? gen = selectedUserGender
                             : gen = "";
-                        
+
                         Profile pr = Profile(
                           profileImage: "",
                           userName: widget.user.userName,

@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ChronicDis": MessageLookupByLibrary.simpleMessage("المرض المزمن"),
         "CurrentAppointment":
             MessageLookupByLibrary.simpleMessage("الكشف الحالي"),
+        "Diagnosis": MessageLookupByLibrary.simpleMessage("التشخيص"),
         "Doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
         "Emergency": MessageLookupByLibrary.simpleMessage("الطوارئ"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
@@ -68,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterclinicPosition":
             MessageLookupByLibrary.simpleMessage("ادخل موقع العيادة"),
         "examination": MessageLookupByLibrary.simpleMessage("كشف جديد"),
+        "examination2": MessageLookupByLibrary.simpleMessage("الفحص"),
         "female": MessageLookupByLibrary.simpleMessage("انثي"),
         "gender": MessageLookupByLibrary.simpleMessage("النوع"),
         "government": MessageLookupByLibrary.simpleMessage("المحافظة"),

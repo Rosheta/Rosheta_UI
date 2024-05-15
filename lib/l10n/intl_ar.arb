@@ -66,5 +66,7 @@
     "ChronicDis" : "المرض المزمن",
     "userID": "من فضلك ادخل الرقم القومي للمريض",
     "enterPatientID": "ادخل الرقم القومي للمريض",
+    "examination2":"الفحص",
+    "Diagnosis":"التشخيص",
     "CurrentAppointment":"الكشف الحالي"
 }

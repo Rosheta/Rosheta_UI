@@ -20,9 +20,11 @@ class LoginApi {
         body: json.encode({
           'email': email,
           'password': password,
-          'devicetoken' : prefs.getString('devicetoken'),
+          'devicetoken': prefs.getString('devicetoken'),
         }),
       );
+      print("--------------------------");
+      print(response.statusCode);
 
       // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {

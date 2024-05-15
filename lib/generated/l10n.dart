@@ -720,6 +720,26 @@ class S {
     );
   }
 
+  /// `examination`
+  String get examination2 {
+    return Intl.message(
+      'examination',
+      name: 'examination2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Diagnosis`
+  String get Diagnosis {
+    return Intl.message(
+      'Diagnosis',
+      name: 'Diagnosis',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Current Appointment`
   String get CurrentAppointment {
     return Intl.message(

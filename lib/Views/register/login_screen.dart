@@ -116,7 +116,9 @@ class _LoginScreen extends State<LoginScreen> {
                                   dataManager.profile_image = pr.profileImage;
                                   dataManager.name = pr.name;
                                   dataManager.username = pr.userName;
-                                  if (pr.gender == "")
+                                  if (pr.userName == "")
+                                    dataManager.type = 4;
+                                  else if (pr.gender == "")
                                     dataManager.type = 3;
                                   else if (pr.location == "")
                                     dataManager.type = 1;

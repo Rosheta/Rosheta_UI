@@ -75,6 +75,8 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
               itemCount: appointments.length,
               itemBuilder: (context, index) {
                 Appointment appointment = appointments[index];
+                List<String> pointList1 = appointment.prescription.split("///");
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 0.0,
@@ -119,9 +121,38 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
                                         vertical: -4,
                                       ),
                                       title:
+                                          getTitle(S.of(context).examination2),
+                                      subtitle: Text(
+                                        pointList1[0],
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                    ListTile(
+                                      visualDensity: const VisualDensity(
+                                        horizontal: 0,
+                                        vertical: -4,
+                                      ),
+                                      title: getTitle(S.of(context).Diagnosis),
+                                      subtitle: Text(
+                                        pointList1[1],
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                    ListTile(
+                                      visualDensity: const VisualDensity(
+                                        horizontal: 0,
+                                        vertical: -4,
+                                      ),
+                                      title:
                                           getTitle(S.of(context).prescription),
                                       subtitle: Text(
-                                        appointment.prescription,
+                                        pointList1[2],
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 20,

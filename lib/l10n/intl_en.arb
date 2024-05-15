@@ -66,6 +66,8 @@
     "ChronicDis" : "Chronic Disease",
     "userID": "Please enter patient national ID ",
     "enterPatientID": "Enter patient national ID",
+    "examination2":"examination",
+    "Diagnosis":"Diagnosis",
 
     "CurrentAppointment":"Current Appointment"
 }

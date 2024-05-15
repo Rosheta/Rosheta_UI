@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ChronicDis": MessageLookupByLibrary.simpleMessage("Chronic Disease"),
         "CurrentAppointment":
             MessageLookupByLibrary.simpleMessage("Current Appointment"),
+        "Diagnosis": MessageLookupByLibrary.simpleMessage("Diagnosis"),
         "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
         "Emergency": MessageLookupByLibrary.simpleMessage("Emergency"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("LOGIN"),
@@ -71,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterclinicPosition":
             MessageLookupByLibrary.simpleMessage("Enter your clinic address"),
         "examination": MessageLookupByLibrary.simpleMessage("New Examination"),
+        "examination2": MessageLookupByLibrary.simpleMessage("examination"),
         "female": MessageLookupByLibrary.simpleMessage("female"),
         "gender": MessageLookupByLibrary.simpleMessage("gender"),
         "government": MessageLookupByLibrary.simpleMessage("government"),

@@ -28,19 +28,12 @@ class SendAppointment {
           'chronics': chronicDiseases,
         }),
       );
-      print(
-          ".......................................................................");
-      print("send");
-      print(accessToken);
-      print(response.statusCode);
-      print(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         return true;
       } else {
         return false;
       }
     } catch (e) {
-      print("Exception: $e");
       return false;
     }
   }
