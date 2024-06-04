@@ -81,15 +81,11 @@ class GiveAccessApi {
         User dataUser = User.fromJson(jsonData);
         return dataUser;
       } else {
-        print('Status code: ${response.statusCode}');
         User dataUser = User(profileImage: '', name: '', flag: false);
-        print(dataUser.flag);
         return dataUser;
       }
     } catch (e) {
-      print('Exception: $e');
       User dataUser = User(profileImage: '', name: '', flag: false);
-      print(dataUser.flag);
       return dataUser;
     }
     // throw Exception('User not found');

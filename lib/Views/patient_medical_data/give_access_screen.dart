@@ -59,11 +59,9 @@ class GiveAccessScreen extends StatelessWidget {
                         User data = await tmp.getUser(usernameController.text);
                         if (data.flag == false) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Successfully giving access to the user')),
-                          );
-                        }else{
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Failure, please try again later")),
+                            const SnackBar(
+                              content: Text('User not found'),
+                            ),
                           );
                         } else {
                           showDialog(
