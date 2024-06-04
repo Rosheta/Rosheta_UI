@@ -3,9 +3,7 @@ import 'package:rosheta_ui/Views/emergancy/showData_view.dart';
 import 'package:rosheta_ui/components/shared/appbar.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
-import 'package:rosheta_ui/models/doctors/MidicalData_model.dart';
-import 'package:rosheta_ui/services/patient_medical_data/get_patientData_service.dart';
-import 'package:rosheta_ui/services/patient_medical_data/give_access_service.dart';
+import 'package:rosheta_ui/services/patient_medical_data/get_patient_data_service.dart';
 
 class GiveAccessUsingIdScreen extends StatelessWidget {
   GiveAccessUsingIdScreen({super.key});

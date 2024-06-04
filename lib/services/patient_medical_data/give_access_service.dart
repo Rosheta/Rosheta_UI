@@ -28,11 +28,9 @@ class GiveAccessApi {
       if (response.statusCode == 200 || response.statusCode == 201) {
         return true;
       } else {
-        print('Status code: ${response.statusCode}');
         return false;
       }
     } catch (e) {
-      print('Exception: $e');
       return false;
     }
   }
@@ -48,7 +46,6 @@ class GiveAccessApi {
       request.headers['Authorization'] = 'Bearer $token';
       request.headers['accesscontrol'] = 'Bearer $sharedtoken';
       final http.StreamedResponse response = await client.send(request);
-      print(response.stream);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final List<Uint8List> chunks = [];
         await for (final List<int> chunk in response.stream) {
@@ -56,14 +53,11 @@ class GiveAccessApi {
         }
         final Uint8List data =
             Uint8List.fromList(chunks.expand((x) => x).toList());
-        print('Attachment retrieved successfully');
         return data;
       } else {
-        print('Status code: ${response.statusCode}');
         return Uint8List(0);
       }
     } catch (e) {
-      print('Error: $e');
       throw Exception('Failed to retrieve attachment');
     }
   }

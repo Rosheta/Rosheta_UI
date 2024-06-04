@@ -8,12 +8,12 @@ import 'package:rosheta_ui/Views/patient_medical_data/show_file_screen.dart';
 import 'package:rosheta_ui/Views/profile/profile_screen.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
-import 'package:rosheta_ui/models/doctors/MidicalData_model.dart';
+import 'package:rosheta_ui/models/doctors/MedicalData_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Appointment_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Chronic_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/attachment_model.dart';
-import 'package:rosheta_ui/services/doctors/DoctorData_service.dart';
-import 'package:rosheta_ui/services/doctors/currentAppointment_service.dart';
+import 'package:rosheta_ui/services/doctors/doctor_data_service.dart';
+import 'package:rosheta_ui/services/doctors/current_appointment_service.dart';
 import 'package:rosheta_ui/services/patient_medical_data/give_access_service.dart';
 
 import '../search/search_screen.dart'; // Import your ChronicDiseaseApi service
@@ -499,16 +499,7 @@ class _PrescriptionAndNotesScreenState
   }
 
   void saveData() {
-    setState(() {
-      print(
-          'Prescription: ${prescriptionController1.text + "///" + prescriptionController2.text + "///" + prescriptionController3.text}');
-      print('Notes: ${notesController.text}');
-      print('Chronic Diseases:');
-      for (int i = 0; i < chronicDiseases.length; i++) {
-        print(
-            'Disease: ${diseaseControllers[i].text}, Notes: ${notesDiseaseControllers[i].text}');
-      }
-    });
+    setState(() {});
 
     showDialog(
       context: context,

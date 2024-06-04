@@ -1,19 +1,15 @@
 // ignore_for_file: library_private_types_in_public_api, avoid_print, file_names
 
 import 'dart:typed_data';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:rosheta_ui/Views/chat/friends_screen.dart';
 import 'package:rosheta_ui/Views/patient_medical_data/show_file_screen.dart';
-import 'package:rosheta_ui/Views/profile/profile_screen.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
-import 'package:rosheta_ui/models/doctors/MidicalData_model.dart';
+import 'package:rosheta_ui/models/doctors/MedicalData_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Appointment_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Chronic_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/attachment_model.dart';
-import 'package:rosheta_ui/services/doctors/DoctorData_service.dart';
-import 'package:rosheta_ui/services/doctors/currentAppointment_service.dart';
+import 'package:rosheta_ui/services/doctors/doctor_data_service.dart';
 import 'package:rosheta_ui/services/patient_medical_data/give_access_service.dart';
 
 class EmergencyView extends StatefulWidget {

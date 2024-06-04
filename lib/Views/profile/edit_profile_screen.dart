@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rosheta_ui/Views/chat/friends_screen.dart';
@@ -390,7 +388,6 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                         value: selectedUserGender,
                         onChanged: (newValue) {
                           setState(() {
-                            print("aaaa");
                             selectedUserGender = newValue.toString();
                           });
                         },
@@ -448,9 +445,6 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     child: ElevatedButton(
                       onPressed: () async {
                         String dt = widget.user.date;
-                        print(birthDateController.text.substring(0, 9) +
-                                (int.parse(birthDateController.text[9]))
-                                    .toString());
                         if (dt != '') {
                           setState(() {
                             dt = birthDateController.text.substring(0, 9) +

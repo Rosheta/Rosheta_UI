@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:rosheta_ui/Views/search/search_screen.dart';
@@ -9,7 +8,6 @@ import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/profile/profile_model.dart';
 import 'package:rosheta_ui/Views/profile/edit_profile_screen.dart';
 import 'package:rosheta_ui/services/profile/Profile_service.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:rosheta_ui/services/profile/change_pic_service.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -35,7 +33,7 @@ class _ProfileViewState extends State<ProfileScreen> {
       });
     }
     // ignore: unnecessary_new
-    changePicApi changePicrequest = changePicApi();
+    ChangePicApi changePicrequest = ChangePicApi();
     String s = await changePicrequest.changePic(profileImage: file);
     if (s != "") {
       setState(() {
@@ -108,7 +106,7 @@ class _ProfileViewState extends State<ProfileScreen> {
           } else {
             Profile pr = snapshot.data!;
 
-            //image = pr.profileImage;
+            // image = pr.profileImage;
 
             return Container(
               color: const Color.fromARGB(255, 233, 255, 255),
@@ -124,7 +122,7 @@ class _ProfileViewState extends State<ProfileScreen> {
                               ? CircleAvatar(
                                   radius: 100.0,
                                   backgroundImage:
-                                      NetworkImage(pr.profileImage),
+                                      NetworkImage(pr.profileImage,scale:2),
                                 )
                               : const CircleAvatar(
                                   radius: 100.0,

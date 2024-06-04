@@ -71,7 +71,7 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
 
   Future<ViewProfile> _fetchProfile() async {
     try {
-      viewProfileApi vp = viewProfileApi();
+      ViewProfileApi vp = ViewProfileApi();
       return await vp.viewProfile(userId: widget.userID);
     } catch (e) {
       // Handle any errors that occur during the data fetching process

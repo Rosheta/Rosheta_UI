@@ -48,19 +48,3 @@ class ChronicDiseaseList {
 
   get length => diseases.length;
 }
-
-// class ChronicDiseaseList2 {
-//   final List<ChronicDisease> diseases;
-//   ChronicDiseaseList2({required this.diseases});
-//   factory ChronicDiseaseList2.fromJson(List<dynamic> jsonList) {
-//     List<ChronicDisease> diseases = jsonList.map((jsonData) {
-//       return ChronicDisease(
-//         name: jsonData['Name'],
-//         date: "2001-07-12",
-//         notes: jsonData['Notes'],
-//       );
-//     }).toList();
-//     return ChronicDiseaseList2(diseases: diseases);
-//   }
-//   get length => diseases.length;
-// }

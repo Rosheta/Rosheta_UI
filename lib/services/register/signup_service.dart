@@ -43,7 +43,6 @@ class SignupApi {
         return response.toString();
       }
     } catch (e) {
-      print("Exception: $e");
       return 'false';
     }
   }
@@ -58,8 +57,6 @@ class SignupApi {
       required birthdate}) async {
     final String apiUrl = dotenv.env['API_URL']!;
     final String url = '$apiUrl/patient/register';
-    print(url);
-    print(gender);
     try {
       http.Response response = await http.post(
         Uri.parse(url),
@@ -82,7 +79,6 @@ class SignupApi {
         return response.body;
       }
     } catch (e) {
-      print("Exception: $e");
       return 'false';
     }
   }
@@ -119,7 +115,6 @@ class SignupApi {
         return response.toString();
       }
     } catch (e) {
-      print("Exception: $e");
       return 'false';
     }
   }

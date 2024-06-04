@@ -144,8 +144,6 @@ class _ChatScreenState extends State<ChatScreen> {
                     tmpOffset = _scrollController.position.maxScrollExtent;
                     _scrollToBottom();
                   } else {
-                    print(
-                        'tmpOffset: $tmpOffset  max: ${_scrollController.position.maxScrollExtent}');
                     double tmm = (_scrollController.position.maxScrollExtent -
                                 tmpOffset -
                                 20) <

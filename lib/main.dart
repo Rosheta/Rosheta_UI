@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:rosheta_ui/Views/Languages/language_screen.dart';
 import 'package:rosheta_ui/Views/doctors/DoctorChronic_screen.dart';
-import 'package:rosheta_ui/Views/emergancy/usingId_view.dart';
 import 'package:rosheta_ui/Views/register/login_screen.dart';
 import 'package:rosheta_ui/Views/search/search_screen.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
@@ -50,10 +49,10 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home:  LoginScreen(),
+      home: const LoginScreen(),
       navigatorKey: navigatorKey,
       routes: {
-        '/share-screen': (context) => DoctorView(),
+        '/share-screen': (context) => const DoctorView(),
       },
     );
   }

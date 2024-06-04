@@ -10,6 +10,7 @@ class FriendsScreen extends StatefulWidget {
   const FriendsScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _FriendsScreenState createState() => _FriendsScreenState();
 }
 

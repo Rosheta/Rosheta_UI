@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
@@ -18,7 +16,6 @@ class ShowFileScreen extends StatefulWidget {
 class _ShowFileScreenState extends State<ShowFileScreen> {
   int pages = 0;
   bool isReady = false;
-  final Completer<PDFViewController> _controller = Completer<PDFViewController>();
 
   @override
   void initState() {

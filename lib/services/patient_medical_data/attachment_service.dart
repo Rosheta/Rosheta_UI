@@ -18,8 +18,6 @@ class AttachmentApi {
     final String accessToken = await getAccessToken();
 
     try {
-      print(accessToken);
-
       http.Response response = await http.get(
         Uri.parse(url),
         headers: {
@@ -27,8 +25,6 @@ class AttachmentApi {
           'Authorization': 'Bearer $accessToken',
         },
       );
-     
-      // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
         var jsonData = jsonDecode(data);
@@ -37,11 +33,9 @@ class AttachmentApi {
             attachments.attachment!.map((e) => Attachment.fromJson(e)).toList();
         return listOfFiles;
       } else {
-        print('Status code: ${response.statusCode}');
         return [];
       }
     } catch (e) {
-      print('Exception: $e');
       return [];
     }
   }
@@ -61,10 +55,8 @@ class AttachmentApi {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print('Attachment deleted successfully');
         return true;
       } else {
-        print('Status code: ${response.statusCode}');
         return false;
       }
     } catch (e) {
@@ -91,14 +83,11 @@ class AttachmentApi {
         }
         final Uint8List data =
             Uint8List.fromList(chunks.expand((x) => x).toList());
-        print('Attachment retrieved successfully');
         return data;
       } else {
-        print('Status code: ${response.statusCode}');
         return Uint8List(0);
       }
     } catch (e) {
-      print('Error: $e');
       throw Exception('Failed to retrieve attachment');
     }
   }

@@ -28,7 +28,6 @@ class AddAttachmentApi {
         return responseBody;
       }
     } catch (e) {
-      print("Exception: $e");
       return 'Error , Please try again later';
     }
   }

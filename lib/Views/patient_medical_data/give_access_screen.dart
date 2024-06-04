@@ -80,7 +80,7 @@ class GiveAccessScreen extends StatelessWidget {
                           );
                         }else{
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Failure, please try again later")),
+                            const SnackBar(content: Text("Failure, please try again later")),
                           );
                         }
                       } catch (e) {

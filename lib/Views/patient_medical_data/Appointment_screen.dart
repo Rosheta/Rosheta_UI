@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Appointment_model.dart';
-import 'package:rosheta_ui/services/patient_medical_data/Appointment_service.dart';
+import 'package:rosheta_ui/services/patient_medical_data/appointment_service.dart';
 
 import '../search/search_screen.dart'; // Import your SearchPeople delegate
 
