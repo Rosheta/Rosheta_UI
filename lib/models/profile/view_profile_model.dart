@@ -48,9 +48,9 @@ class ViewProfile {
         : department = jsonData['department'];
     jsonData['phone'] == null ? phone = "" : phone = jsonData['phone'];
 
-    // jsonData['birthdate'] == null
-    //   ? date = ""
-    //   : date = jsonData['birthdate'][0];
+    jsonData['birthdate'] == null
+      ? date = ""
+      : date = jsonData['birthdate'][0];
 
     jsonData['email'] == null ? email = "" : email = jsonData['email'];
     jsonData['government'] == null
@@ -67,7 +67,7 @@ class ViewProfile {
       government: government,
       email: email,
       phone: phone,
-      date: "2001/03/23",
+      date: date,
       department: department,
       location: location,
     );

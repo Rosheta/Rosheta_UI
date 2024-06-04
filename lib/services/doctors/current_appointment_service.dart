@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SendAppointment {
   Future<bool> sendAppointment(
-      {required String prescription,
+      {required Map<String, String> prescription,
       required String note,
       required List<Map<String, String>> chronicDiseases,
       required String token}) async {
@@ -28,19 +28,12 @@ class SendAppointment {
           'chronics': chronicDiseases,
         }),
       );
-      print(
-          ".......................................................................");
-      print("send");
-      print(accessToken);
-      print(response.statusCode);
-      print(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         return true;
       } else {
         return false;
       }
     } catch (e) {
-      print("Exception: $e");
       return false;
     }
   }

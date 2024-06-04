@@ -106,7 +106,7 @@ class _ChatScreenState extends State<ChatScreen> {
           title: Row(children: [
             CircleAvatar(
               radius: 20.0,
-              backgroundImage: widget.imageUrl != null
+              backgroundImage: widget.imageUrl != null && widget.imageUrl != ""
                   ? Image.network(widget.imageUrl ?? '').image
                   : Image.asset('Images/profile.png').image
                       as ImageProvider<Object>?,
@@ -144,8 +144,6 @@ class _ChatScreenState extends State<ChatScreen> {
                     tmpOffset = _scrollController.position.maxScrollExtent;
                     _scrollToBottom();
                   } else {
-                    print(
-                        'tmpOffset: $tmpOffset  max: ${_scrollController.position.maxScrollExtent}');
                     double tmm = (_scrollController.position.maxScrollExtent -
                                 tmpOffset -
                                 20) <

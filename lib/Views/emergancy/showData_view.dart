@@ -1,11 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api, avoid_print, file_names
 
 import 'dart:typed_data';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:rosheta_ui/Views/chat/friends_screen.dart';
 import 'package:rosheta_ui/Views/patient_medical_data/show_file_screen.dart';
-import 'package:rosheta_ui/Views/profile/profile_screen.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/doctors/MedicalData_model.dart';
@@ -13,28 +10,24 @@ import 'package:rosheta_ui/models/patient_medical_data/Appointment_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Chronic_model.dart';
 import 'package:rosheta_ui/models/patient_medical_data/attachment_model.dart';
 import 'package:rosheta_ui/services/doctors/doctor_data_service.dart';
-import 'package:rosheta_ui/services/doctors/current_appointment_service.dart';
 import 'package:rosheta_ui/services/patient_medical_data/give_access_service.dart';
 
-import '../search/search_screen.dart'; // Import your ChronicDiseaseApi service
-
-class DoctorView extends StatefulWidget {
-  const DoctorView({super.key});
+class EmergencyView extends StatefulWidget {
+  final String token; // Define a property to hold the user object
+  const EmergencyView({super.key, required this.token});
 
   @override
-  _DoctorViewState createState() => _DoctorViewState();
+  _EmergencyViewState createState() => _EmergencyViewState();
 }
 
-class _DoctorViewState extends State<DoctorView> {
+class _EmergencyViewState extends State<EmergencyView> {
   late Future<MedicalData> _medicalData;
-  late String token;
-
   @override
   void initState() {
     super.initState();
   }
 
-  Future<MedicalData> _fetchChronicDiseases(String token) async {
+  Future<MedicalData> _fetchData(String token) async {
     try {
       DoctorDataApi midicalData = DoctorDataApi();
       return await midicalData.fetchDoctorData(token);
@@ -50,13 +43,10 @@ class _DoctorViewState extends State<DoctorView> {
 
   @override
   Widget build(BuildContext context) {
-    final message = ModalRoute.of(context)!.settings.arguments as RemoteMessage;
-    token = message.data["dataAccessToken"];
-    print(token);
-    // token = "T";
-    _medicalData = _fetchChronicDiseases(token);
+    String token = widget.token;
+    _medicalData = _fetchData(token);
     return DefaultTabController(
-      length: 4, // Number of tabs
+      length: 3, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.cyan,
@@ -71,15 +61,6 @@ class _DoctorViewState extends State<DoctorView> {
           bottom: TabBar(
             isScrollable: true,
             tabs: [
-              Tab(
-                child: Text(
-                  S.of(context).CurrentAppointment,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.black54),
-                ),
-              ),
               Tab(
                 child: Text(
                   S.of(context).Chronic,
@@ -114,9 +95,7 @@ class _DoctorViewState extends State<DoctorView> {
         body: TabBarView(
           children: [
             // First tab content
-            PrescriptionAndNotesScreen(
-              token: token,
-            ),
+
             // Second tab content
             DoctorChronicDiseaseListWidget(medicalDataFeture: _medicalData),
             // Third tab content
@@ -453,237 +432,6 @@ Row getTitle(T) {
   );
 }
 
-class PrescriptionAndNotesScreen extends StatefulWidget {
-  final String token;
-  const PrescriptionAndNotesScreen({super.key, required this.token});
-
-  @override
-  _PrescriptionAndNotesScreenState createState() =>
-      _PrescriptionAndNotesScreenState();
-}
-
-class _PrescriptionAndNotesScreenState
-    extends State<PrescriptionAndNotesScreen> {
-  TextEditingController prescriptionController1 = TextEditingController();
-  TextEditingController prescriptionController2 = TextEditingController();
-  TextEditingController prescriptionController3 = TextEditingController();
-
-  TextEditingController notesController = TextEditingController();
-  List<TextEditingController> diseaseControllers = [];
-  List<TextEditingController> notesDiseaseControllers = [];
-  List<Map<String, String>> chronicDiseases = [];
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialize the lists with empty controllers
-    diseaseControllers.add(TextEditingController());
-    notesDiseaseControllers.add(TextEditingController());
-  }
-
-  void addChronicDisease() {
-    setState(() {
-      // Create new TextEditingController instances for the new disease
-      TextEditingController newDiseaseController = TextEditingController();
-      TextEditingController newNotesController = TextEditingController();
-
-      // Add the new controllers to the lists
-      diseaseControllers.add(newDiseaseController);
-      notesDiseaseControllers.add(newNotesController);
-
-      chronicDiseases.add({
-        'Name': newDiseaseController.text,
-        'Notes': newNotesController.text,
-      });
-    });
-  }
-
-  void saveData() {
-    setState(() {});
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(S.of(context).save),
-          content: Text(S.of(context).saveAndLeaveQ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () async {
-                SendAppointment sendAppointment = SendAppointment();
-                List<Map<String, String>> chronicDiseases2 = [];
-
-                for (int i = 0; i < chronicDiseases.length; i++) {
-                  chronicDiseases2.add({
-                    'Name': diseaseControllers[i].text,
-                    'Notes': notesDiseaseControllers[i].text,
-                  });
-                }
-
-                bool success = await sendAppointment.sendAppointment(
-                  prescription: {
-                    "Examination": prescriptionController1.text,
-                    "Diagnosis": prescriptionController2.text,
-                    "Prescriptions": prescriptionController3.text,
-                  },
-                  note: notesController.text,
-                  chronicDiseases: chronicDiseases2,
-                  token: widget.token,
-                );
-
-                if (success) {
-                  // Show success message or navigate to another screen
-                  print('Appointment sent successfully!');
-                } else {
-                  // Show error message
-                  print('Failed to send appointment!');
-                }
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProfileScreen(),
-                  ),
-                );
-              },
-              child: Text(S.of(context).save),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                // Perform save operation here
-              },
-              child: Text(S.of(context).Cancel),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            getTitle(S.of(context).examination2),
-            TextFormField(
-              controller: prescriptionController1,
-              decoration: const InputDecoration(),
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              textInputAction: TextInputAction.newline,
-            ),
-            const SizedBox(height: 16.0),
-            getTitle(S.of(context).Diagnosis),
-            TextFormField(
-              controller: prescriptionController2,
-              decoration: const InputDecoration(),
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              textInputAction: TextInputAction.newline,
-            ),
-            const SizedBox(height: 16.0),
-            getTitle(S.of(context).prescription),
-            TextFormField(
-              controller: prescriptionController3,
-              decoration: const InputDecoration(),
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              textInputAction: TextInputAction.newline,
-            ),
-            const SizedBox(height: 16.0),
-            getTitle(S.of(context).Notes),
-            TextFormField(
-              controller: notesController,
-              decoration: const InputDecoration(),
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              textInputAction: TextInputAction.newline,
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: addChronicDisease,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.add_circle,
-                    size: 25,
-                    color: Colors.black87,
-                  ), // This adds the "+" icon
-                  const SizedBox(
-                      width:
-                          5), // Optional: Adds some space between the icon and the text
-                  Text(
-                    S.of(context).AddChronicDisease,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: chronicDiseases.asMap().entries.map((entry) {
-                final index = entry.key;
-                return Container(
-                  padding: const EdgeInsets.all(16.0),
-                  margin: const EdgeInsets.symmetric(vertical: 8.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      getDis(S.of(context).ChronicDis),
-                      TextFormField(
-                        controller: diseaseControllers[index],
-                        decoration: const InputDecoration(),
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        textInputAction: TextInputAction.newline,
-                      ),
-                      const SizedBox(height: 8.0),
-                      getDis(S.of(context).Notes),
-                      TextFormField(
-                        controller: notesDiseaseControllers[index],
-                        decoration: const InputDecoration(),
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        textInputAction: TextInputAction.newline,
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-            ElevatedButton(
-              onPressed: saveData,
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-              child: Text(
-                S.of(context).save,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class DoctorAttachmentsListWidget extends StatefulWidget {
   final Future<MedicalData> medicalDataFeture;
   final String token;
@@ -768,20 +516,14 @@ class _DoctorAttachmentsListWidgetState
     return InkWell(
       onTap: () async {
         GiveAccessApi attachmentApi = GiveAccessApi();
-        Uint8List tmp =
-            await attachmentApi.getAttachment(fileHash, widget.token);
-        if (tmp.length != 0) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    ShowFileScreen(serverData: tmp, ext: ext)),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Failed to load file')),
-          );
-        }
+        Uint8List tmp = await attachmentApi.getAttachment(
+            fileHash, widget.token /*write sharedtoken here*/
+            );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ShowFileScreen(serverData: tmp, ext: ext)),
+        );
       },
       child: Card(
         child: ListTile(

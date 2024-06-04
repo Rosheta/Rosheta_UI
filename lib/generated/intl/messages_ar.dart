@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ChronicDis": MessageLookupByLibrary.simpleMessage("المرض المزمن"),
         "CurrentAppointment":
             MessageLookupByLibrary.simpleMessage("الكشف الحالي"),
+        "Diagnosis": MessageLookupByLibrary.simpleMessage("التشخيص"),
         "Doctor": MessageLookupByLibrary.simpleMessage("دكتور"),
         "Emergency": MessageLookupByLibrary.simpleMessage("الطوارئ"),
         "LOGIN": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
@@ -58,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editInfor":
             MessageLookupByLibrary.simpleMessage("تعديل المعلومات الاساسية"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكترونى"),
+        "enterPatientID":
+            MessageLookupByLibrary.simpleMessage("ادخل الرقم القومي للمريض"),
         "enterValidEmail":
             MessageLookupByLibrary.simpleMessage("الايميل يحتوى على @"),
         "enterValidPhone":
@@ -68,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterclinicPosition":
             MessageLookupByLibrary.simpleMessage("ادخل موقع العيادة"),
         "examination": MessageLookupByLibrary.simpleMessage("كشف جديد"),
+        "examination2": MessageLookupByLibrary.simpleMessage("الفحص"),
         "female": MessageLookupByLibrary.simpleMessage("انثي"),
         "gender": MessageLookupByLibrary.simpleMessage("النوع"),
         "giveaccess": MessageLookupByLibrary.simpleMessage(
@@ -105,6 +109,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("روشتة"),
         "uploadAttachment": MessageLookupByLibrary.simpleMessage("رفع ملف"),
         "uploadFile": MessageLookupByLibrary.simpleMessage("رفع ملف"),
+        "userID": MessageLookupByLibrary.simpleMessage(
+            "من فضلك ادخل الرقم القومي للمريض"),
         "username":
             MessageLookupByLibrary.simpleMessage("من فضلك ادخل اسم المستخدم")
       };

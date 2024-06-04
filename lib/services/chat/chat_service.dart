@@ -34,20 +34,16 @@ class ChatApi {
             friends.chatUser!.map((e) => Friend.fromJson(e)).toList();
         return listOfFriends;
       } else {
-        print('Status code: ${response.statusCode}');
         return [];
       }
     } catch (e) {
-      print('Exception: $e');
       return [];
     }
   }
 
   Future<Messages> getmsgs(String chatId,int page) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    print(chatId);
-    final url = '$apiUrl/getChatContent?chatId=${chatId}&page=${page}';
-    print(url);
+    final url = '$apiUrl/getChatContent?chatId=$chatId&page=$page';
     final String token = await getAccessToken();
 
     try {
@@ -65,11 +61,9 @@ class ChatApi {
         Messages messages = Messages.fromJson(jsonData);
         return messages;
       } else {
-        print('Status code: ${response.statusCode}');
         return Messages();
       }
     } catch (e) {
-      print('Exception: $e');
       return Messages();
     }
   }
@@ -98,11 +92,9 @@ class ChatApi {
         String chatId = jsonData['chatId'];
         return chatId;
       } else {
-        print('Status code: ${response.statusCode}');
         return " ";
       }
     } catch (e) {
-      print('Exception: $e');
       return " ";
     }
   }

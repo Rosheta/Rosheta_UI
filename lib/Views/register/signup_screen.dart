@@ -84,7 +84,7 @@ class _SignupState extends State<SignupScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (c) =>  SignupLabScreen()));
+                                builder: (c) => const SignupLabScreen()));
                       },
                       child: Text(
                         S.of(context).Lab,

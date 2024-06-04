@@ -3,7 +3,7 @@ import 'package:rosheta_ui/Views/chat/friends_screen.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Chronic_model.dart';
-import 'package:rosheta_ui/services/patient_medical_data/Chronic_service.dart';
+import 'package:rosheta_ui/services/patient_medical_data/chronic_service.dart';
 
 import '../search/search_screen.dart'; // Import your ChronicDiseaseApi service
 
@@ -118,21 +118,21 @@ class _ChronicDiseaseListScreenState extends State<ChronicDiseaseListScreen> {
                           children: [
                             ListTile(
                               visualDensity:
-                                  VisualDensity(horizontal: 0, vertical: -4),
+                                  const VisualDensity(horizontal: 0, vertical: -4),
                               title: getTitle(S.of(context).assignDate),
                               subtitle: Text(
                                 disease.date.substring(0, 10),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.black, fontSize: 20),
                               ),
                             ),
                             ListTile(
                               visualDensity:
-                                  VisualDensity(horizontal: 0, vertical: -4),
+                                  const VisualDensity(horizontal: 0, vertical: -4),
                               title: getTitle(S.of(context).Notes),
                               subtitle: Text(
                                 disease.notes,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.black, fontSize: 20),
                               ),
                             ),

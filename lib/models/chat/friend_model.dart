@@ -1,5 +1,3 @@
-// create a model class for structure of chat user
-
 class Friend {
   final String? chatId;
   final String? name;

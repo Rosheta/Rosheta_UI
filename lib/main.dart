@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
       home: const LoginScreen(),
       navigatorKey: navigatorKey,
       routes: {
-        '/share-screen': (context) => DoctorView(),
+        '/share-screen': (context) => const DoctorView(),
       },
     );
   }

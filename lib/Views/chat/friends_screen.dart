@@ -10,6 +10,7 @@ class FriendsScreen extends StatefulWidget {
   const FriendsScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _FriendsScreenState createState() => _FriendsScreenState();
 }
 
@@ -115,7 +116,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
               children: [
                 CircleAvatar(
                   radius: 30.0,
-                  backgroundImage: imageURL != null
+                  backgroundImage: imageURL != "" && imageURL != null
                       ? Image.network(imageURL).image
                       : Image.asset('Images/profile.png').image
                           as ImageProvider<Object>?,

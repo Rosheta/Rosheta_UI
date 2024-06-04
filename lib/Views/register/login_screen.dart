@@ -116,20 +116,25 @@ class _LoginScreen extends State<LoginScreen> {
                                   dataManager.profile_image = pr.profileImage;
                                   dataManager.name = pr.name;
                                   dataManager.username = pr.userName;
-                                  if (pr.gender == "")
+                                  if (pr.userName == "") {
+                                    dataManager.type = 4;
+                                  } else if (pr.gender == "") {
                                     dataManager.type = 3;
-                                  else if (pr.location == "")
+                                  } else if (pr.location == "") {
                                     dataManager.type = 1;
-                                  else
+                                  } else {
                                     dataManager.type = 2;
-
+                                  }
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (c) =>
                                               const ProfileScreen()));
                                 } else {
-                                  print('error');
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              'Email or password is incorrect')));
                                 }
                               }
                             },
@@ -145,7 +150,7 @@ class _LoginScreen extends State<LoginScreen> {
                         child: Text(S.of(context).register),
                         onPressed: () => {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (c) => SignupScreen()))
+                              MaterialPageRoute(builder: (c) => const SignupScreen()))
                         },
                       )
                     ],

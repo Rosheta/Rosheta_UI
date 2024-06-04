@@ -22,7 +22,6 @@ class MedicalData {
         .map(
             (chronicDiseaseJson) => ChronicDisease.fromJson(chronicDiseaseJson))
         .toList();
-    print(3);
     List<Attachment> attachments = (jsonData['files'] as List)
         .map((attachmentJson) => Attachment.fromJson(attachmentJson))
         .toList();

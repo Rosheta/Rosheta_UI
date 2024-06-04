@@ -1,33 +1,34 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:rosheta_ui/models/doctors/MedicalData_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:rosheta_ui/models/patient_medical_data/Appointment_model.dart';
 
-class AppointmentListApi {
-  Future<List<Appointment>> fetchAppointments() async {
+class DoctorDataApi {
+  Future<MedicalData> fetchDoctorData(String token) async {
     final String apiUrl = dotenv.env['API_URL']!;
-    final url = '$apiUrl/patient/appointments';
+    final url = '$apiUrl/doctor/patient/data';
 
-    final String token = await getAccessToken();
     try {
+      String accessToken = await getAccessToken();
+
       http.Response response = await http.get(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $accessToken',
+          'accesscontrol': 'Bearer $token'
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
-        List<dynamic> jsonData = jsonDecode(response.body);
-        List<Appointment> appointmentList =
-            jsonData.map((json) => Appointment.fromJson(json)).toList();
-        return appointmentList;
+        Map<String, dynamic> jsonMap = jsonDecode(response.body);
+        MedicalData medicalData = MedicalData.fromJson(jsonMap);
+        return medicalData;
       } else {
-        throw Exception('Failed to load appointments');
+        throw Exception('Failed to load data');
       }
     } catch (e) {
-      throw Exception('Failed to load appointments');
+      throw Exception('Failed to load data');
     }
   }
 

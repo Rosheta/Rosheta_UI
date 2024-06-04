@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rosheta_ui/Views/chat/friends_screen.dart';
@@ -163,7 +161,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.cyan,
         title: Text(
           S.of(context).title,
@@ -197,7 +195,6 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
         ],
       ),
       drawer: select_drawer(context),
-      
       body: Container(
         color: const Color.fromARGB(255, 233, 255, 255),
         width: double.infinity,
@@ -391,7 +388,6 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                         value: selectedUserGender,
                         onChanged: (newValue) {
                           setState(() {
-                            print("aaaa");
                             selectedUserGender = newValue.toString();
                           });
                         },
@@ -456,11 +452,9 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                                     .toString();
                           });
                         }
-                        String gover='';
-                        String dep='';
-                        String gen='';
-
-
+                        String gover = '';
+                        String dep = '';
+                        String gen = '';
 
                         widget.user.government != ""
                             ? gover = selectedGovernment
@@ -472,7 +466,7 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                         widget.user.gender != ""
                             ? gen = selectedUserGender
                             : gen = "";
-                        
+
                         Profile pr = Profile(
                           profileImage: "",
                           userName: widget.user.userName,

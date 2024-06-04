@@ -10,14 +10,14 @@ class EditProfileApi {
     final url = '$apiUrl/profile';
     try {
       String accessToken =
-          await getAccessToken(); // Assuming this method gets the access token
+          await getAccessToken();
 
       http.Response response = await http.put(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
-              'Bearer $accessToken', // Include access token in Authorization header
+              'Bearer $accessToken',
         },
         body: json.encode({
           'department': pr.department,
@@ -38,7 +38,6 @@ class EditProfileApi {
         return false;
       }
     } catch (e) {
-      print("Exception: $e");
       return false;
     }
   }

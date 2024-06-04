@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:rosheta_ui/models/profile/profile_model.dart';
 import 'package:http/http.dart' as http;
@@ -21,21 +20,19 @@ class ProfileApi {
               'Bearer $accessToken', // Include access token in Authorization header
         },
       );
+
       // Deserialize body to be accessible
       if (response.statusCode == 200 || response.statusCode == 201) {
         String data = response.body;
         var jsonData = jsonDecode(data);
-
         Profile dataProfile = Profile.fromJson(jsonData);
-
         return dataProfile;
-      } else {
-        print('Status code: ${response.statusCode}');
+      }else{
+        throw Exception('Profile failed');
       }
     } catch (e) {
-      print('Exception: $e');
+      throw Exception('Profile failed');
     }
-    throw Exception('Profile failed');
   }
 
   Future<String> getAccessToken() async {

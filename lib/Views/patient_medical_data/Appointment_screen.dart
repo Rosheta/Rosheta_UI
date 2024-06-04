@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rosheta_ui/drawer/drawers.dart';
 import 'package:rosheta_ui/generated/l10n.dart';
 import 'package:rosheta_ui/models/patient_medical_data/Appointment_model.dart';
-import 'package:rosheta_ui/services/patient_medical_data/Appointment_service.dart';
+import 'package:rosheta_ui/services/patient_medical_data/appointment_service.dart';
 
 import '../search/search_screen.dart'; // Import your SearchPeople delegate
 
@@ -75,6 +75,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
               itemCount: appointments.length,
               itemBuilder: (context, index) {
                 Appointment appointment = appointments[index];
+
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 0.0,
@@ -119,9 +120,38 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
                                         vertical: -4,
                                       ),
                                       title:
+                                          getTitle(S.of(context).examination2),
+                                      subtitle: Text(
+                                        appointment.examination,
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                    ListTile(
+                                      visualDensity: const VisualDensity(
+                                        horizontal: 0,
+                                        vertical: -4,
+                                      ),
+                                      title: getTitle(S.of(context).Diagnosis),
+                                      subtitle: Text(
+                                        appointment.diagnosis,
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                    ListTile(
+                                      visualDensity: const VisualDensity(
+                                        horizontal: 0,
+                                        vertical: -4,
+                                      ),
+                                      title:
                                           getTitle(S.of(context).prescription),
                                       subtitle: Text(
-                                        appointment.prescription,
+                                        appointment.prescriptions,
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontSize: 20,

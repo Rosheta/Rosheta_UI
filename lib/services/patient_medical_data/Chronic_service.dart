@@ -9,8 +9,6 @@ class ChronicDiseaseListApi {
     final String apiUrl = dotenv.env['API_URL']!;
     final url = '$apiUrl/patient/diseases';
     String accessToken = await getAccessToken();
-
-    print(url);
     try {
       http.Response response = await http.get(
         Uri.parse(url),
@@ -19,39 +17,12 @@ class ChronicDiseaseListApi {
           'Authorization': 'Bearer $accessToken',
         },
       );
-      print(
-          ".......................................................................");
-      print("chronic");
-      print(accessToken);
-      print(response.statusCode);
-      print(response.body);
-
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // if (true) {
         List<dynamic> jsonData = jsonDecode(response.body);
-        // List<dynamic> jsonData = [
-        //   {
-        //     "name": "Diabetes",
-        //     "date": "2020-01-15",
-        //     "notes": "Requires daily insulin injections."
-        //   },
-        //   {
-        //     "name": "Hypertension",
-        //     "date": "2018-05-10",
-        //     "notes": "Blood pressure under control with medication."
-        //   },
-        //   {
-        //     "name": "Asthma",
-        //     "date": "2019-09-20",
-        //     "notes": "Uses inhaler as needed."
-        //   }
-        // ];
         List<ChronicDisease> chronicDiseaseList = jsonData
             .where((json) => json['Name'] != null && json['Name'].isNotEmpty)
             .map((json) => ChronicDisease.fromJson(json))
             .toList();
-        // Map JSON data to ChronicDisease objects
-
         return chronicDiseaseList;
       } else {
         throw Exception('Failed to load chronic disease list');

@@ -6,8 +6,6 @@ import 'package:rosheta_ui/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
-  if (message == null) return;
-  
   navigatorKey.currentState?.pushNamed(
     "/share-screen",
     arguments: message,
@@ -42,11 +40,8 @@ class FirebaseApi {
     await _flutterLocalNotificationsPlugin.initialize(
       settings,
       onDidReceiveNotificationResponse: (notificationResponse) async {
-        if (notificationResponse != null) {
-          final message =
-              RemoteMessage.fromMap(jsonDecode(notificationResponse.payload!));
+          final message = RemoteMessage.fromMap(jsonDecode(notificationResponse.payload!));
           handleMessage(message);
-        }
       },
     );
 
@@ -76,19 +71,18 @@ class FirebaseApi {
         context: navigatorKey.currentContext!,
         builder: (context) {
           return SimpleDialog(
-            contentPadding: EdgeInsets.all(16),
+            contentPadding: const EdgeInsets.all(16),
             children: [
-              Text("You have a new message to share data of patient"),
+              const Text("You have a new message to share data of patient"),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog
-                  // Navigate to the share screen
+                  Navigator.of(context).pop(); 
                   navigatorKey.currentState?.pushNamed(
                     "/share-screen",
                     arguments: message,
                   );
                 },
-                child: Text('View Details'), // Button text
+                child: const Text('View Details'),
               ),
             ],
           );
@@ -98,20 +92,9 @@ class FirebaseApi {
   }
 
   Future<void> initNotifications() async {
-    final FirebaseMessaging firebaseMessaging =
-        await FirebaseMessaging.instance;
-    NotificationSettings settings = await firebaseMessaging.requestPermission(
-      alert: true,
-      badge: true,
-      provisional: false,
-      sound: true,
-      announcement: false,
-      carPlay: false,
-      criticalAlert: false,
-    );
+    final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
     final token = await firebaseMessaging.getToken();
-    // store token in your server and refrences it to send notifications
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('devicetoken', token!);
 

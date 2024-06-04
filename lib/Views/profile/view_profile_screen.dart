@@ -71,7 +71,7 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
 
   Future<ViewProfile> _fetchProfile() async {
     try {
-      viewProfileApi vp = viewProfileApi();
+      ViewProfileApi vp = ViewProfileApi();
       return await vp.viewProfile(userId: widget.userID);
     } catch (e) {
       // Handle any errors that occur during the data fetching process
@@ -170,8 +170,9 @@ class _viewProfileViewState extends State<ViewProfileScreen> {
                                 MaterialPageRoute(
                                     builder: (c) => ChatScreen(
                                           userIdSecondPerson: widget.userID,
-                                          name: pr.userName,
+                                          name: pr.name,
                                           chatId: chatID,
+                                          imageUrl: pr.profileImage,
                                         )));
                           },
                           child: Container(

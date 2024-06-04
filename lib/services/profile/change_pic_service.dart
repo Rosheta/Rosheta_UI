@@ -1,22 +1,18 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
-class changePicApi {
+class ChangePicApi {
   Future<String> changePic({required profileImage}) async {
     final String apiUrl = dotenv.env['API_URL']!;
     final url = '$apiUrl/profile/picture';
     try {
-      String accessToken =
-          await getAccessToken(); // Assuming this method gets the access token
+      String accessToken = await getAccessToken(); 
 
       var request = http.MultipartRequest('PUT', Uri.parse(url));
       request.files
           .add(await http.MultipartFile.fromPath('photo', profileImage.path));
       request.headers['Authorization'] = 'Bearer $accessToken';
-
       var response = await request.send();
 
       // Get the response body
@@ -27,7 +23,6 @@ class changePicApi {
         return "";
       }
     } catch (e) {
-      print("Exception: $e");
       return "";
     }
   }

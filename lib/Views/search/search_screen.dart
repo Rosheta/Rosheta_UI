@@ -173,7 +173,7 @@ class SearchPeople extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    search_service s = search_service();
+    SearchAPI s = SearchAPI();
     final searchProvider = Provider.of<SearchProvider>(context);
 
     Map<String, dynamic> requestData = {
@@ -198,7 +198,6 @@ class SearchPeople extends SearchDelegate<String> {
         'Lab',
       ];
     }
-    print(type);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -263,13 +262,13 @@ class SearchPeople extends SearchDelegate<String> {
                             Text(
                               specialization,
                               style:
-                                  TextStyle(fontSize: 14.0, color: Colors.grey),
+                                  const TextStyle(fontSize: 14.0, color: Colors.grey),
                             ),
                           if (location.isNotEmpty)
                             Text(
                               location,
                               style:
-                                  TextStyle(fontSize: 14.0, color: Colors.grey),
+                                  const TextStyle(fontSize: 14.0, color: Colors.grey),
                             ),
                         ],
                       ),

@@ -700,6 +700,46 @@ class S {
     );
   }
 
+  /// `Please enter patient national ID `
+  String get userID {
+    return Intl.message(
+      'Please enter patient national ID ',
+      name: 'userID',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter patient national ID`
+  String get enterPatientID {
+    return Intl.message(
+      'Enter patient national ID',
+      name: 'enterPatientID',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `examination`
+  String get examination2 {
+    return Intl.message(
+      'examination',
+      name: 'examination2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Diagnosis`
+  String get Diagnosis {
+    return Intl.message(
+      'Diagnosis',
+      name: 'Diagnosis',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Current Appointment`
   String get CurrentAppointment {
     return Intl.message(

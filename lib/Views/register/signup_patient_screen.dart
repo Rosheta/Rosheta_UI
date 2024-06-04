@@ -150,8 +150,6 @@ class _SignupPatientScreenState extends State<SignupPatientScreen> {
                           ),
                         ),
                         onPressed: () async {
-                          print("Validating: ${birthDateController.text}");
-
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState?.save();
                             SignupApi signuprequest = SignupApi();
@@ -279,7 +277,7 @@ class _SignupPatientScreenState extends State<SignupPatientScreen> {
 }
 
 TextFormField buildTextFormField(TextEditingController controller, String label,
-    IconData icon, TextInputType type, Function Validator) {
+    IconData icon, TextInputType type, Function validator) {
   return TextFormField(
     controller: controller,
     keyboardType: type,
@@ -296,6 +294,6 @@ TextFormField buildTextFormField(TextEditingController controller, String label,
         borderSide: BorderSide(color: Colors.red.shade900, width: 1),
       ),
     ),
-    validator: (value) => Validator(value),
+    validator: (value) => validator(value),
   );
 }

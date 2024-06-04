@@ -35,6 +35,8 @@ class Profile {
 
   factory Profile.fromJson(Map<String, dynamic> jsonData) {
     final String profileImage;
+    final String userName;
+
     final String name;
     final String gender;
     final String ID;
@@ -61,17 +63,13 @@ class Profile {
         ? department = ""
         : department = jsonData['department'];
     jsonData['ssn'] == null ? ID = "" : ID = jsonData['ssn'];
-    jsonData['phone']['value'] == null
-        ? phone = ""
-        : phone = jsonData['phone']['value'];
+    jsonData['phone'] == null ? phone = "" : phone = jsonData['phone']['value'];
 
-    // jsonData['birthdate'] == null
-    //     ? date = ""
-    //     : date = jsonData['birthdate']['value'][0];
+    jsonData['birthdate'] == null
+        ? date = ""
+        : date = jsonData['birthdate']['value'][0];
 
-    jsonData['email']['value'] == null
-        ? email = ""
-        : email = jsonData['email']['value'];
+    jsonData['email'] == null ? email = "" : email = jsonData['email']['value'];
     jsonData['government'] == null
         ? government = ""
         : government = jsonData['government'];
@@ -79,30 +77,35 @@ class Profile {
 
     jsonData['name'] == null ? name = "" : name = jsonData['name'];
 
-    jsonData['phone']['visible'] == null
+    jsonData['phone'] == null
         ? viewphone = false
         : viewphone = jsonData['phone']['visible'];
 
-    // jsonData['birthdate'] == null
-    //     ? viewdate = false
-    //     : viewdate = jsonData['birthdate']['visible'];
+    jsonData['birthdate'] == null
+        ? viewdate = false
+        : viewdate = jsonData['birthdate']['visible'];
 
-    jsonData['email']['visible'] == null
+    jsonData['email'] == null
         ? viewemail = false
         : viewemail = jsonData['email']['visible'];
+
+    jsonData['user_name'] == null
+        ? userName = ""
+        : userName = jsonData['user_name'];
+
     return Profile(
       profileImage: profileImage,
-      userName: jsonData['user_name'],
+      userName: userName,
       name: name,
       gender: gender,
       government: government,
       email: email,
       phone: phone,
-      date: "2024/03/20",
+      date: date,
       ID: ID,
       viewemail: viewemail,
       viewphone: viewphone,
-      viewdate: true,
+      viewdate: viewdate,
       department: department,
       location: location,
     );

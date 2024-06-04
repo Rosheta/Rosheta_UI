@@ -122,7 +122,7 @@ class _AddAttachmentsState extends State<AddAttachments> {
                                     );
                                   }else{
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("Not uploaded, please try again later")),
+                                      const SnackBar(content: Text("Not uploaded, please try again later")),
                                     );
                                   }
                                 } catch (e) {
