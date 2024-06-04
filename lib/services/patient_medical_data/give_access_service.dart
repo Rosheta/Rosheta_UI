@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:rosheta_ui/models/patient_medical_data/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GiveAccessApi {
@@ -60,5 +61,37 @@ class GiveAccessApi {
     } catch (e) {
       throw Exception('Failed to retrieve attachment');
     }
+  }
+
+  Future<User> getUser(username) async {
+    final String apiUrl = dotenv.env['API_URL']!;
+    final url = '$apiUrl/patient/user?username=$username';
+    final String token = await getAccessToken();
+    try {
+      http.Response response = await http.get(
+        Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        String data = response.body;
+        var jsonData = jsonDecode(data);
+        User dataUser = User.fromJson(jsonData);
+        return dataUser;
+      } else {
+        print('Status code: ${response.statusCode}');
+        User dataUser = User(profileImage: '', name: '', flag: false);
+        print(dataUser.flag);
+        return dataUser;
+      }
+    } catch (e) {
+      print('Exception: $e');
+      User dataUser = User(profileImage: '', name: '', flag: false);
+      print(dataUser.flag);
+      return dataUser;
+    }
+    // throw Exception('User not found');
   }
 }

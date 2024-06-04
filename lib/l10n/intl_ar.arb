@@ -68,5 +68,8 @@
     "enterPatientID": "ادخل الرقم القومي للمريض",
     "examination2":"الفحص",
     "Diagnosis":"التشخيص",
-    "CurrentAppointment":"الكشف الحالي"
+    "CurrentAppointment":"الكشف الحالي",
+    "Yes":"نعم",
+    "No":"لا",
+    "giveaccess":"هل تريد اعطاء الوصول للملفات الطبية للدكتور؟"
 }
