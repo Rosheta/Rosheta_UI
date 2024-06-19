@@ -233,9 +233,13 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     visible: widget.user.email != "",
                     child: Column(children: [
                       const SizedBox(height: 20.0),
-                      Text(
-                        S.of(context).email,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            S.of(context).email,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                       TextField(
                         controller: emailController,
@@ -259,9 +263,13 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     visible: widget.user.phone != "",
                     child: Column(children: [
                       const SizedBox(height: 20.0),
-                      Text(
-                        S.of(context).Phone,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            S.of(context).Phone,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                       TextField(
                         controller: phoneController,
@@ -285,9 +293,17 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     visible: widget.user.date != "",
                     child: Column(children: [
                       const SizedBox(height: 20.0),
-                      Text(
-                        S.of(context).birthDate,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                S.of(context).birthDate,
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                       TextFormField(
                         controller:
@@ -310,32 +326,19 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     ]),
                   ),
                   // ID
-                  Visibility(
-                    visible: widget.user.ID != "",
-                    child: Column(children: [
-                      const SizedBox(height: 20.0),
-                      Text(
-                        S.of(context).NationalId,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      TextField(
-                        controller: ssnController,
-                        decoration: InputDecoration(
-                          hintText: S.of(context).hintTextID,
-                        ),
-                      ),
-                    ]),
-                  ),
-                  // clinicLocation
-
+                 
                   // Location
                   Visibility(
                     visible: widget.user.location != "",
                     child: Column(children: [
                       const SizedBox(height: 20.0),
-                      Text(
-                        S.of(context).location,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            S.of(context).location,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                       TextField(
                         controller: positionController,
@@ -350,9 +353,13 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     visible: widget.user.government != "",
                     child: Column(children: [
                       const SizedBox(height: 20.0),
-                      Text(
-                        S.of(context).government,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            S.of(context).government,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                       DropdownButtonFormField(
                         value: selectedGovernment,
@@ -380,9 +387,13 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     visible: widget.user.gender != "",
                     child: Column(children: [
                       const SizedBox(height: 20.0),
-                      Text(
-                        S.of(context).gender,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            S.of(context).gender,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                       DropdownButtonFormField(
                         value: selectedUserGender,
@@ -414,9 +425,13 @@ class _EditBasicInfoPageState extends State<EditBasicInfoScreen> {
                     visible: widget.user.department != "",
                     child: Column(children: [
                       const SizedBox(height: 20.0),
-                      Text(
-                        S.of(context).department,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            S.of(context).department,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                       DropdownButtonFormField(
                         value: selectedDepartments,

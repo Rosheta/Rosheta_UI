@@ -105,7 +105,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
                                     horizontal: 8.0,
                                   ),
                                   title: Text(
-                                    "${appointment.doctorName}\n${appointment.date.substring(0, 10)}",
+                                    "Dr. ${appointment.doctorName}\n${appointment.date.substring(0, 10)}",
                                     style: const TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
