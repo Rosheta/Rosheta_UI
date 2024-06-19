@@ -21,6 +21,7 @@ class _AddAttachmentsState extends State<AddAttachments> {
 
   @override
   Widget build(BuildContext context) {
+    List<String>? tmp= _selectedFile?.path.split('/');
     return Scaffold(
       appBar: appBar(context),
       drawer: select_drawer(context),
@@ -50,9 +51,8 @@ class _AddAttachmentsState extends State<AddAttachments> {
                             BorderSide(color: Colors.red.shade900, width: 1),
                       ),
                     ),
-                    validator: (value) => value!.isEmpty
-                        ? S.of(context).enterYourName
-                        : null,
+                    validator: (value) =>
+                        value!.isEmpty ? S.of(context).enterYourName : null,
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
@@ -69,7 +69,7 @@ class _AddAttachmentsState extends State<AddAttachments> {
                   Expanded(
                       child: Text(
                     _selectedFile != null
-                        ? '${_selectedFile?.path}'
+                        ? '${tmp?.last}'
                         : 'No File Selected',
                     style: const TextStyle(fontSize: 16),
                     maxLines: 1,
@@ -90,45 +90,50 @@ class _AddAttachmentsState extends State<AddAttachments> {
                             if (_selectedFile == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    content:Text('Please select a file to upload')),
+                                    content:
+                                        Text('Please select a file to upload')),
                               );
                             }
-                            if (_formKey.currentState!.validate() && _selectedFile != null) {
-                                AddAttachmentApi tmp = AddAttachmentApi();
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible: false, 
-                                  builder: (BuildContext context) {
-                                    return const AlertDialog(
-                                      content: Row(
-                                        children: [
-                                          CircularProgressIndicator(),
-                                          SizedBox(width: 20),
-                                          Text('Uploading...'),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                );
-                                try {
-                                  String check = await tmp.addAttachment(
-                                    userame: usernameController.text,
-                                    selectedFile: _selectedFile!,
+                            if (_formKey.currentState!.validate() &&
+                                _selectedFile != null) {
+                              AddAttachmentApi tmp = AddAttachmentApi();
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return const AlertDialog(
+                                    content: Row(
+                                      children: [
+                                        CircularProgressIndicator(),
+                                        SizedBox(width: 20),
+                                        Text('Uploading...'),
+                                      ],
+                                    ),
                                   );
-                                  Navigator.of(context).pop(); 
-                                  if (check == 'true') {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('Successfully uploaded')),
-                                    );
-                                  }else{
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text("Not uploaded, please try again later")),
-                                    );
-                                  }
-                                } catch (e) {
-                                  Navigator.of(context).pop(); 
+                                },
+                              );
+                              try {
+                                String check = await tmp.addAttachment(
+                                  userame: usernameController.text,
+                                  selectedFile: _selectedFile!,
+                                );
+                                Navigator.of(context).pop();
+                                if (check == 'true') {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Successfully uploaded')),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            "Not uploaded, please try again later")),
+                                  );
                                 }
+                              } catch (e) {
+                                Navigator.of(context).pop();
                               }
+                            }
                           })),
                 ],
               ),
