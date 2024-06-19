@@ -14,13 +14,16 @@ class SendAppointment {
     final url = '$apiUrl/doctor/appointment';
     try {
       String accessToken = await getAccessToken();
-
+      print("..............................................");
+      print(prescription);
+      print(note);
+      print(chronicDiseases);
       http.Response response = await http.post(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $accessToken',
-          'accesscontrol': token
+          'accesscontrol': 'Bearer $token'
         },
         body: json.encode({
           'prescription': prescription,
@@ -29,6 +32,7 @@ class SendAppointment {
         }),
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
+        print("yes.................................");
         return true;
       } else {
         return false;

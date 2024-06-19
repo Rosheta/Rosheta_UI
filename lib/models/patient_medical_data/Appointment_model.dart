@@ -1,4 +1,5 @@
 import 'package:rosheta_ui/models/patient_medical_data/Chronic_model.dart';
+import 'dart:convert';
 
 class Appointment {
   final String name;
@@ -22,13 +23,14 @@ class Appointment {
   });
 
   factory Appointment.fromJson(Map<String, dynamic> json) {
+     
     return Appointment(
       name: json['Name'],
       date: json['Date'],
       doctorName: json['DoctorId'],
-      examination: json['Prescription']['Examination'],
-      diagnosis: json['Prescription']['Diagnosis'],
-      prescriptions: json['Prescription']['Prescriptions'],
+      examination:jsonDecode( json['Prescription'])['Examination'],
+      diagnosis: jsonDecode( json['Prescription'])['Diagnosis'],
+      prescriptions: jsonDecode( json['Prescription'])['Prescriptions'],
       notes: json['Notes'],
       chronicDiseases: ChronicDiseaseList.fromJson(json['ChronicDiseases']),
     );

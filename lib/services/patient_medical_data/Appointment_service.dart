@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,9 +20,14 @@ class AppointmentListApi {
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
+        print(
+            "....................................................................");
+        print(response.body);
         List<dynamic> jsonData = jsonDecode(response.body);
+
         List<Appointment> appointmentList =
             jsonData.map((json) => Appointment.fromJson(json)).toList();
+        print(appointmentList);
         return appointmentList;
       } else {
         throw Exception('Failed to load appointments');
